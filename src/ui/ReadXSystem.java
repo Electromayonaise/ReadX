@@ -1,7 +1,5 @@
 package ui;
 import java.util.Scanner;
-
-import model.BibliographicPtoducts;
 import model.ReadXController;
 import java.util.GregorianCalendar;
 import utils.Validators;
@@ -20,6 +18,7 @@ import utils.Validators;
 public class ReadXSystem {
     
     public static Scanner reader;
+    GregorianCalendar date = new GregorianCalendar();
 
     public static ReadXController readXController;
     public static void print(Object a) {
@@ -41,6 +40,7 @@ public class ReadXSystem {
                     break;
                 case 2:
                     print("User management selected");
+                    UserManagement();
                     break;
                 case 3:
                     print("Buy books and journal subscriptions selected");
@@ -96,7 +96,7 @@ public class ReadXSystem {
     public static void BibliographicProductsManagement() {
         int selectedProduct = 0;
         print("What type of bibliographic product do you want to add? 1. Book 2. Journal");
-        Validators.validateBibliographicProducts();  // missing validation method 
+        Validators.validateBibliographicProducts(); 
         print("Please enter the book's name");
         String name = reader.nextLine();
         print("Please enter the number of pages");
@@ -105,7 +105,23 @@ public class ReadXSystem {
         GregorianCalendar publicationDate = new GregorianCalendar();
         print("Please enter the price");
         double price = reader.nextDouble();
-        readXController= new ReadXController(name, pageNumber, publicationDate, price, selectedProduct);
+        readXController.createBibliographicProduct(name, pageNumber, publicationDate, price, selectedProduct);
     }
-    
+
+    public static void UserManagement(){
+        int plan = 0;
+        print("Please select your plan 1. Basic 2. Premium");
+        Validators.validatePlan();
+        print("please enter your name");
+        String name = reader.nextLine();
+        print("please enter your id");
+        String id = reader.nextLine();
+        // save the registration date as the current date
+        GregorianCalendar registrationDate = new GregorianCalendar();
+        readXController.createUser(name, id, registrationDate, plan);
+    }
+
+    public static void BuyBooksAndJournalSubscriptions(){
+        print("");
+    }
 }

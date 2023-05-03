@@ -1,5 +1,5 @@
 package model;
 
 public enum Genre {
-    SIENCEFICTION ,FANTASY , HISTORICNOVEL
+    SCIENCEFICTION ,FANTASY , HISTORICNOVEL
 }
