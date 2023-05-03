@@ -1,38 +1,25 @@
 package model;
 import java.util.GregorianCalendar;
-import utils.Validators;
 
 public class Users {
  
     private String name;
     private String id;
     private GregorianCalendar registrationDate;
-    private int plan;
     public static BasicUser basicUser;
     public static PremiumUser premiumUser;
 
-    public Users (String name, String id, GregorianCalendar registrationDate, int plan) {
+    public Users (String name, String id, GregorianCalendar registrationDate) {
         this.name = name;
         this.id = id;
         this.registrationDate = registrationDate;
-        this.plan = plan;
-        if (plan==1){
-            createBasicUser();
-        }
-        else if (plan==2){
-            createPrimuimUser();
-        }
-    }
-
-    public void createBasicUser(){
         basicUser = new BasicUser(name,id,registrationDate);
     }
 
-    public void createPrimuimUser(){
-        Validators.print("Enter your credit card number");
-        String cardNumber=Validators.reader.nextLine();
-        Validators.print("Enter your credit card security code");
-        String securityCode=Validators.reader.nextLine();
+    public Users (String name, String id, GregorianCalendar registrationDate, String cardNumber, String securityCode) {
+        this.name = name;
+        this.id = id;
+        this.registrationDate = registrationDate;
         premiumUser = new PremiumUser(name,id,registrationDate,cardNumber,securityCode);
     }
     
@@ -48,9 +35,6 @@ public class Users {
         return registrationDate;
     }
 
-    public int getPlan() {
-        return plan;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -64,7 +48,4 @@ public class Users {
         this.registrationDate = registrationDate;
     }
 
-    public void setPlan(int plan) {
-        this.plan = plan;
-    }
 }

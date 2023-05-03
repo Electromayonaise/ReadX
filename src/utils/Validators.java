@@ -1,6 +1,5 @@
 package utils;
 import java.util.Scanner;
-import model.Genre;
 
 public class Validators {
 
@@ -29,25 +28,21 @@ public class Validators {
         return plan;
     }
     
-    public static Genre validateGenre(){
-        String desiredGenre = reader.nextLine();
-        Genre genre = null;
-        while(!desiredGenre.equals("SCIENCEFICTION") && !desiredGenre.equals("FANTASY") && !desiredGenre.equals("HISTORICNOVEL")){
-            print("Invalid option, please try again");
-            desiredGenre = reader.nextLine();
-        }
-        if (desiredGenre.equals("SCIENCEFICTION")){
-            genre = Genre.SCIENCEFICTION;
-            return genre;
-        }
-        else if (desiredGenre.equals("FANTASY")){
-            genre = Genre.FANTASY;
-            return genre;
-        }
-        else if (desiredGenre.equals("HISTORICNOVEL")){
-            genre = Genre.HISTORICNOVEL;
-            return genre;
+    public static int validateGenre(){
+        int genre= reader.nextInt();
+        while(genre>3 || genre<1){
+            print("Invalid option, please enter a valid genre");
+            genre = reader.nextInt();
         }
         return genre;
+    }
+
+    public static int validateCategory(){
+        int category= reader.nextInt();
+        while(category>3 || category<1){
+            print("Invalid option, please enter a valid category");
+            category = reader.nextInt();
+        }
+        return category;
     }
 }

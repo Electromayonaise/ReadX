@@ -7,7 +7,7 @@ public class PremiumUser extends Users {
     private String securityCode;
 
     public PremiumUser(String name, String id, GregorianCalendar registrationDate, String cardNumber, String securityCode) {
-        super(name, id, registrationDate,2);
+        super(name, id, registrationDate, cardNumber, securityCode);
         this.cardNumber = cardNumber;
         this.securityCode = securityCode;
         

@@ -95,17 +95,38 @@ public class ReadXSystem {
      */
     public static void BibliographicProductsManagement() {
         int selectedProduct = 0;
-        print("What type of bibliographic product do you want to add? 1. Book 2. Journal");
+        print("What type of bibliographic product do you want to add? 1. Book 2. Magazine");
         Validators.validateBibliographicProducts(); 
-        print("Please enter the book's name");
+        print("Please enter the name");
         String name = reader.nextLine();
         print("Please enter the number of pages");
         int pageNumber = reader.nextInt();
-        print("Please enter the publication date");
-        GregorianCalendar publicationDate = new GregorianCalendar();
+        print("Please enter the publication year");
+        int publicationYear = reader.nextInt();
+        print("Please enter the publication month");
+        int publicationMonth = reader.nextInt();
+        print("Please enter the publication day");
+        int publicationDay = reader.nextInt();
+        GregorianCalendar publicationDate = new GregorianCalendar(publicationYear, publicationMonth, publicationDay);
         print("Please enter the price");
         double price = reader.nextDouble();
-        readXController.createBibliographicProduct(name, pageNumber, publicationDate, price, selectedProduct);
+        if (selectedProduct==1){
+            int genre = 0;
+            print("Please enter a brief review");
+            String briefReview = reader.nextLine();
+            print("Please enter the book`s genre: ");
+            print("1. Science Fiction 2. Fantasy 3. Historic Novel");
+            Validators.validateGenre();
+            readXController.createBook(name, pageNumber, publicationDate, price, briefReview, genre);
+        } else {
+            int category = 0;
+            print("Please enter the magazine`s category: ");
+            print("1. Variety 2. Design 3. Science");
+            Validators.validateCategory();
+            print("Please enter the magazine`s frequency of issuance in days: ");
+            int frequencyOfIssuance = reader.nextInt();
+            readXController.createMagazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category);
+        }
     }
 
     public static void UserManagement(){
@@ -118,10 +139,22 @@ public class ReadXSystem {
         String id = reader.nextLine();
         // save the registration date as the current date
         GregorianCalendar registrationDate = new GregorianCalendar();
-        readXController.createUser(name, id, registrationDate, plan);
+        if(plan==2){
+            print("Please enter your credit card number");
+            String creditCardNumber = reader.nextLine();
+            print("Please enter your credit card CVV" ); 
+            String creditCardCVV = reader.next();
+            readXController.createPremiumUser(name, id, registrationDate, creditCardNumber, creditCardCVV);
+        } else {
+            readXController.createBasicUser(name, id, registrationDate);
+        }
     }
 
     public static void BuyBooksAndJournalSubscriptions(){
-        print("");
+        print("Please enter your id");
+        String id = reader.nextLine();
+        print("Please enter the product's id");
+        String productId = reader.nextLine();
+        readXController.buyProducts(id, productId);
     }
 }

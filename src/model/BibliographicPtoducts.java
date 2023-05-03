@@ -1,5 +1,4 @@
 package model;
-import utils.Validators;
 import java.util.GregorianCalendar;
 
 
@@ -10,27 +9,55 @@ public class BibliographicPtoducts {
     private GregorianCalendar publicationDate;
     private double price;
     public static Book book;
-    public static Journal journal;
+    public static Magazine magazine;
 
-    public BibliographicPtoducts(String name, int pageNumber, GregorianCalendar publicationDate, double price, int selectedProduct) {
+    public BibliographicPtoducts(String name, int pageNumber, GregorianCalendar publicationDate, double price, String briefReview, int genre) {
         this.name = name;
         this.pageNumber = pageNumber;
         this.publicationDate = publicationDate;
         this.price = price;
-        if (selectedProduct == 1) {
-            createBook();
-        } else if (selectedProduct == 2) {
-            createJournal();
-        }
+        
+        book = new Book(name, pageNumber, publicationDate, price, briefReview, genre);
     }
 
-    public void createBook() {
-        Validators.print("Please enter the book`s genre: ");
-        Genre genre = Validators.validateGenre();
-        book = new Book(name, pageNumber, publicationDate, price, genre);
+    public BibliographicPtoducts(String name, int pageNumber, GregorianCalendar publicationDate, double price, int frequencyOfIssuance, int category) {
+        this.name = name;
+        this.pageNumber = pageNumber;
+        this.publicationDate = publicationDate;
+        this.price = price;
+        magazine = new Magazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category);
     }
 
-    public void createJournal() {
-        journal = new Journal(name, pageNumber, publicationDate, price);
+    public String getName() {
+        return name;
     }
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public GregorianCalendar getPublicationDate() {
+        return publicationDate;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public void setPublicationDate(GregorianCalendar publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
 }
