@@ -22,6 +22,10 @@ public class Users {
         this.registrationDate = registrationDate;
         premiumUser = new PremiumUser(name,id,registrationDate,cardNumber,securityCode);
     }
+
+    public void buyProduct(String productID){
+    
+    }
     
     public String getName() {
         return name;
