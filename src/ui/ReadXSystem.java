@@ -19,6 +19,10 @@ public class ReadXSystem {
     
     public static Scanner reader;
     GregorianCalendar date = new GregorianCalendar();
+    private static int bookPos=0;
+    private static int magazinePos=0;
+    private static int basicPos=0;
+    private static int premiumPos=0;
 
     public static ReadXController readXController;
     public static void print(Object a) {
@@ -117,7 +121,8 @@ public class ReadXSystem {
             print("Please enter the book`s genre: ");
             print("1. Science Fiction 2. Fantasy 3. Historic Novel");
             Validators.validateGenre();
-            readXController.createBook(name, pageNumber, publicationDate, price, briefReview, genre);
+            readXController.createBook(name, pageNumber, publicationDate, price, briefReview, genre, bookPos);
+            bookPos++;
         } else {
             int category = 0;
             print("Please enter the magazine`s category: ");
@@ -125,7 +130,8 @@ public class ReadXSystem {
             Validators.validateCategory();
             print("Please enter the magazine`s frequency of issuance in days: ");
             int frequencyOfIssuance = reader.nextInt();
-            readXController.createMagazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category);
+            readXController.createMagazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category, magazinePos);
+            magazinePos++;
         }
     }
 
@@ -144,9 +150,11 @@ public class ReadXSystem {
             String creditCardNumber = reader.nextLine();
             print("Please enter your credit card CVV" ); 
             String creditCardCVV = reader.next();
-            readXController.createPremiumUser(name, id, registrationDate, creditCardNumber, creditCardCVV);
+            readXController.createPremiumUser(name, id, registrationDate, creditCardNumber, creditCardCVV, premiumPos);
+            premiumPos++;
         } else {
-            readXController.createBasicUser(name, id, registrationDate);
+            readXController.createBasicUser(name, id, registrationDate, basicPos);
+            basicPos++;
         }
     }
 

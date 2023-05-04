@@ -31,6 +31,7 @@ public class Magazine extends BibliographicPtoducts{
             id += (char) (Math.random() * 26 + 'A');
         }
         setId(id);
+        System.out.println("Generated magazine ID: " + id);
     }
 
     public int getFrequencyOfIssuance() {

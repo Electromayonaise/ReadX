@@ -31,6 +31,7 @@ public class Book extends BibliographicPtoducts{
             id += Integer.toHexString((int) (Math.random() * 16));
         }
         setId(id);
+        System.out.println("Generated book ID: " + id);
     }
     
     public String getBriefReview() {
