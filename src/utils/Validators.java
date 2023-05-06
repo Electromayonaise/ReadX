@@ -10,6 +10,22 @@ public class Validators {
         System.out.println(o);
     }
 
+    public static int validateIntInput(){
+        while(!reader.hasNextInt()){
+            print("Invalid option, please try again");
+            reader.next();
+        }
+        return reader.nextInt();
+    }
+
+    public static double validateDoubleInput(){
+        while(!reader.hasNextDouble()){
+            print("Invalid option, please try again");
+            reader.next();
+        }
+        return reader.nextDouble();
+    }
+
     public static int validateBibliographicProducts(){
         int selectedProduct = reader.nextInt();
         while(selectedProduct>2 || selectedProduct<1){

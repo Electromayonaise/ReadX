@@ -17,25 +17,25 @@ import utils.Validators;
  */
 public class ReadXSystem {
     
-    public static Scanner reader;
+    public static Scanner reader  = new Scanner(System.in);;
     GregorianCalendar date = new GregorianCalendar();
     private static int bookPos=0;
     private static int magazinePos=0;
     private static int basicPos=0;
     private static int premiumPos=0;
 
-    public static ReadXController readXController;
+    public static ReadXController readXController= new ReadXController();
     public static void print(Object a) {
         System.out.println(a);
     }
 
     public ReadXSystem() {
-        reader  = new Scanner(System.in);
+        
     }
     public static void main(String[] args) {
         
         menu();
-        int option = reader.nextInt();
+        int option =  Validators.validateIntInput();
         while(option != 8) {
             switch(option) {
                 case 1:
@@ -48,9 +48,11 @@ public class ReadXSystem {
                     break;
                 case 3:
                     print("Buy books and journal subscriptions selected");
+                    BuyBooksAndJournalSubscriptions();
                     break;
                 case 4:
                     print("Library presentation selected");
+                    LibraryPresentation();
                     break;
                 case 5:
                     print("Reading session simulation selected");
@@ -98,56 +100,54 @@ public class ReadXSystem {
      * the frequency of issuance, the number of active subscriptions and accumulated pages read
      */
     public static void BibliographicProductsManagement() {
-        int selectedProduct = 0;
+        int selectedProduct;
         print("What type of bibliographic product do you want to add? 1. Book 2. Magazine");
-        Validators.validateBibliographicProducts(); 
+        selectedProduct=Validators.validateBibliographicProducts(); 
         print("Please enter the name");
-        String name = reader.nextLine();
+        String name = reader.next();
+        name=name.toUpperCase();
         print("Please enter the number of pages");
-        int pageNumber = reader.nextInt();
+        int pageNumber = Validators.validateIntInput();
         print("Please enter the publication year");
-        int publicationYear = reader.nextInt();
+        int publicationYear =  Validators.validateIntInput();
         print("Please enter the publication month");
-        int publicationMonth = reader.nextInt();
+        int publicationMonth =  Validators.validateIntInput();
         print("Please enter the publication day");
-        int publicationDay = reader.nextInt();
+        int publicationDay =  Validators.validateIntInput();
         GregorianCalendar publicationDate = new GregorianCalendar(publicationYear, publicationMonth, publicationDay);
         print("Please enter the price");
-        double price = reader.nextDouble();
+        double price = Validators.validateDoubleInput();
         if (selectedProduct==1){
-            int genre = 0;
             print("Please enter a brief review");
-            String briefReview = reader.nextLine();
+            String briefReview = reader.next();
             print("Please enter the book`s genre: ");
             print("1. Science Fiction 2. Fantasy 3. Historic Novel");
-            Validators.validateGenre();
+            int genre= Validators.validateGenre();
             readXController.createBook(name, pageNumber, publicationDate, price, briefReview, genre, bookPos);
             bookPos++;
         } else {
-            int category = 0;
             print("Please enter the magazine`s category: ");
             print("1. Variety 2. Design 3. Science");
-            Validators.validateCategory();
+            int category=Validators.validateCategory();
             print("Please enter the magazine`s frequency of issuance in days: ");
-            int frequencyOfIssuance = reader.nextInt();
+            int frequencyOfIssuance =  Validators.validateIntInput();
             readXController.createMagazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category, magazinePos);
             magazinePos++;
         }
     }
 
     public static void UserManagement(){
-        int plan = 0;
         print("Please select your plan 1. Basic 2. Premium");
-        Validators.validatePlan();
+        int plan=Validators.validatePlan();
         print("please enter your name");
-        String name = reader.nextLine();
+        String name = reader.next();
         print("please enter your id");
-        String id = reader.nextLine();
+        String id = readXController.validateUserID();
         // save the registration date as the current date
         GregorianCalendar registrationDate = new GregorianCalendar();
         if(plan==2){
             print("Please enter your credit card number");
-            String creditCardNumber = reader.nextLine();
+            String creditCardNumber = reader.next();
             print("Please enter your credit card CVV" ); 
             String creditCardCVV = reader.next();
             readXController.createPremiumUser(name, id, registrationDate, creditCardNumber, creditCardCVV, premiumPos);
@@ -160,9 +160,28 @@ public class ReadXSystem {
 
     public static void BuyBooksAndJournalSubscriptions(){
         print("Please enter your id");
-        String id = reader.nextLine();
-        print("Please enter the product's id");
-        String productId = reader.nextLine();
-        readXController.buyProducts(id, productId);
+        String id = reader.next();
+        print("If you wish to, you may enter a product's name to get its id by pressing '1', if you already know the id of the product you want to buy, press any other number");
+        int option = Validators.validateIntInput();
+        if (option==1){
+            print("Please enter the product's name");
+            String name = reader.next();
+            name=name.toUpperCase();
+            readXController.getProductID(name);
+        }
+        else{
+            print("Please enter the product's id");
+            String productId = reader.next();
+            readXController.buyProducts(id, productId);
+        }
+
     }
+  
+    public static void LibraryPresentation(){
+        print("Please enter your id");
+        String id = reader.next();
+        readXController.showLibrary(id);
+    }
+
+    
 }

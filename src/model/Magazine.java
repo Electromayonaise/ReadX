@@ -21,11 +21,11 @@ public class Magazine extends BibliographicPtoducts{
             finalCategory = Category.SCIENCE;
         }
         this.category = finalCategory;
-        generateMagazineID();
+        generateID();
     }
 
     // must generate a unique alphanumeric identifier of 3 characters (A-Z, 0-9)
-    public void generateMagazineID() {
+    public void generateID() {
         String id = "";
         for (int i = 0; i < 3; i++) {
             id += (char) (Math.random() * 26 + 'A');
