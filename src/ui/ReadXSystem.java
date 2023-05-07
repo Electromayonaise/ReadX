@@ -168,6 +168,9 @@ public class ReadXSystem {
             String name = reader.next();
             name=name.toUpperCase();
             readXController.getProductID(name);
+            print("Please enter the product's id");
+            String productId = reader.next();
+            readXController.buyProducts(id, productId);
         }
         else{
             print("Please enter the product's id");

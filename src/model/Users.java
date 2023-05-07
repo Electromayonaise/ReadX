@@ -6,8 +6,8 @@ public class Users {
     private String name;
     private String id;
     private GregorianCalendar registrationDate;
-    public Book[] books;
-    public Magazine[] magazines;
+    public Book[] books= new Book[100];
+    public Magazine[] magazines= new Magazine[100];
 
     public Users (String name, String id, GregorianCalendar registrationDate) {
         this.name = name;

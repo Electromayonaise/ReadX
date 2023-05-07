@@ -20,12 +20,12 @@ public class ReadXController {
     }
 
     public void createPremiumUser(String name, String id, GregorianCalendar registrationDate, String cardNumber, String securityCode, int premiumPos){
-        System.out.print("test" );
+        System.out.println("Premium user created succesfully, with the name of:"+ name + " and the ID of: " + id +"(payment information private)" );
         users[premiumPos] = new PremiumUser(name, id, registrationDate, cardNumber, securityCode);
     }
 
     public void createBasicUser(String name, String id, GregorianCalendar registrationDate, int basicPos){
-        System.out.println("Basic user created successfully, with the name of: " + name + " and the ID of: " + id + " and the registration date of: " + registrationDate);
+        System.out.println("Basic user created successfully, with the name of: " + name + " and the ID of: " + id);
         users[basicPos] = new BasicUser(name, id, registrationDate);
     }
 
