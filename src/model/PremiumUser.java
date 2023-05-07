@@ -11,7 +11,6 @@ public class PremiumUser extends Users {
         super(name, id, registrationDate, cardNumber, securityCode);
         this.cardNumber = cardNumber;
         this.securityCode = securityCode;
-        
     }
 
     public String getCardNumber() {

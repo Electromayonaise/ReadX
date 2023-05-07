@@ -4,33 +4,43 @@ import utils.Validators;
 
 public class ReadXController {
     
-    BibliographicPtoducts[] bibliographicPtoducts = new BibliographicPtoducts[100];
+
+    Book[] books = new Book[100];
+    Magazine[] magazines = new Magazine[100];
     Users[] users= new Users[100];
+    public final int MAX_PRODUCTS = 100;
     public ReadXController(){}
 
     public void createBook( String name, int pageNumber, GregorianCalendar publicationDate, double price, String briefReview, int genre, int bookPos) {
-        bibliographicPtoducts[bookPos] = new Book(name, pageNumber, publicationDate, price, briefReview, genre);
+        books[bookPos] = new Book(name, pageNumber, publicationDate, price, briefReview, genre);
     }
 
     public void createMagazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, int frequencyOfIssuance, int category, int magazinePos){
-        bibliographicPtoducts[magazinePos] = new Magazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category);
+        magazines[magazinePos] = new Magazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category);
     }
 
     public void createPremiumUser(String name, String id, GregorianCalendar registrationDate, String cardNumber, String securityCode, int premiumPos){
+        System.out.print("test" );
         users[premiumPos] = new PremiumUser(name, id, registrationDate, cardNumber, securityCode);
     }
 
     public void createBasicUser(String name, String id, GregorianCalendar registrationDate, int basicPos){
+        System.out.println("Basic user created successfully, with the name of: " + name + " and the ID of: " + id + " and the registration date of: " + registrationDate);
         users[basicPos] = new BasicUser(name, id, registrationDate);
     }
 
     public void buyProducts(String id, String productID){
         for (int i = 0; i < users.length; i++) {
             if (users[i] != null && users[i].getId().equals(id)) {
-                for (int j = 0; j < bibliographicPtoducts.length; j++) {
-                    if (bibliographicPtoducts[j] != null && bibliographicPtoducts[j].getName().equals(productID)) {
+                for (int j = 0; j < MAX_PRODUCTS; j++) {
+                    if (books[j] != null && books[j].getId().equals(productID)) {
                         int pos = 0;
-                        users[i].buyProduct(users[i].getId(), bibliographicPtoducts[j],pos);
+                        users[i].buyBook(users[i].getId(), books[j],pos);
+                        pos++;
+                    }
+                    else if (magazines[j] != null && magazines[j].getId().equals(productID)) {
+                        int pos = 0;
+                        users[i].buyMagazine(users[i].getId(), magazines[j],pos);
                         pos++;
                     }
                 }
@@ -44,8 +54,12 @@ public class ReadXController {
             if (users[i].getId().equals(id)){
                 int pos = 0;
                 for (int j=0; j<5; j++){
-                    for (int k=0; k<5; k++){
-                        System.out.println(users[i].bibliographicPtoducts[pos].getId());
+                    if (users[i].books[pos] != null){
+                        System.out.println(users[i].books[pos].getId() + " ");
+                        pos++;
+                    }
+                    if (users[i].magazines[pos] != null){
+                        System.out.println(users[i].magazines[pos].getId() + " ");
                         pos++;
                     }
                 }
@@ -66,9 +80,12 @@ public class ReadXController {
     }
 
     public void getProductID(String name){
-        for (int i = 0; i < bibliographicPtoducts.length; i++) {
-            while (bibliographicPtoducts[i] != null && bibliographicPtoducts[i].getName().equals(name)) {
-                System.out.println("The product's ID is: " + bibliographicPtoducts[i].getId());
+        for (int i = 0; i < MAX_PRODUCTS ; i++) {
+            if (books[i] != null && books[i].getName().equals(name)) {
+                System.out.println("The product's ID is: " + books[i].getId());
+            }
+            else if (magazines[i] != null && magazines[i].getName().equals(name)) {
+                System.out.println("The product's ID is: " + magazines[i].getId());
             }
         }
     }
