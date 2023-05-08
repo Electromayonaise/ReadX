@@ -9,26 +9,72 @@ public class ReadXController {
     Magazine[] magazines = new Magazine[100];
     Users[] users= new Users[100];
     public final int MAX_PRODUCTS = 100;
+
+    /*
+     * Constructor method for the ReadXController class, empty because it is not needed
+     */
     public ReadXController(){}
 
+    /*
+     * Method that creates a book object and stores it in the books array
+     * @param name Book's name
+     * @param pageNumber Book's number of pages
+     * @param publicationDate Book's publication date
+     * @param price Book's price
+     * @param briefReview Book's brief review
+     * @param genre Book's genre (flag value)
+     * @param bookPos Book's position in the books array
+     */
     public void createBook( String name, int pageNumber, GregorianCalendar publicationDate, double price, String briefReview, int genre, int bookPos) {
         books[bookPos] = new Book(name, pageNumber, publicationDate, price, briefReview, genre);
     }
 
+    /*
+     * Method that creates a magazine object and stores it in the magazines array
+     * @param name Magazine's name
+     * @param pageNumber Magazine's number of pages
+     * @param publicationDate Magazine's publication date
+     * @param price Magazine's price
+     * @param frequencyOfIssuance Magazine's frequency of issuance
+     * @param category Magazine's category (flag value)
+     * @param magazinePos Magazine's position in the magazines array
+     */
     public void createMagazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, int frequencyOfIssuance, int category, int magazinePos){
         magazines[magazinePos] = new Magazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category);
     }
 
+    /*
+     * Method that creates a premium user object and stores it in the users array
+     * @param name User's name
+     * @param id User's id
+     * @param registrationDate User's registration date
+     * @param cardNumber User's credit card number
+     * @param securityCode User's credit card security code
+     * @param premiumPos User's position in the users array
+     */
     public void createPremiumUser(String name, String id, GregorianCalendar registrationDate, String cardNumber, String securityCode, int premiumPos){
         System.out.println("Premium user created succesfully, with the name of:"+ name + " and the ID of: " + id +"(payment information private)" );
         users[premiumPos] = new PremiumUser(name, id, registrationDate, cardNumber, securityCode);
     }
 
+    /*
+     * Method that creates a basic user object and stores it in the users array
+     * @param name User's name
+     * @param id User's id
+     * @param registrationDate User's registration date
+     * @param basicPos User's position in the users array
+     */
     public void createBasicUser(String name, String id, GregorianCalendar registrationDate, int basicPos){
         System.out.println("Basic user created successfully, with the name of: " + name + " and the ID of: " + id);
         users[basicPos] = new BasicUser(name, id, registrationDate);
     }
 
+    /*
+     * Method that searches for a product inputed by the user in the books and magazines arrays and sends 
+     * it to the method buyBook/buyMagazine
+     * @param id User's id
+     * @param productID Product's id
+     */
     public void buyProducts(String id, String productID){
         for (int i = 0; i < users.length; i++) {
             if (users[i] != null && users[i].getId().equals(id)) {

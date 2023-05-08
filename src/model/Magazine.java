@@ -8,6 +8,15 @@ public class Magazine extends BibliographicPtoducts{
     private Category category;
     private String id;
 
+    /*
+     * Constructor method for the Magazine class
+     * @param name Bibliographic product's name
+     * @param pageNumber Bibliographic product's number of pages
+     * @param publicationDate Bibliographic product's publication date
+     * @param price Bibliographic product's price
+     * @param frequencyOfIssuance Bibliographic product's frequency of issuance
+     * @param category Bibliographic product's category (flag value converted in the constructor to an enum value)
+     */
     public Magazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, int frequencyOfIssuance, int category) {
         super(name, pageNumber, publicationDate, price, frequencyOfIssuance, category);
         Category finalCategory = null;
