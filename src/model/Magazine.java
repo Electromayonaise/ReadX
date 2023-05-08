@@ -19,17 +19,8 @@ public class Magazine extends BibliographicPtoducts{
      */
     public Magazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, int frequencyOfIssuance, int category) {
         super(name, pageNumber, publicationDate, price, frequencyOfIssuance, category);
-        Category finalCategory = null;
-        if (category==1){
-            finalCategory = Category.VARIETY;
-        }
-        else if (category==2){
-            finalCategory = Category.DESIGN;
-        }
-        else if (category==3){
-            finalCategory = Category.SCIENCE;
-        }
-        this.category = finalCategory;
+        setCategoryByFlag(category);
+        this.frequencyOfIssuance = frequencyOfIssuance;
         generateID();
     }
 
@@ -41,6 +32,20 @@ public class Magazine extends BibliographicPtoducts{
         }
         setId(id);
         System.out.println("Generated magazine ID: " + id);
+    }
+
+    public void setCategoryByFlag(int category) {
+        Category finalCategory = null;
+        if (category==1){
+            finalCategory = Category.VARIETY;
+        }
+        else if (category==2){
+            finalCategory = Category.DESIGN;
+        }
+        else if (category==3){
+            finalCategory = Category.SCIENCE;
+        }
+        this.category = finalCategory;
     }
 
     public int getFrequencyOfIssuance() {

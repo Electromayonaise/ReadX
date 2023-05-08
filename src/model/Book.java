@@ -18,17 +18,7 @@ public class Book extends BibliographicPtoducts{
      */
     public Book (String name, int pageNumber, GregorianCalendar publicationDate, double price, String briefReview, int genre) {
         super(name, pageNumber, publicationDate, price, briefReview, genre);
-        Genre finalGenre = null;
-        if (genre==1){
-            finalGenre = Genre.SCIENCEFICTION;
-        }
-        else if (genre==2){
-            finalGenre = Genre.FANTASY;
-        }
-        else if (genre==3){
-            finalGenre = Genre.HISTORICNOVEL;
-        }
-        this.genre = finalGenre;
+        setGenreByFlag(genre);
         this.briefReview = briefReview;
         generateID();
     }
@@ -43,6 +33,20 @@ public class Book extends BibliographicPtoducts{
         }
         setId(id);
         System.out.println("Generated book ID: " + id);
+    }
+
+    public void setGenreByFlag(int genre) {
+        Genre finalGenre = null;
+        if (genre==1){
+            finalGenre = Genre.SCIENCEFICTION;
+        }
+        else if (genre==2){
+            finalGenre = Genre.FANTASY;
+        }
+        else if (genre==3){
+            finalGenre = Genre.HISTORICNOVEL;
+        }
+        this.genre = finalGenre;
     }
     
     public String getBriefReview() {

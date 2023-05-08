@@ -26,6 +26,33 @@ public class Validators {
         return reader.nextDouble();
     }
 
+    public static int validateOptionInput(){
+        int option = reader.nextInt();
+        while(option>3 || option<1){
+            print("Invalid option, please try again");
+            option = reader.nextInt();
+        }
+        return option;
+    }
+
+    public static int validateUpdateInput(){
+        int option = reader.nextInt();
+        while(option>6 || option<1){
+            print("Invalid option, please try again");
+            option = reader.nextInt();
+        }
+        return option;
+    }
+
+    public static int validateOneOrTwo(){
+        int option = reader.nextInt();
+        while(option>2 || option<1){
+            print("Invalid option, please try again");
+            option = reader.nextInt();
+        }
+        return option;
+    }
+
     public static int validateBibliographicProducts(){
         int selectedProduct = reader.nextInt();
         while(selectedProduct>2 || selectedProduct<1){

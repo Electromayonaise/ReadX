@@ -102,6 +102,29 @@ public class ReadXSystem {
 
     /*
      * Bibliographic products management: 
+     * Gives the user the option to add, delete or update a bibliographic product
+     */
+    public static void BibliographicProductsManagement() {
+        int desiredOption;
+        print("Please enter what do you wish to manage");
+        print("1. Add a bibliographic product 2. Delete a bibliographic product 3. Update a bibliographic product ");
+        desiredOption=Validators.validateOptionInput();
+        switch(desiredOption){
+            case 1:
+                addBibliographicProduct();
+                break;
+            case 2:
+                deleteBibliographicProduct();
+                break;
+            case 3:
+                updateBibliographicProduct();
+                break;
+        } 
+
+    }
+
+    /*
+     * Method that adds a bibliographic product
      * For now, the two bibliographic products are books and journals. 
      * On one hand, each book has a unique 3 hexadecimal digit identifier, a name, number of pages,  a brief review, a publication date, 
      * a genre ( Science Fiction, Fantasy, and Historic Novel), a url that leads to a repository with the book cover, the selling price in dollars, 
@@ -110,41 +133,174 @@ public class ReadXSystem {
      * a category (Variety, Design, and Sience), a URL leading to a repository with the cover of the magazine, the value of the subscription (in dollars), 
      * the frequency of issuance, the number of active subscriptions and accumulated pages read
      */
-    public static void BibliographicProductsManagement() {
-        int selectedProduct;
+    public static void addBibliographicProduct(){
         print("What type of bibliographic product do you want to add? 1. Book 2. Magazine");
+            int selectedProduct;
+            selectedProduct=Validators.validateBibliographicProducts(); 
+            print("Please enter the name");
+            String name = reader.next();
+            name=name.toUpperCase();
+            print("Please enter the number of pages");
+            int pageNumber = Validators.validateIntInput();
+            print("Please enter the publication year");
+            int publicationYear =  Validators.validateIntInput();
+            print("Please enter the publication month");
+            int publicationMonth =  Validators.validateIntInput();
+            print("Please enter the publication day");
+            int publicationDay =  Validators.validateIntInput();
+            GregorianCalendar publicationDate = new GregorianCalendar(publicationYear, publicationMonth, publicationDay);
+            print("Please enter the price");
+            double price = Validators.validateDoubleInput();
+            if (selectedProduct==1){
+                print("Please enter a brief review");
+                String briefReview = reader.next();
+                print("Please enter the book`s genre: ");
+                print("1. Science Fiction 2. Fantasy 3. Historic Novel");
+                int genre= Validators.validateGenre();
+                readXController.createBook(name, pageNumber, publicationDate, price, briefReview, genre, bookPos);
+                bookPos++;
+            } else {
+                print("Please enter the magazine`s category: ");
+                print("1. Variety 2. Design 3. Science");
+                int category=Validators.validateCategory();
+                print("Please enter the magazine`s frequency of issuance in days: ");
+                int frequencyOfIssuance =  Validators.validateIntInput();
+                readXController.createMagazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category, magazinePos);
+                magazinePos++;
+            }
+    }
+
+
+    /*
+     * Method that deletes a bibliographic product by it´s id
+     */
+    public static void deleteBibliographicProduct(){
+        print("What type of bibliographic product do you want to delete? 1. Book 2. Magazine");
+        int selectedProduct;
         selectedProduct=Validators.validateBibliographicProducts(); 
-        print("Please enter the name");
-        String name = reader.next();
-        name=name.toUpperCase();
-        print("Please enter the number of pages");
-        int pageNumber = Validators.validateIntInput();
-        print("Please enter the publication year");
-        int publicationYear =  Validators.validateIntInput();
-        print("Please enter the publication month");
-        int publicationMonth =  Validators.validateIntInput();
-        print("Please enter the publication day");
-        int publicationDay =  Validators.validateIntInput();
-        GregorianCalendar publicationDate = new GregorianCalendar(publicationYear, publicationMonth, publicationDay);
-        print("Please enter the price");
-        double price = Validators.validateDoubleInput();
-        if (selectedProduct==1){
-            print("Please enter a brief review");
-            String briefReview = reader.next();
-            print("Please enter the book`s genre: ");
-            print("1. Science Fiction 2. Fantasy 3. Historic Novel");
-            int genre= Validators.validateGenre();
-            readXController.createBook(name, pageNumber, publicationDate, price, briefReview, genre, bookPos);
-            bookPos++;
-        } else {
-            print("Please enter the magazine`s category: ");
-            print("1. Variety 2. Design 3. Science");
-            int category=Validators.validateCategory();
-            print("Please enter the magazine`s frequency of issuance in days: ");
-            int frequencyOfIssuance =  Validators.validateIntInput();
-            readXController.createMagazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category, magazinePos);
-            magazinePos++;
+        print("If you wish to search the id of the product you want to delete, please enter 1. If you already know the id, please enter any other number");
+        int desiredOption=Validators.validateOneOrTwo();
+        if (desiredOption==1){
+            print("Please enter the product's name");
+            String name = reader.next();
+            name=name.toUpperCase();
+            readXController.getProductID(name);
         }
+        print("Please enter the id");
+        String id = reader.next();
+        if (selectedProduct==1){
+            readXController.deleteBook(id);
+        } else {
+            readXController.deleteMagazine(id);
+        }
+    }
+
+    /*
+     * Method that updates a bibliographic product, acording to the user's choice
+     */
+    public static void updateBibliographicProduct(){
+
+        print("What type of bibliographic product do you want to update? 1. Book 2. Magazine");
+        int selectedProduct;
+        selectedProduct=Validators.validateBibliographicProducts(); 
+        print("If you wish to search the id of the product you want to update, please enter 1. If you already know the id, please enter any other number");
+        int desiredOption=Validators.validateOneOrTwo();
+        if (desiredOption==1){
+            print("Please enter the product's name");
+            String name = reader.next();
+            name=name.toUpperCase();
+            readXController.getProductID(name);
+        }
+        print("Please enter the id");
+        String id = reader.next();
+        if (selectedProduct==1){
+            print("Please enter what data do you want to update");
+            print("1. Name 2. Number of pages 3. Publication date 4. Price 5. Brief review 6. Genre");
+            int selectedData= Validators.validateUpdateInput();
+            switch(selectedData){
+                case 1:
+                    print("Please enter the new name");
+                    String newName = reader.next();
+                    newName=newName.toUpperCase();
+                    readXController.updateBookName(id, newName);
+                    break;
+                case 2:
+                    print("Please enter the new number of pages");
+                    int newPageNumber = Validators.validateIntInput();
+                    readXController.updateBookPageNumber(id, newPageNumber);
+                    break;
+                case 3:
+                    print("Please enter the new publication year");
+                    int newPublicationYear =  Validators.validateIntInput();
+                    print("Please enter the new publication month");
+                    int newPublicationMonth =  Validators.validateIntInput();
+                    print("Please enter the new publication day");
+                    int newPublicationDay =  Validators.validateIntInput();
+                    GregorianCalendar newPublicationDate = new GregorianCalendar(newPublicationYear, newPublicationMonth, newPublicationDay);
+                    readXController.updateBookPublicationDate(id, newPublicationDate);
+                    break;
+                case 4:
+                    print("Please enter the new price");
+                    double newPrice = Validators.validateDoubleInput();
+                    readXController.updateBookPrice(id, newPrice);
+                    break;
+                case 5:
+                    print("Please enter the new brief review");
+                    String newBriefReview = reader.next();
+                    readXController.updateBookBriefReview(id, newBriefReview);
+                    break;
+                case 6:
+                    print("Please enter the new genre");
+                    print("1. Science Fiction 2. Fantasy 3. Historic Novel");
+                    int newGenre= Validators.validateGenre();
+                    readXController.updateBookGenre(id, newGenre);
+                    break;
+            }
+        } else {
+            print("Please enter what data do you want to update");
+            print("1. Name 2. Number of pages 3. Publication date 4. Price 5. Frequency of issuance 6. Category");
+            int selectedData= Validators.validateUpdateInput();
+            switch(selectedData){
+                case 1:
+                    print("Please enter the new name");
+                    String newName = reader.next();
+                    newName=newName.toUpperCase();
+                    readXController.updateMagazineName(id, newName);
+                    break;
+                case 2:
+                    print("Please enter the new number of pages");
+                    int newPageNumber = Validators.validateIntInput();
+                    readXController.updateMagazinePageNumber(id, newPageNumber);
+                    break;
+                case 3:
+                    print("Please enter the new publication year");
+                    int newPublicationYear =  Validators.validateIntInput();
+                    print("Please enter the new publication month");
+                    int newPublicationMonth =  Validators.validateIntInput();
+                    print("Please enter the new publication day");
+                    int newPublicationDay =  Validators.validateIntInput();
+                    GregorianCalendar newPublicationDate = new GregorianCalendar(newPublicationYear, newPublicationMonth, newPublicationDay);
+                    readXController.updateMagazinePublicationDate(id, newPublicationDate);
+                    break;
+                case 4:
+                    print("Please enter the new price");
+                    double newPrice = Validators.validateDoubleInput();
+                    readXController.updateMagazinePrice(id, newPrice);
+                    break;
+                case 5:
+                    print("Please enter the new frequency of issuance");
+                    int newFrequencyOfIssuance = Validators.validateIntInput();
+                    readXController.updateMagazineFrequencyOfIssuance(id, newFrequencyOfIssuance);
+                    break;
+                case 6:
+                    print("Please enter the new category");
+                    print("1. Variety 2. Design 3. Science");
+                    int newCategory=Validators.validateCategory();
+                    readXController.updateMagazineCategory(id, newCategory);
+                    break;
+            }
+        }
+
     }
 
     /*

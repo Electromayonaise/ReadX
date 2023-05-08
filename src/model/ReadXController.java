@@ -44,6 +44,200 @@ public class ReadXController {
     }
 
     /*
+     * Method that deletes a book object from the books array
+     * @param id Book's id
+     */
+    public void deleteBook(String id){
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] != null && books[i].getId().equals(id)) {
+                books[i] = null;
+                System.out.println("Book deleted successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that deletes a magazine object from the magazines array
+     * @param id Magazine's id
+     */
+    public void deleteMagazine(String id){
+        for (int i = 0; i < magazines.length; i++) {
+            if (magazines[i] != null && magazines[i].getId().equals(id)) {
+                magazines[i] = null;
+                System.out.println("Magazine deleted successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a book object's name
+     * @param id Book's id
+     * @param newName Book's new name
+     */
+    public void updateBookName(String id, String newName){
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] != null && books[i].getId().equals(id)) {
+                books[i].setName(newName);
+                System.out.println("Book name updated successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a book object's number of pages
+     * @param id Book's id
+     * @param newPageNumber Book's new number of pages
+     */
+    public void updateBookPageNumber(String id, int newPageNumber){
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] != null && books[i].getId().equals(id)) {
+                books[i].setPageNumber(newPageNumber);
+                System.out.println("Book page number updated successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a book object's publication date
+     * @param id Book's id
+     * @param newPublicationDate Book's new publication date
+     */
+    public void updateBookPublicationDate(String id, GregorianCalendar newPublicationDate){
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] != null && books[i].getId().equals(id)) {
+                books[i].setPublicationDate(newPublicationDate);
+                System.out.println("Book publication date updated successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a book object's price
+     * @param id Book's id
+     * @param newPrice Book's new price
+     */
+    public void updateBookPrice(String id, double newPrice){
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] != null && books[i].getId().equals(id)) {
+                books[i].setPrice(newPrice);
+                System.out.println("Book price updated successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a book object's brief review
+     * @param id Book's id
+     * @param newBriefReview Book's new brief review
+     */
+    public void updateBookBriefReview(String id, String newBriefReview){
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] != null && books[i].getId().equals(id)) {
+                books[i].setBriefReview(newBriefReview);
+                System.out.println("Book brief review updated successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a book object's genre
+     * @param id Book's id
+     * @param newGenre Book's new genre (flag value)
+     */
+    public void updateBookGenre(String id, int newGenre){
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] != null && books[i].getId().equals(id)) {
+                books[i].setGenreByFlag(newGenre);
+                System.out.println("Book genre updated successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a magazine object's name
+     * @param id Magazine's id
+     * @param newName Magazine's new name
+     */
+    public void updateMagazineName(String id, String newName){
+        for (int i = 0; i < magazines.length; i++) {
+            if (magazines[i] != null && magazines[i].getId().equals(id)) {
+                magazines[i].setName(newName);
+                System.out.println("Magazine name updated successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a magazine object's number of pages
+     * @param id Magazine's id
+     * @param newPageNumber Magazine's new number of pages
+     */
+    public void updateMagazinePageNumber(String id, int newPageNumber){
+        for (int i = 0; i < magazines.length; i++) {
+            if (magazines[i] != null && magazines[i].getId().equals(id)) {
+                magazines[i].setPageNumber(newPageNumber);
+                System.out.println("Magazine page number updated successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a magazine object's publication date
+     * @param id Magazine's id
+     * @param newPublicationDate Magazine's new publication date
+     */
+    public void updateMagazinePublicationDate(String id, GregorianCalendar newPublicationDate){
+        for (int i = 0; i < magazines.length; i++) {
+            if (magazines[i] != null && magazines[i].getId().equals(id)) {
+                magazines[i].setPublicationDate(newPublicationDate);
+                System.out.println("Magazine publication date updated successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a magazine object's price
+     * @param id Magazine's id
+     * @param newPrice Magazine's new price
+     */
+    public void updateMagazinePrice(String id, double newPrice){
+        for (int i = 0; i < magazines.length; i++) {
+            if (magazines[i] != null && magazines[i].getId().equals(id)) {
+                magazines[i].setPrice(newPrice);
+                System.out.println("Magazine price updated successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a magazine object's frequency of issuance
+     * @param id Magazine's id
+     * @param newFrequencyOfIssuance Magazine's new frequency of issuance
+     */
+    public void updateMagazineFrequencyOfIssuance(String id, int newFrequencyOfIssuance){
+        for (int i = 0; i < magazines.length; i++) {
+            if (magazines[i] != null && magazines[i].getId().equals(id)) {
+                magazines[i].setFrequencyOfIssuance(newFrequencyOfIssuance);
+                System.out.println("Magazine frequency of issuance updated successfully");
+            }
+        }
+    }
+
+    /*
+     * Method that updates a magazine object's category
+     * @param id Magazine's id
+     * @param newCategory Magazine's new category (flag value)
+     */
+    public void updateMagazineCategory(String id, int newCategory){
+        for (int i = 0; i < magazines.length; i++) {
+            if (magazines[i] != null && magazines[i].getId().equals(id)) {
+                magazines[i].setCategoryByFlag(newCategory);
+                System.out.println("Magazine category updated successfully");
+            }
+        }
+    }
+
+    /*
      * Method that creates a premium user object and stores it in the users array
      * @param name User's name
      * @param id User's id
