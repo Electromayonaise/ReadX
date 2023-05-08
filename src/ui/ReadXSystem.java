@@ -48,22 +48,23 @@ public class ReadXSystem {
             switch(option) {
                 case 1:
                     print("Bibliographic products management selected");
-                    BibliographicProductsManagement();
+                    bibliographicProductsManagement();
                     break;
                 case 2:
                     print("User management selected");
-                    UserManagement();
+                    userManagement();
                     break;
                 case 3:
                     print("Buy books and journal subscriptions selected");
-                    BuyBooksAndJournalSubscriptions();
+                    buyBooksAndJournalSubscriptions();
                     break;
                 case 4:
                     print("Library presentation selected");
-                    LibraryPresentation();
+                    libraryPresentation();
                     break;
                 case 5:
                     print("Reading session simulation selected");
+                    readingSimulation();
                     break;
                 case 6:
                     print("Report generation selected");
@@ -104,7 +105,7 @@ public class ReadXSystem {
      * Bibliographic products management: 
      * Gives the user the option to add, delete or update a bibliographic product
      */
-    public static void BibliographicProductsManagement() {
+    public static void bibliographicProductsManagement() {
         int desiredOption;
         print("Please enter what do you wish to manage");
         print("1. Add a bibliographic product 2. Delete a bibliographic product 3. Update a bibliographic product ");
@@ -310,7 +311,7 @@ public class ReadXSystem {
      * On the other hand, premium users have a name, an id, a registration date, a credit card number, and a security code.
      * In terms of the ads, a interface called advertisable is created, which has a method called showAds, applicable to basic users.
      */
-    public static void UserManagement(){
+    public static void userManagement(){
         print("Please select your plan 1. Basic 2. Premium");
         int plan=Validators.validatePlan();
         print("please enter your name");
@@ -337,7 +338,7 @@ public class ReadXSystem {
      * The user must enter his id, and then he can either enter the name of the product he wants to buy, or the id of the product he wants to buy.
      * If the user enters the name of the product, the system will show the id of the product, and then the user must enter the id of the product he wants to buy.
      */
-    public static void BuyBooksAndJournalSubscriptions(){
+    public static void buyBooksAndJournalSubscriptions(){
         print("Please enter your id");
         String id = reader.next();
         print("If you wish to, you may enter a product's name to get its id by pressing '1', if you already know the id of the product you want to buy, press any other number");
@@ -363,10 +364,19 @@ public class ReadXSystem {
      * Library presentation:
      * The user must enter his id, and then the system will show the user's library.
      */
-    public static void LibraryPresentation(){
+    public static void libraryPresentation(){
         print("Please enter your id");
         String id = reader.next();
         readXController.showLibrary(id);
+    }
+
+    public static void readingSimulation(){
+        print("Please enter your id");
+        String id = reader.next();
+        readXController.showLibrary(id);
+        print("Please enter the id of or position in the shown matrix of the product you want to read");
+        String productId = reader.next();
+        readXController.readProduct(productId);
     }
 
     

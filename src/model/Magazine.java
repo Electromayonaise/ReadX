@@ -25,6 +25,7 @@ public class Magazine extends BibliographicPtoducts{
     }
 
     // must generate a unique alphanumeric identifier of 3 characters (A-Z, 0-9)
+    @Override
     public void generateID() {
         String id = "";
         for (int i = 0; i < 3; i++) {
