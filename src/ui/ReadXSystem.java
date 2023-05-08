@@ -25,6 +25,10 @@ public class ReadXSystem {
     private static int premiumPos=0;
 
     public static ReadXController readXController= new ReadXController();
+    /*
+     * Method that prints an object, to avoid writing System.out.println() every time
+     * @param a Object to be printed
+     */
     public static void print(Object a) {
         System.out.println(a);
     }
@@ -32,6 +36,10 @@ public class ReadXSystem {
     public ReadXSystem() {
         
     }
+
+    /*
+     * Main method that runs the program by calling the menu method and the other methods according to the user's input
+     */
     public static void main(String[] args) {
         
         menu();
@@ -72,6 +80,9 @@ public class ReadXSystem {
         }
     }
 
+    /*
+     * Method that prints the menu
+     */
     public static void menu() {
         
         print("***********************************");
@@ -136,6 +147,13 @@ public class ReadXSystem {
         }
     }
 
+    /*
+     * User management:
+     * There are two types of users: basic and premium.
+     * On one hand, basic users have a name, an id, and a registration date. 
+     * On the other hand, premium users have a name, an id, a registration date, a credit card number, and a security code.
+     * In terms of the ads, a interface called advertisable is created, which has a method called showAds, applicable to basic users.
+     */
     public static void UserManagement(){
         print("Please select your plan 1. Basic 2. Premium");
         int plan=Validators.validatePlan();
@@ -158,6 +176,11 @@ public class ReadXSystem {
         }
     }
 
+    /*
+     * Buy books and journal subscriptions:
+     * The user must enter his id, and then he can either enter the name of the product he wants to buy, or the id of the product he wants to buy.
+     * If the user enters the name of the product, the system will show the id of the product, and then the user must enter the id of the product he wants to buy.
+     */
     public static void BuyBooksAndJournalSubscriptions(){
         print("Please enter your id");
         String id = reader.next();
@@ -179,7 +202,11 @@ public class ReadXSystem {
         }
 
     }
-  
+    
+    /*
+     * Library presentation:
+     * The user must enter his id, and then the system will show the user's library.
+     */
     public static void LibraryPresentation(){
         print("Please enter your id");
         String id = reader.next();

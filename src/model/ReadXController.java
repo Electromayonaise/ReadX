@@ -113,7 +113,10 @@ public class ReadXController {
         }
     }
 
-    // Method to check if the user id allready exists in the system
+    /*
+     *  Method to check if the user id allready exists in the system
+     * @return id User's id
+     */
     public String validateUserID(){
         String id = Validators.reader.next();
         for (int i = 0; i < users.length; i++) {
@@ -125,6 +128,10 @@ public class ReadXController {
         return id;
     }
 
+    /*
+     * Method that searchhes for a product by its name and prints its id
+     * @param name Product's name
+     */
     public void getProductID(String name){
         for (int i = 0; i < MAX_PRODUCTS ; i++) {
             if (books[i] != null && books[i].getName().equals(name)) {
