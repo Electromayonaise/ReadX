@@ -291,22 +291,52 @@ public class ReadXController {
     // The user's library must be represented trough 5x5 matrix that present the id's of the products from oldest to newest (publication date),when the martix is full, the user may go to the next page of the library and so on.=
     public void showLibrary(String id){
         for (int i=0; i<users.length; i++){
-            if (users[i].getId().equals(id)){
+            if (users[i] != null && users[i].getId().equals(id)){
+                String [][]matrix = new String[5][5];
+                for(int j=0, k=0; j<matrix.length ;j++){
+                    for(int m=0; m<matrix.length ;m++){
+                        if(users[i].books[k] != null){
+                            matrix[j][m] = users[i].books[k].getId();
+                            k++;
+                        }
+                        else if(users[i].magazines[k] != null){
+                            matrix[j][m] = users[i].magazines[k].getId();
+                            k++;
+                        }
+                    }     
+                }
+                for(int j = 0; j < matrix.length; j++)
+                {
+                    for(int m = 0; m < matrix.length; m++)
+                        System.out.print("\t" + matrix[j][m]);
+                    System.out.println();
+                }
+            }  
+            /*if (users[i] != null && users[i].getId().equals(id)){
                 int pos = 0;
                 for (int j=0; j<5; j++){
-                    if (users[i].books[pos] != null){
-                        System.out.println(users[i].books[pos].getId() + " ");
-                        pos++;
+                    String library[][] = new String[5][5];
+                    for (int k=0; k<5; k++){
+                        if (users[i].books[pos] != null){
+                            library [k][j] = users[i].books[pos].getId();
+                            System.out.println("\t" + library[j][j]);
+                            pos++;
+                        }
+                        if (users[i].magazines[pos] != null){
+                            library [k][j] = users[i].magazines[pos].getId();
+                            System.out.println("\t" + library[k][j]);
+                            pos++;
+                        }
                     }
-                    if (users[i].magazines[pos] != null){
-                        System.out.println(users[i].magazines[pos].getId() + " ");
-                        pos++;
-                    }
+                    System.out.println("");
                 }
-            }
+            }*/
         }
     }
 
+    public void readProduct(String productID){
+        
+    }
     /*
      *  Method to check if the user id allready exists in the system
      * @return id User's id
