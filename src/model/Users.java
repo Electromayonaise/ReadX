@@ -1,13 +1,16 @@
 package model;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public abstract class Users {
  
     private String name;
     private String id;
+    private int boughtBooks=0;
+    private int boughtMagazineSubscriptions=0;
     private GregorianCalendar registrationDate;
-    public Book[] books= new Book[100];
-    public Magazine[] magazines= new Magazine[100];
+    public ArrayList <Book> userBooksList = new ArrayList<Book>();
+    public ArrayList <Magazine> userMagazinesList = new ArrayList<Magazine>();
 
     /*
      * Constructor method for the Users class (Basic users)
@@ -37,17 +40,44 @@ public abstract class Users {
        
     }
 
-    
-    public void buyBook(String foundUser, Book desiredProduct, int pos){
-        books[pos] = desiredProduct;
-        System.out.println("Book bought successfully");
+    /*
+     * Method that adds a book to the user's book list
+     * @param foundUser User that is buying the book
+     * @param desiredProduct Book that the user wants to buy
+     */
+    public void buyBook(String foundUser, Book desiredProduct){
+        userBooksList.add(desiredProduct);
+        boughtBooks++;
+        System.out.println("Book bought successfully, with the user: " +foundUser);
     }
 
-    public void buyMagazine(String foundUser, Magazine desiredProduct, int pos){
-        magazines[pos] = desiredProduct;
-        System.out.println("Magazine bought successfully");
+    /*
+     * Method that adds a magazine to the user's magazine list
+     * @param foundUser User that is buying the magazine
+     * @param desiredProduct Magazine that the user wants to buy
+     */
+    public void buyMagazine(String foundUser, Magazine desiredProduct){
+        userMagazinesList.add(desiredProduct);
+        boughtMagazineSubscriptions++;
+        System.out.println("Magazine bought successfully, with the user: " +foundUser);
     }
     
+    public int getBoughtBooks() {
+        return boughtBooks;
+    }
+
+    public int getBoughtMagazineSubscriptions() {
+        return boughtMagazineSubscriptions;
+    }
+
+    public void setBoughtBooks(int boughtBooks) {
+        this.boughtBooks = boughtBooks;
+    }
+
+    public void setBoughtMagazineSubscriptions(int boughtMagazineSubscriptions) {
+        this.boughtMagazineSubscriptions = boughtMagazineSubscriptions;
+    }
+
     public String getName() {
         return name;
     }

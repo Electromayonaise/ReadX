@@ -1,14 +1,14 @@
 package model;
 import java.util.GregorianCalendar;
+import java.util.ArrayList;
 import utils.Validators;
 
 public class ReadXController {
     
-
-    Book[] books = new Book[100];
-    Magazine[] magazines = new Magazine[100];
-    Users[] users= new Users[100];
-    public final int MAX_PRODUCTS = 100;
+    ArrayList <Book> booksList = new ArrayList<Book>();
+    ArrayList <Magazine> magazinesList = new ArrayList<Magazine>();
+    ArrayList<Users> usersList = new ArrayList<Users>();
+    private int maxProducts= booksList.size() + magazinesList.size() +1;
 
     /*
      * Constructor method for the ReadXController class, empty because it is not needed
@@ -25,8 +25,8 @@ public class ReadXController {
      * @param genre Book's genre (flag value)
      * @param bookPos Book's position in the books array
      */
-    public void createBook( String name, int pageNumber, GregorianCalendar publicationDate, double price, String briefReview, int genre, int bookPos) {
-        books[bookPos] = new Book(name, pageNumber, publicationDate, price, briefReview, genre);
+    public void createBook( String name, int pageNumber, GregorianCalendar publicationDate, double price, String briefReview, int genre) {
+        booksList.add(new Book(name, pageNumber, publicationDate, price, briefReview, genre));
     }
 
     /*
@@ -39,8 +39,8 @@ public class ReadXController {
      * @param category Magazine's category (flag value)
      * @param magazinePos Magazine's position in the magazines array
      */
-    public void createMagazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, int frequencyOfIssuance, int category, int magazinePos){
-        magazines[magazinePos] = new Magazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category);
+    public void createMagazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, int frequencyOfIssuance, int category){
+        magazinesList.add(new Magazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category));
     }
 
     /*
@@ -48,9 +48,9 @@ public class ReadXController {
      * @param id Book's id
      */
     public void deleteBook(String id){
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] != null && books[i].getId().equals(id)) {
-                books[i] = null;
+        for (int i = 0; i < booksList.size(); i++) {
+            if (booksList.get(i) != null && booksList.get(i).getId().equals(id)) {
+                booksList.remove(i);
                 System.out.println("Book deleted successfully");
             }
         }
@@ -61,9 +61,9 @@ public class ReadXController {
      * @param id Magazine's id
      */
     public void deleteMagazine(String id){
-        for (int i = 0; i < magazines.length; i++) {
-            if (magazines[i] != null && magazines[i].getId().equals(id)) {
-                magazines[i] = null;
+        for (int i = 0; i < magazinesList.size(); i++) {
+            if (magazinesList.get(i) != null && magazinesList.get(i).getId().equals(id)) {
+                magazinesList.remove(i);
                 System.out.println("Magazine deleted successfully");
             }
         }
@@ -75,9 +75,9 @@ public class ReadXController {
      * @param newName Book's new name
      */
     public void updateBookName(String id, String newName){
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] != null && books[i].getId().equals(id)) {
-                books[i].setName(newName);
+        for (int i = 0; i < booksList.size(); i++) {
+            if (booksList.get(i) != null && booksList.get(i).getId().equals(id)) {
+                booksList.get(i).setName(newName);
                 System.out.println("Book name updated successfully");
             }
         }
@@ -89,9 +89,9 @@ public class ReadXController {
      * @param newPageNumber Book's new number of pages
      */
     public void updateBookPageNumber(String id, int newPageNumber){
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] != null && books[i].getId().equals(id)) {
-                books[i].setPageNumber(newPageNumber);
+        for (int i = 0; i < booksList.size(); i++) {
+            if (booksList.get(i) != null && booksList.get(i).getId().equals(id)) {
+                booksList.get(i).setPageNumber(newPageNumber);
                 System.out.println("Book page number updated successfully");
             }
         }
@@ -103,9 +103,9 @@ public class ReadXController {
      * @param newPublicationDate Book's new publication date
      */
     public void updateBookPublicationDate(String id, GregorianCalendar newPublicationDate){
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] != null && books[i].getId().equals(id)) {
-                books[i].setPublicationDate(newPublicationDate);
+        for (int i = 0; i < booksList.size(); i++) {
+            if (booksList.get(i) != null && booksList.get(i).getId().equals(id)) {
+                booksList.get(i).setPublicationDate(newPublicationDate);
                 System.out.println("Book publication date updated successfully");
             }
         }
@@ -117,9 +117,9 @@ public class ReadXController {
      * @param newPrice Book's new price
      */
     public void updateBookPrice(String id, double newPrice){
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] != null && books[i].getId().equals(id)) {
-                books[i].setPrice(newPrice);
+        for (int i = 0; i < booksList.size(); i++) {
+            if (booksList.get(i) != null && booksList.get(i).getId().equals(id)) {
+                booksList.get(i).setPrice(newPrice);
                 System.out.println("Book price updated successfully");
             }
         }
@@ -131,9 +131,9 @@ public class ReadXController {
      * @param newBriefReview Book's new brief review
      */
     public void updateBookBriefReview(String id, String newBriefReview){
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] != null && books[i].getId().equals(id)) {
-                books[i].setBriefReview(newBriefReview);
+        for (int i = 0; i < booksList.size(); i++) {
+            if (booksList.get(i) != null && booksList.get(i).getId().equals(id)) {
+                booksList.get(i).setBriefReview(newBriefReview);
                 System.out.println("Book brief review updated successfully");
             }
         }
@@ -145,9 +145,9 @@ public class ReadXController {
      * @param newGenre Book's new genre (flag value)
      */
     public void updateBookGenre(String id, int newGenre){
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] != null && books[i].getId().equals(id)) {
-                books[i].setGenreByFlag(newGenre);
+        for (int i = 0; i < booksList.size(); i++) {
+            if (booksList.get(i) != null && booksList.get(i).getId().equals(id)) {
+                booksList.get(i).setGenreByFlag(newGenre);
                 System.out.println("Book genre updated successfully");
             }
         }
@@ -159,9 +159,9 @@ public class ReadXController {
      * @param newName Magazine's new name
      */
     public void updateMagazineName(String id, String newName){
-        for (int i = 0; i < magazines.length; i++) {
-            if (magazines[i] != null && magazines[i].getId().equals(id)) {
-                magazines[i].setName(newName);
+        for (int i = 0; i < magazinesList.size(); i++) {
+            if (magazinesList.get(i) != null && magazinesList.get(i).getId().equals(id)) {
+                magazinesList.get(i).setName(newName);
                 System.out.println("Magazine name updated successfully");
             }
         }
@@ -173,9 +173,9 @@ public class ReadXController {
      * @param newPageNumber Magazine's new number of pages
      */
     public void updateMagazinePageNumber(String id, int newPageNumber){
-        for (int i = 0; i < magazines.length; i++) {
-            if (magazines[i] != null && magazines[i].getId().equals(id)) {
-                magazines[i].setPageNumber(newPageNumber);
+        for (int i = 0; i < magazinesList.size(); i++) {
+            if (magazinesList.get(i) != null && magazinesList.get(i).getId().equals(id)) {
+                magazinesList.get(i).setPageNumber(newPageNumber);
                 System.out.println("Magazine page number updated successfully");
             }
         }
@@ -187,9 +187,9 @@ public class ReadXController {
      * @param newPublicationDate Magazine's new publication date
      */
     public void updateMagazinePublicationDate(String id, GregorianCalendar newPublicationDate){
-        for (int i = 0; i < magazines.length; i++) {
-            if (magazines[i] != null && magazines[i].getId().equals(id)) {
-                magazines[i].setPublicationDate(newPublicationDate);
+        for (int i = 0; i < magazinesList.size(); i++) {
+            if (magazinesList.get(i) != null && magazinesList.get(i).getId().equals(id)) {
+                magazinesList.get(i).setPublicationDate(newPublicationDate);
                 System.out.println("Magazine publication date updated successfully");
             }
         }
@@ -201,9 +201,9 @@ public class ReadXController {
      * @param newPrice Magazine's new price
      */
     public void updateMagazinePrice(String id, double newPrice){
-        for (int i = 0; i < magazines.length; i++) {
-            if (magazines[i] != null && magazines[i].getId().equals(id)) {
-                magazines[i].setPrice(newPrice);
+        for (int i = 0; i < magazinesList.size(); i++) {
+            if (magazinesList.get(i) != null && magazinesList.get(i).getId().equals(id)) {
+                magazinesList.get(i).setPrice(newPrice);
                 System.out.println("Magazine price updated successfully");
             }
         }
@@ -215,9 +215,9 @@ public class ReadXController {
      * @param newFrequencyOfIssuance Magazine's new frequency of issuance
      */
     public void updateMagazineFrequencyOfIssuance(String id, int newFrequencyOfIssuance){
-        for (int i = 0; i < magazines.length; i++) {
-            if (magazines[i] != null && magazines[i].getId().equals(id)) {
-                magazines[i].setFrequencyOfIssuance(newFrequencyOfIssuance);
+        for (int i = 0; i < magazinesList.size(); i++) {
+            if (magazinesList.get(i) != null && magazinesList.get(i).getId().equals(id)) {
+                magazinesList.get(i).setFrequencyOfIssuance(newFrequencyOfIssuance);
                 System.out.println("Magazine frequency of issuance updated successfully");
             }
         }
@@ -229,9 +229,9 @@ public class ReadXController {
      * @param newCategory Magazine's new category (flag value)
      */
     public void updateMagazineCategory(String id, int newCategory){
-        for (int i = 0; i < magazines.length; i++) {
-            if (magazines[i] != null && magazines[i].getId().equals(id)) {
-                magazines[i].setCategoryByFlag(newCategory);
+        for (int i = 0; i < magazinesList.size(); i++) {
+            if (magazinesList.get(i) != null && magazinesList.get(i).getId().equals(id)) {
+                magazinesList.get(i).setCategoryByFlag(newCategory);
                 System.out.println("Magazine category updated successfully");
             }
         }
@@ -246,9 +246,9 @@ public class ReadXController {
      * @param securityCode User's credit card security code
      * @param premiumPos User's position in the users array
      */
-    public void createPremiumUser(String name, String id, GregorianCalendar registrationDate, String cardNumber, String securityCode, int premiumPos){
+    public void createPremiumUser(String name, String id, GregorianCalendar registrationDate, String cardNumber, String securityCode){
         System.out.println("Premium user created succesfully, with the name of:"+ name + " and the ID of: " + id +"(payment information private)" );
-        users[premiumPos] = new PremiumUser(name, id, registrationDate, cardNumber, securityCode);
+        usersList.add(new PremiumUser(name, id, registrationDate, cardNumber, securityCode));
     }
 
     /*
@@ -258,9 +258,9 @@ public class ReadXController {
      * @param registrationDate User's registration date
      * @param basicPos User's position in the users array
      */
-    public void createBasicUser(String name, String id, GregorianCalendar registrationDate, int basicPos){
+    public void createBasicUser(String name, String id, GregorianCalendar registrationDate){
         System.out.println("Basic user created successfully, with the name of: " + name + " and the ID of: " + id);
-        users[basicPos] = new BasicUser(name, id, registrationDate);
+        usersList.add(new BasicUser(name, id, registrationDate));
     }
 
     /*
@@ -270,18 +270,28 @@ public class ReadXController {
      * @param productID Product's id
      */
     public void buyProducts(String id, String productID){
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] != null && users[i].getId().equals(id)) {
-                for (int j = 0; j < MAX_PRODUCTS; j++) {
-                    if (books[j] != null && books[j].getId().equals(productID)) {
-                        int pos = 0;
-                        users[i].buyBook(users[i].getId(), books[j],pos);
-                        pos++;
+        for (int i = 0; i < usersList.size(); i++) {
+            if (usersList.get(i) != null && usersList.get(i).getId().equals(id)) {
+                for (int j = 0; j < maxProducts; j++) {
+                    if (booksList.get(j) != null && booksList.get(j).getId().equals(productID)) {
+                        if (usersList.get(i) instanceof PremiumUser){
+                        usersList.get(i).buyBook(usersList.get(i).getId(), booksList.get(j));
+                        }
+                        else if (usersList.get(i) instanceof BasicUser){
+                            if (usersList.get(i).getBoughtBooks() ==5 ){
+                                System.out.println("You have reached the maximum number of books you can buy");
+                            }
+                        }
                     }
-                    else if (magazines[j] != null && magazines[j].getId().equals(productID)) {
-                        int pos = 0;
-                        users[i].buyMagazine(users[i].getId(), magazines[j],pos);
-                        pos++;
+                    else if (magazinesList.get(j) != null && magazinesList.get(j).getId().equals(productID)) {
+                        if (usersList.get(i) instanceof PremiumUser){
+                        usersList.get(i).buyMagazine(usersList.get(i).getId(), magazinesList.get(j));
+                        }
+                        else if (usersList.get(i) instanceof BasicUser){
+                            if (usersList.get(i).getBoughtMagazineSubscriptions() ==2 ){
+                                System.out.println("You have reached the maximum number of magazine subscriptions you can buy");
+                            }
+                        }
                     }
                 }
             }
@@ -290,17 +300,17 @@ public class ReadXController {
 
     // The user's library must be represented trough 5x5 matrix that present the id's of the products from oldest to newest (publication date),when the martix is full, the user may go to the next page of the library and so on.=
     public void showLibrary(String id){
-        for (int i=0; i<users.length; i++){
-            if (users[i] != null && users[i].getId().equals(id)){
+        for (int i=0; i<usersList.size(); i++){
+            if (usersList.get(i) != null && usersList.get(i).getId().equals(id)){
                 String [][]matrix = new String[5][5];
                 for(int j=0, k=0; j<matrix.length ;j++){
                     for(int m=0; m<matrix.length ;m++){
-                        if(users[i].books[k] != null){
-                            matrix[j][m] = users[i].books[k].getId();
+                        if(usersList.get(i).userBooksList.get(k) != null){
+                            matrix[j][m] = usersList.get(i).userBooksList.get(k).getId();
                             k++;
                         }
-                        else if(users[i].magazines[k] != null){
-                            matrix[j][m] = users[i].magazines[k].getId();
+                        else if(usersList.get(i).userMagazinesList.get(k) != null){
+                            matrix[j][m] = usersList.get(i).userMagazinesList.get(k).getId();
                             k++;
                         }
                     }     
@@ -343,8 +353,8 @@ public class ReadXController {
      */
     public String validateUserID(){
         String id = Validators.reader.next();
-        for (int i = 0; i < users.length; i++) {
-            while (users[i] != null && users[i].getId().equals(id)) {
+        for (int i = 0; i < usersList.size(); i++) {
+            while (usersList.get(i) != null && usersList.get(i).getId().equals(id)) {
                 System.out.println("This ID is already registered, please enter a new one");
                 id = Validators.reader.next();
             }
@@ -357,12 +367,12 @@ public class ReadXController {
      * @param name Product's name
      */
     public void getProductID(String name){
-        for (int i = 0; i < MAX_PRODUCTS ; i++) {
-            if (books[i] != null && books[i].getName().equals(name)) {
-                System.out.println("The product's ID is: " + books[i].getId());
+        for (int i = 0; i < maxProducts ; i++) {
+            if (booksList.get(i) != null && booksList.get(i).getName().equals(name)) {
+                System.out.println("The product's ID is: " + booksList.get(i).getId());
             }
-            else if (magazines[i] != null && magazines[i].getName().equals(name)) {
-                System.out.println("The product's ID is: " + magazines[i].getId());
+            else if (magazinesList.get(i) != null && magazinesList.get(i).getName().equals(name)) {
+                System.out.println("The product's ID is: " + magazinesList.get(i).getId());
             }
         }
     }
