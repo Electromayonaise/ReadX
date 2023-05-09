@@ -40,10 +40,10 @@ public class Validators {
      * Method to validate the input is a valid option between 1 and 3
      */
     public static int validateOptionInput(){
-        int option = reader.nextInt();
+        int option = validateIntInput();
         while(option>3 || option<1){
             print("Invalid option, please try again");
-            option = reader.nextInt();
+            option = validateIntInput();
         }
         return option;
     }
@@ -52,10 +52,10 @@ public class Validators {
      * Method to validate the input is a valid option between 1 and 6
      */
     public static int validateUpdateInput(){
-        int option = reader.nextInt();
+        int option = validateIntInput();
         while(option>6 || option<1){
             print("Invalid option, please try again");
-            option = reader.nextInt();
+            option = validateIntInput();
         }
         return option;
     }
@@ -64,10 +64,10 @@ public class Validators {
      * Method to validate the input is a valid option between 1 and 2
      */
     public static int validateOneOrTwo(){
-        int option = reader.nextInt();
+        int option = validateIntInput();
         while(option>2 || option<1){
             print("Invalid option, please try again");
-            option = reader.nextInt();
+            option = validateIntInput();
         }
         return option;
     }
@@ -76,10 +76,10 @@ public class Validators {
      * Method to validate the input is a valid product option between 1 and 2
      */
     public static int validateBibliographicProducts(){
-        int selectedProduct = reader.nextInt();
+        int selectedProduct = validateIntInput();
         while(selectedProduct>2 || selectedProduct<1){
             print("Invalid option, please try again");
-            selectedProduct = reader.nextInt();
+            selectedProduct = validateIntInput();
         }
         return selectedProduct;
     }
@@ -88,10 +88,10 @@ public class Validators {
      * Method to validate the input is a valid plan option between 1 and 2
      */
     public static int validatePlan(){
-        int plan = reader.nextInt();
+        int plan = validateIntInput();
         while(plan>2 || plan<1){
             print("Invalid option, please try again");
-            plan = reader.nextInt();
+            plan =validateIntInput();
         }
         return plan;
     }
@@ -100,10 +100,10 @@ public class Validators {
      * Method to validate the input is a valid genre option between 1 and 3
      */
     public static int validateGenre(){
-        int genre= reader.nextInt();
+        int genre= validateIntInput();
         while(genre>3 || genre<1){
             print("Invalid option, please enter a valid genre");
-            genre = reader.nextInt();
+            genre = validateIntInput();
         }
         return genre;
     }
@@ -112,10 +112,10 @@ public class Validators {
      * Method to validate the input is a valid category option between 1 and 3
      */
     public static int validateCategory(){
-        int category= reader.nextInt();
+        int category= validateIntInput();
         while(category>3 || category<1){
             print("Invalid option, please enter a valid category");
-            category = reader.nextInt();
+            category = validateIntInput();
         }
         return category;
     }

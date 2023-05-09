@@ -134,9 +134,6 @@ public class ReadXSystem {
         print("What type of bibliographic product do you want to add? 1. Book 2. Magazine");
             int selectedProduct;
             selectedProduct=Validators.validateBibliographicProducts(); 
-            print("Please enter the name");
-            String name = reader.next();
-            name=name.toUpperCase();
             print("Please enter the number of pages");
             int pageNumber = Validators.validateIntInput();
             print("Please enter the publication year");
@@ -149,6 +146,8 @@ public class ReadXSystem {
             print("Please enter the price");
             double price = Validators.validateDoubleInput();
             if (selectedProduct==1){
+                print("Please enter the book`s name");
+                String name = readXController.checkForBookNames();
                 print("Please enter a brief review");
                 String briefReview = reader.next();
                 print("Please enter the book`s genre: ");
@@ -156,6 +155,8 @@ public class ReadXSystem {
                 int genre= Validators.validateGenre();
                 readXController.createBook(name, pageNumber, publicationDate, price, briefReview, genre);
             } else {
+                print("Please enter the magazine`s name");
+                String name = readXController.checkForMagazineNames();
                 print("Please enter the magazine`s category: ");
                 print("1. Variety 2. Design 3. Science");
                 int category=Validators.validateCategory();

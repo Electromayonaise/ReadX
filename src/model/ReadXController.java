@@ -27,6 +27,10 @@ public class ReadXController {
      */
     public void createBook( String name, int pageNumber, GregorianCalendar publicationDate, double price, String briefReview, int genre) {
         booksList.add(new Book(name, pageNumber, publicationDate, price, briefReview, genre));
+        /*for (int i = 0; i < booksList.size(); i++){
+            System.out.println(booksList.get(i).getId());
+            CICLE TO CHECK IF THE BOOKS ARE BEING ADDED TO THE ARRAY
+        }*/
     }
 
     /*
@@ -41,6 +45,10 @@ public class ReadXController {
      */
     public void createMagazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, int frequencyOfIssuance, int category){
         magazinesList.add(new Magazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category));
+        /*for (int i = 0; i < magazinesList.size(); i++){
+            System.out.println(magazinesList.get(i).getId());
+            CICLE TO CHECK IF THE MAGAZINES ARE BEING ADDED TO THE ARRAY
+        } */ 
     }
 
     /*
@@ -273,23 +281,33 @@ public class ReadXController {
         for (int i = 0; i < usersList.size(); i++) {
             if (usersList.get(i) != null && usersList.get(i).getId().equals(id)) {
                 for (int j = 0; j < maxProducts; j++) {
-                    if (booksList.get(j) != null && booksList.get(j).getId().equals(productID)) {
-                        if (usersList.get(i) instanceof PremiumUser){
-                        usersList.get(i).buyBook(usersList.get(i).getId(), booksList.get(j));
-                        }
-                        else if (usersList.get(i) instanceof BasicUser){
-                            if (usersList.get(i).getBoughtBooks() ==5 ){
-                                System.out.println("You have reached the maximum number of books you can buy");
+                    if (booksList.size()>j){
+                        if (booksList.get(j) != null && booksList.get(j).getId().equals(productID)) {
+                            if (usersList.get(i) instanceof PremiumUser){
+                            usersList.get(i).buyBook(usersList.get(i).getId(), booksList.get(j));
+                            }
+                            else if (usersList.get(i) instanceof BasicUser){
+                                if (usersList.get(i).getBoughtBooks() ==5 ){
+                                    System.out.println("You have reached the maximum number of books you can buy");
+                                }
+                                else {
+                                    usersList.get(i).buyBook(usersList.get(i).getId(), booksList.get(j));
+                                }
                             }
                         }
                     }
-                    else if (magazinesList.get(j) != null && magazinesList.get(j).getId().equals(productID)) {
-                        if (usersList.get(i) instanceof PremiumUser){
-                        usersList.get(i).buyMagazine(usersList.get(i).getId(), magazinesList.get(j));
-                        }
-                        else if (usersList.get(i) instanceof BasicUser){
-                            if (usersList.get(i).getBoughtMagazineSubscriptions() ==2 ){
-                                System.out.println("You have reached the maximum number of magazine subscriptions you can buy");
+                    if (magazinesList.size()>j){
+                        if (magazinesList.get(j) != null && magazinesList.get(j).getId().equals(productID)) {
+                            if (usersList.get(i) instanceof PremiumUser){
+                            usersList.get(i).buyMagazine(usersList.get(i).getId(), magazinesList.get(j));
+                            }
+                            else if (usersList.get(i) instanceof BasicUser){
+                                if (usersList.get(i).getBoughtMagazineSubscriptions() ==2 ){
+                                    System.out.println("You have reached the maximum number of magazine subscriptions you can buy");
+                                }
+                                else {
+                                    usersList.get(i).buyMagazine(usersList.get(i).getId(), magazinesList.get(j));
+                                }
                             }
                         }
                     }
@@ -322,25 +340,45 @@ public class ReadXController {
                     System.out.println();
                 }
             }  
-            /*if (users[i] != null && users[i].getId().equals(id)){
-                int pos = 0;
-                for (int j=0; j<5; j++){
-                    String library[][] = new String[5][5];
-                    for (int k=0; k<5; k++){
-                        if (users[i].books[pos] != null){
-                            library [k][j] = users[i].books[pos].getId();
-                            System.out.println("\t" + library[j][j]);
-                            pos++;
-                        }
-                        if (users[i].magazines[pos] != null){
-                            library [k][j] = users[i].magazines[pos].getId();
-                            System.out.println("\t" + library[k][j]);
-                            pos++;
-                        }
-                    }
-                    System.out.println("");
-                }
-            }*/
+            /*
+             * 	public static final int ROW = 3; 
+	public static final int COLUMN = 5; 
+
+	private int[][] matrix;
+
+	public MatrixCalculator(){
+		matrix = new int[ROW][COLUMN]; 
+		initMatrix();
+	}
+
+	public void  createMatrix(int row, int column){
+		for(int i = 0; i < row; i++){
+			for(int j = 0; j < column; j++){
+				matrix[i][j] = i+j; 
+			}
+		}
+
+	}
+	public String printMatrix(){
+		String msj = ""; 
+		for(int i = 0; i < ROW; i++){
+			for(int j = 0; j < COLUMN; j++){
+				msj += " "+matrix[i][j]; 
+			}
+			msj += "\n";
+		}
+		return msj; 
+	}
+
+	private void initMatrix(){
+		for(int i = 0; i < ROW; i++){
+			for(int j = 0; j < COLUMN; j++){
+				matrix[i][j] = i+j; 
+			}
+		}
+	}
+             */
+            
         }
     }
 
@@ -368,12 +406,52 @@ public class ReadXController {
      */
     public void getProductID(String name){
         for (int i = 0; i < maxProducts ; i++) {
-            if (booksList.get(i) != null && booksList.get(i).getName().equals(name)) {
+            if (booksList.size()>i){
+                if (booksList.get(i).getName().equals(name)) {
                 System.out.println("The product's ID is: " + booksList.get(i).getId());
+                }
             }
-            else if (magazinesList.get(i) != null && magazinesList.get(i).getName().equals(name)) {
+            if (magazinesList.size()>i){
+               if (magazinesList.get(i).getName().equals(name)) {
                 System.out.println("The product's ID is: " + magazinesList.get(i).getId());
+               }
             }
         }
+    }
+
+    /*
+     * Method that searches if a book with the same name already exists in the system
+     */
+    public String checkForBookNames(){
+        String name = Validators.reader.next();
+        name = name.toUpperCase();
+        if (booksList.size() == 0){
+            return name;
+        }
+        for (int i =0; i< booksList.size(); i++){
+            if (booksList.get(i) != null && booksList.get(i).getName().equals(name)){
+                System.out.println("A book with this name already exists, please enter a new one");
+                name = Validators.reader.next();
+            }
+        }
+        return name;
+    }
+
+    /*
+     * Method that searches if a magazine with the same name already exists in the system
+     */
+    public String checkForMagazineNames(){
+        String name = Validators.reader.next();
+        name = name.toUpperCase();
+        if (magazinesList.size() == 0){
+            return name;
+        }
+        for (int i=0; i< magazinesList.size(); i++){
+            if (magazinesList.get(i) != null && magazinesList.get(i).getName().equals(name)){
+                System.out.println("A magazine with this name already exists, please enter a new one");
+                name = Validators.reader.next();
+            }
+        }
+        return name;
     }
 }
