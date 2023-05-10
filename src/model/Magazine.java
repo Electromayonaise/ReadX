@@ -17,8 +17,8 @@ public class Magazine extends BibliographicPtoducts{
      * @param frequencyOfIssuance Bibliographic product's frequency of issuance
      * @param category Bibliographic product's category (flag value converted in the constructor to an enum value)
      */
-    public Magazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, int frequencyOfIssuance, int category) {
-        super(name, pageNumber, publicationDate, price, frequencyOfIssuance, category);
+    public Magazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, String url, int frequencyOfIssuance, int category) {
+        super(name, pageNumber, publicationDate, price, url, frequencyOfIssuance, category);
         setCategoryByFlag(category);
         this.frequencyOfIssuance = frequencyOfIssuance;
         generateID();
@@ -26,13 +26,13 @@ public class Magazine extends BibliographicPtoducts{
 
     // must generate a unique alphanumeric identifier of 3 characters (A-Z, 0-9)
     @Override
-    public void generateID() {
+    public String generateID() {
         String id = "";
         for (int i = 0; i < 3; i++) {
             id += (char) (Math.random() * 26 + 'A');
         }
         setId(id);
-        System.out.println("Generated magazine ID: " + id);
+        return id;
     }
 
     public void setCategoryByFlag(int category) {

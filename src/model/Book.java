@@ -16,8 +16,8 @@ public class Book extends BibliographicPtoducts{
      * @param briefReview Book's brief review
      * @param genre Book's genre (flag value converted inside the constructor to a Genre enum)
      */
-    public Book (String name, int pageNumber, GregorianCalendar publicationDate, double price, String briefReview, int genre) {
-        super(name, pageNumber, publicationDate, price, briefReview, genre);
+    public Book (String name, int pageNumber, GregorianCalendar publicationDate, double price, String url, String briefReview, int genre) {
+        super(name, pageNumber, publicationDate, price, url, briefReview, genre);
         setGenreByFlag(genre);
         this.briefReview = briefReview;
         generateID();
@@ -27,13 +27,13 @@ public class Book extends BibliographicPtoducts{
      * Method that generates a random ID for the book that is  a unique 3 hexadecimal digit identifier (1,2,3,4,5,6,7,8,9,A,B,C,D,E,F)
      */
     @Override
-     public void  generateID() {
+     public String generateID() {
         String id = "";
         for (int i = 0; i < 3; i++) {
             id += Integer.toHexString((int) (Math.random() * 16));
         }
         setId(id);
-        System.out.println("Generated book ID: " + id);
+        return id;
     }
 
     public void setGenreByFlag(int genre) {

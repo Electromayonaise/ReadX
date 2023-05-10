@@ -45,10 +45,9 @@ public abstract class Users {
      * @param foundUser User that is buying the book
      * @param desiredProduct Book that the user wants to buy
      */
-    public void buyBook(String foundUser, Book desiredProduct){
+    public void buyBook(Book desiredProduct){
         userBooksList.add(desiredProduct);
         boughtBooks++;
-        System.out.println("Book bought successfully, with the user: " +foundUser);
     }
 
     /*
@@ -56,10 +55,9 @@ public abstract class Users {
      * @param foundUser User that is buying the magazine
      * @param desiredProduct Magazine that the user wants to buy
      */
-    public void buyMagazine(String foundUser, Magazine desiredProduct){
+    public void buyMagazine(Magazine desiredProduct){
         userMagazinesList.add(desiredProduct);
         boughtMagazineSubscriptions++;
-        System.out.println("Magazine bought successfully, with the user: " +foundUser);
     }
     
     public int getBoughtBooks() {

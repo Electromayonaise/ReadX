@@ -36,6 +36,15 @@ public class Validators {
         return reader.nextDouble();
     }
 
+    public static String validateUrlInput(){
+        String url = reader.next();
+        while (!url.contains("https") || !url.contains("www")){
+            print("Invalid url, please make sure it has a direction (or contains https, www)");
+            url = reader.next();
+        }
+        return url;
+    }
+
     /*
      * Method to validate the input is a valid option between 1 and 3
      */

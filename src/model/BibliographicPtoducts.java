@@ -8,6 +8,8 @@ public abstract class BibliographicPtoducts {
     private int pageNumber;
     private GregorianCalendar publicationDate;
     private double price;
+    private String url;
+    private GregorianCalendar dateOfPurchase;
 
     /*
      * Constructor method for the BibliographicPtoducts class (Books)
@@ -18,11 +20,12 @@ public abstract class BibliographicPtoducts {
      * @param briefReview Bibliographic product's brief review
      * @param genre Bibliographic product's genre (flag value)
      */
-    public BibliographicPtoducts(String name, int pageNumber, GregorianCalendar publicationDate, double price, String briefReview, int genre) {
+    public BibliographicPtoducts(String name, int pageNumber, GregorianCalendar publicationDate, double price, String url, String briefReview, int genre) {
         this.name = name;
         this.pageNumber = pageNumber;
         this.publicationDate = publicationDate;
         this.price = price;
+        this.url=url;
     }
 
     /*
@@ -34,7 +37,7 @@ public abstract class BibliographicPtoducts {
      * @param frequencyOfIssuance Bibliographic product's frequency of issuance
      * @param category Bibliographic product's category (flag value)
      */
-    public BibliographicPtoducts(String name, int pageNumber, GregorianCalendar publicationDate, double price, int frequencyOfIssuance, int category) {
+    public BibliographicPtoducts(String name, int pageNumber, GregorianCalendar publicationDate, double price, String url, int frequencyOfIssuance, int category) {
         this.name = name;
         this.pageNumber = pageNumber;
         this.publicationDate = publicationDate;
@@ -44,7 +47,16 @@ public abstract class BibliographicPtoducts {
     /*
      * Abstract method to be implemented in the Book and Magazine classes
      */
-    public abstract void generateID();
+    public abstract String generateID();
+
+
+    public GregorianCalendar getDateOfPurchase() {
+        return dateOfPurchase;
+    }
+
+    public void setDateOfPurchase(GregorianCalendar dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
+    }
 
     public String getName() {
         return name;
@@ -76,6 +88,14 @@ public abstract class BibliographicPtoducts {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void setUrl(String url){
+        this.url=url;
+    }
+    
+    public String getUrl(){
+        return url;
     }
 
 }

@@ -145,24 +145,30 @@ public class ReadXSystem {
             GregorianCalendar publicationDate = new GregorianCalendar(publicationYear, publicationMonth, publicationDay);
             print("Please enter the price");
             double price = Validators.validateDoubleInput();
+            print("Please enter the product's url");
+            String url = Validators.validateUrlInput();
             if (selectedProduct==1){
                 print("Please enter the book`s name");
-                String name = readXController.checkForBookNames();
+                String name = reader.next();
+                name=name.toUpperCase();
                 print("Please enter a brief review");
                 String briefReview = reader.next();
                 print("Please enter the book`s genre: ");
                 print("1. Science Fiction 2. Fantasy 3. Historic Novel");
                 int genre= Validators.validateGenre();
-                readXController.createBook(name, pageNumber, publicationDate, price, briefReview, genre);
+                String addBook = readXController.createBook(name, pageNumber, publicationDate, price, url, briefReview, genre);
+                print("the list of created books is (by id): " + addBook);
             } else {
                 print("Please enter the magazine`s name");
-                String name = readXController.checkForMagazineNames();
+                String name = reader.next();
+                name=name.toUpperCase();
                 print("Please enter the magazine`s category: ");
                 print("1. Variety 2. Design 3. Science");
                 int category=Validators.validateCategory();
                 print("Please enter the magazine`s frequency of issuance in days: ");
                 int frequencyOfIssuance =  Validators.validateIntInput();
-                readXController.createMagazine(name, pageNumber, publicationDate, price, frequencyOfIssuance, category);
+                String addMagazine= readXController.createMagazine(name, pageNumber, publicationDate, price, url, frequencyOfIssuance, category);
+                print("the list of created magazines is (by id): " + addMagazine);
             }
     }
 
@@ -176,18 +182,33 @@ public class ReadXSystem {
         selectedProduct=Validators.validateBibliographicProducts(); 
         print("If you wish to search the id of the product you want to delete, please enter 1. If you already know the id, please enter any other number");
         int desiredOption=Validators.validateOneOrTwo();
+        boolean productExistance= true;
         if (desiredOption==1){
             print("Please enter the product's name");
             String name = reader.next();
             name=name.toUpperCase();
-            readXController.getProductID(name);
+            String bookSearch = readXController.getBookIdByName(name);
+            String magazineSearch= readXController.getMagazineIdByName(name);
+            if (bookSearch.equals("Book not found") && magazineSearch.equals("Magazine not found")){
+                print("Product not found");
+                productExistance = false;
+            } 
+            else if (bookSearch.equals("Book not found")){
+                print(magazineSearch);
+            } else {
+                print(bookSearch);
+            }
+
         }
-        print("Please enter the id");
-        String id = reader.next();
-        if (selectedProduct==1){
-            readXController.deleteBook(id);
-        } else {
-            readXController.deleteMagazine(id);
+        if (productExistance == true){
+            print("Please enter the id");
+            String id = reader.next();
+            if (selectedProduct==1){
+                readXController.deleteBook(id);
+            } else {
+                readXController.deleteMagazine(id);
+        
+            }
         }
     }
 
@@ -201,102 +222,124 @@ public class ReadXSystem {
         selectedProduct=Validators.validateBibliographicProducts(); 
         print("If you wish to search the id of the product you want to update, please enter 1. If you already know the id, please enter any other number");
         int desiredOption=Validators.validateOneOrTwo();
+        boolean productExistance= true;
         if (desiredOption==1){
             print("Please enter the product's name");
             String name = reader.next();
             name=name.toUpperCase();
-            readXController.getProductID(name);
-        }
-        print("Please enter the id");
-        String id = reader.next();
-        if (selectedProduct==1){
-            print("Please enter what data do you want to update");
-            print("1. Name 2. Number of pages 3. Publication date 4. Price 5. Brief review 6. Genre");
-            int selectedData= Validators.validateUpdateInput();
-            switch(selectedData){
-                case 1:
-                    print("Please enter the new name");
-                    String newName = reader.next();
-                    newName=newName.toUpperCase();
-                    readXController.updateBookName(id, newName);
-                    break;
-                case 2:
-                    print("Please enter the new number of pages");
-                    int newPageNumber = Validators.validateIntInput();
-                    readXController.updateBookPageNumber(id, newPageNumber);
-                    break;
-                case 3:
-                    print("Please enter the new publication year");
-                    int newPublicationYear =  Validators.validateIntInput();
-                    print("Please enter the new publication month");
-                    int newPublicationMonth =  Validators.validateIntInput();
-                    print("Please enter the new publication day");
-                    int newPublicationDay =  Validators.validateIntInput();
-                    GregorianCalendar newPublicationDate = new GregorianCalendar(newPublicationYear, newPublicationMonth, newPublicationDay);
-                    readXController.updateBookPublicationDate(id, newPublicationDate);
-                    break;
-                case 4:
-                    print("Please enter the new price");
-                    double newPrice = Validators.validateDoubleInput();
-                    readXController.updateBookPrice(id, newPrice);
-                    break;
-                case 5:
-                    print("Please enter the new brief review");
-                    String newBriefReview = reader.next();
-                    readXController.updateBookBriefReview(id, newBriefReview);
-                    break;
-                case 6:
-                    print("Please enter the new genre");
-                    print("1. Science Fiction 2. Fantasy 3. Historic Novel");
-                    int newGenre= Validators.validateGenre();
-                    readXController.updateBookGenre(id, newGenre);
-                    break;
-            }
-        } else {
-            print("Please enter what data do you want to update");
-            print("1. Name 2. Number of pages 3. Publication date 4. Price 5. Frequency of issuance 6. Category");
-            int selectedData= Validators.validateUpdateInput();
-            switch(selectedData){
-                case 1:
-                    print("Please enter the new name");
-                    String newName = reader.next();
-                    newName=newName.toUpperCase();
-                    readXController.updateMagazineName(id, newName);
-                    break;
-                case 2:
-                    print("Please enter the new number of pages");
-                    int newPageNumber = Validators.validateIntInput();
-                    readXController.updateMagazinePageNumber(id, newPageNumber);
-                    break;
-                case 3:
-                    print("Please enter the new publication year");
-                    int newPublicationYear =  Validators.validateIntInput();
-                    print("Please enter the new publication month");
-                    int newPublicationMonth =  Validators.validateIntInput();
-                    print("Please enter the new publication day");
-                    int newPublicationDay =  Validators.validateIntInput();
-                    GregorianCalendar newPublicationDate = new GregorianCalendar(newPublicationYear, newPublicationMonth, newPublicationDay);
-                    readXController.updateMagazinePublicationDate(id, newPublicationDate);
-                    break;
-                case 4:
-                    print("Please enter the new price");
-                    double newPrice = Validators.validateDoubleInput();
-                    readXController.updateMagazinePrice(id, newPrice);
-                    break;
-                case 5:
-                    print("Please enter the new frequency of issuance");
-                    int newFrequencyOfIssuance = Validators.validateIntInput();
-                    readXController.updateMagazineFrequencyOfIssuance(id, newFrequencyOfIssuance);
-                    break;
-                case 6:
-                    print("Please enter the new category");
-                    print("1. Variety 2. Design 3. Science");
-                    int newCategory=Validators.validateCategory();
-                    readXController.updateMagazineCategory(id, newCategory);
-                    break;
+            String searchBookId= readXController.getBookIdByName(name);
+            String searchMagazineId= readXController.getMagazineIdByName(name);
+            if (searchBookId.equals("Book not found")&& searchMagazineId.equals("Magazine not found")){
+                print("The product was not found");
+                productExistance = false;
+            } else if (searchBookId.equals("Book not found") && !searchMagazineId.equals("Magazine not found")){
+                print(searchMagazineId);
+            } else {
+                print(searchBookId);
             }
         }
-
+        if (productExistance == true){
+            print("Please enter the id");
+            String id = reader.next();
+            if (selectedProduct==1){
+                print("Please enter what data do you want to update");
+                print("1. Name 2. Number of pages 3. Publication date 4. Price 5. Brief review 6. Genre");
+                int selectedData= Validators.validateUpdateInput();
+                switch(selectedData){
+                    case 1:
+                        print("Please enter the new name");
+                        String newName = reader.next();
+                        newName=newName.toUpperCase();
+                        String updateBookName = readXController.updateBookName(id, newName);
+                        print(updateBookName);
+                        break;
+                    case 2:
+                        print("Please enter the new number of pages");
+                        int newPageNumber = Validators.validateIntInput();
+                        String updateBookPages= readXController.updateBookPageNumber(id, newPageNumber);
+                        print(updateBookPages);
+                        break;
+                    case 3:
+                        print("Please enter the new publication year");
+                        int newPublicationYear =  Validators.validateIntInput();
+                        print("Please enter the new publication month");
+                        int newPublicationMonth =  Validators.validateIntInput();
+                        print("Please enter the new publication day");
+                        int newPublicationDay =  Validators.validateIntInput();
+                        GregorianCalendar newPublicationDate = new GregorianCalendar(newPublicationYear, newPublicationMonth, newPublicationDay);
+                        String updateBookDate=readXController.updateBookPublicationDate(id, newPublicationDate);
+                        print(updateBookDate);
+                        break;
+                    case 4:
+                        print("Please enter the new price");
+                        double newPrice = Validators.validateDoubleInput();
+                        String updateBookPrice=readXController.updateBookPrice(id, newPrice);
+                        print(updateBookPrice);
+                        break;
+                    case 5:
+                        print("Please enter the new brief review");
+                        String newBriefReview = reader.next();
+                        String updateBriefReview=readXController.updateBookBriefReview(id, newBriefReview);
+                        print(updateBriefReview);
+                        break;
+                    case 6:
+                        print("Please enter the new genre");
+                        print("1. Science Fiction 2. Fantasy 3. Historic Novel");
+                        int newGenre= Validators.validateGenre();
+                        String updateBookGenre=readXController.updateBookGenre(id, newGenre);
+                        print(updateBookGenre);
+                        break;
+                }
+            } else {
+                print("Please enter what data do you want to update");
+                print("1. Name 2. Number of pages 3. Publication date 4. Price 5. Frequency of issuance 6. Category");
+                int selectedData= Validators.validateUpdateInput();
+                switch(selectedData){
+                    case 1:
+                        print("Please enter the new name");
+                        String newName = reader.next();
+                        newName=newName.toUpperCase();
+                        String updateMagazineName=readXController.updateMagazineName(id, newName);
+                        print(updateMagazineName);
+                        break;
+                    case 2:
+                        print("Please enter the new number of pages");
+                        int newPageNumber = Validators.validateIntInput();
+                        String updateMagazinePages=readXController.updateMagazinePageNumber(id, newPageNumber);
+                        print(updateMagazinePages);
+                        break;
+                    case 3:
+                        print("Please enter the new publication year");
+                        int newPublicationYear =  Validators.validateIntInput();
+                        print("Please enter the new publication month");
+                        int newPublicationMonth =  Validators.validateIntInput();
+                        print("Please enter the new publication day");
+                        int newPublicationDay =  Validators.validateIntInput();
+                        GregorianCalendar newPublicationDate = new GregorianCalendar(newPublicationYear, newPublicationMonth, newPublicationDay);
+                        String updateMagazineDate = readXController.updateMagazinePublicationDate(id, newPublicationDate);
+                        print(updateMagazineDate);
+                        break;
+                    case 4:
+                        print("Please enter the new price");
+                        double newPrice = Validators.validateDoubleInput();
+                        String updateMagazinePrice=readXController.updateMagazinePrice(id, newPrice);
+                        print(updateMagazinePrice);
+                        break;
+                    case 5:
+                        print("Please enter the new frequency of issuance");
+                        int newFrequencyOfIssuance = Validators.validateIntInput();
+                        String updateFrecuencyOfIssuance= readXController.updateMagazineFrequencyOfIssuance(id, newFrequencyOfIssuance);
+                        print(updateFrecuencyOfIssuance);
+                    case 6:
+                        print("Please enter the new category");
+                        print("1. Variety 2. Design 3. Science");
+                        int newCategory=Validators.validateCategory();
+                        String updateMagazineCategory=readXController.updateMagazineCategory(id, newCategory);
+                        print(updateMagazineCategory);
+                        break;
+                }
+            }
+        }
     }
 
     /*
@@ -320,9 +363,11 @@ public class ReadXSystem {
             String creditCardNumber = reader.next();
             print("Please enter your credit card CVV" ); 
             String creditCardCVV = reader.next();
-            readXController.createPremiumUser(name, id, registrationDate, creditCardNumber, creditCardCVV);
+            String premiumUserAdd = readXController.createPremiumUser(name, id, registrationDate, creditCardNumber, creditCardCVV);
+            print (premiumUserAdd);
         } else {
-            readXController.createBasicUser(name, id, registrationDate);
+            String basicUserAdd = readXController.createBasicUser(name, id, registrationDate);
+            print (basicUserAdd);
         }
     }
 
@@ -336,21 +381,29 @@ public class ReadXSystem {
         String id = reader.next();
         print("If you wish to, you may enter a product's name to get its id by pressing '1', if you already know the id of the product you want to buy, press any other number");
         int option = Validators.validateIntInput();
+        String boughtProduct;
+        boolean productExistance= true;
         if (option==1){
             print("Please enter the product's name");
             String name = reader.next();
             name=name.toUpperCase();
-            readXController.getProductID(name);
+            String searchBookId= readXController.getBookIdByName(name);
+            String searchMagazineId= readXController.getMagazineIdByName(name);
+            if (searchBookId.equals("Book not found")&& searchMagazineId.equals("Magazine not found")){
+                print("The product was not found");
+                productExistance = false;
+            } else if (searchBookId.equals("Book not found") && !searchMagazineId.equals("Magazine not found")){
+                print(searchMagazineId);
+            } else {
+                print(searchBookId);
+            }
+        }
+        if (productExistance == true){
             print("Please enter the product's id");
             String productId = reader.next();
-            readXController.buyProducts(id, productId);
+            boughtProduct= readXController.buyProducts(id, productId);
+            print(boughtProduct);
         }
-        else{
-            print("Please enter the product's id");
-            String productId = reader.next();
-            readXController.buyProducts(id, productId);
-        }
-
     }
     
     /*
