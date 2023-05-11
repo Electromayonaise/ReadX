@@ -15,7 +15,7 @@ public abstract class Users {
     public ArrayList <Book> userBooksList = new ArrayList<Book>();
     public ArrayList <Magazine> userMagazinesList = new ArrayList<Magazine>();
 
-    /*
+    /**
      * Constructor method for the Users class (Basic users)
      * @param name User's name
      * @param id User's id
@@ -28,7 +28,7 @@ public abstract class Users {
         
     }
 
-    /*
+    /**
      * Constructor method for the Users class (Premium users)
      * @param name User's name
      * @param id User's id
@@ -43,7 +43,7 @@ public abstract class Users {
        
     }
 
-    /*
+    /**
      * Method that adds a book to the user's book list
      * @param foundUser User that is buying the book
      * @param desiredProduct Book that the user wants to buy
@@ -53,7 +53,7 @@ public abstract class Users {
         boughtBooks++;
     }
 
-    /*
+    /**
      * Method that adds a magazine to the user's magazine list
      * @param foundUser User that is buying the magazine
      * @param desiredProduct Magazine that the user wants to buy
@@ -63,7 +63,7 @@ public abstract class Users {
         boughtMagazineSubscriptions++;
     }
     
-    /*
+    /**
      * Method that searches if the user has a book in his book list
      * @param bookId Book's id
      * @return result Boolean value that indicates if the user has the book or not
@@ -78,7 +78,7 @@ public abstract class Users {
         return result;
     }
 
-    /*
+    /**
      * Method that searches if the user has a magazine in his magazine list
      * @param magazineId Magazine's id
      * @return result Boolean value that indicates if the user has the magazine or not
@@ -93,7 +93,7 @@ public abstract class Users {
         return result;
     }
 
-    /*
+    /**
      * Method that sets the highest page number that the user has read of a book
      * @param book Book that the user is reading
      * @param highestPageNumber Highest page number that the user has read
@@ -106,7 +106,7 @@ public abstract class Users {
         }
     }
 
-    /*
+    /**
      * Method that returns the highest page number that the user has read of a book
      * @param book Book that the user is reading
      * @return result Highest page number that the user has read
@@ -121,7 +121,7 @@ public abstract class Users {
         return result;
     }
 
-    /*
+    /**
      * Method that sets the highest page number that the user has read of a magazine
      * @param magazine Magazine that the user is reading
      * @param highestPageNumber Highest page number that the user has read
@@ -134,7 +134,7 @@ public abstract class Users {
         }
     }
 
-    /*
+    /**
      * Method that returns the highest page number that the user has read of a magazine
      * @param magazine Magazine that the user is reading
      * @return result Highest page number that the user has read
@@ -149,44 +149,83 @@ public abstract class Users {
         return result;
     }
 
-
+    /**
+     * Method that returns the number of books that the user has bought
+     * @return boughtBooks Number of books that the user has bought
+     */
     public int getBoughtBooks() {
         return boughtBooks;
     }
 
+    /**
+     * Method that returns the number of magazines that the user has bought
+     * @return boughtMagazineSubscriptions Number of magazines that the user has bought
+     */
     public int getBoughtMagazineSubscriptions() {
         return boughtMagazineSubscriptions;
     }
 
+    /**
+     * Method that sets the number of books that the user has bought
+     * @param boughtBooks Number of books that the user has bought
+     */
     public void setBoughtBooks(int boughtBooks) {
         this.boughtBooks = boughtBooks;
     }
 
+    /**
+     * Method that sets the number of magazines that the user has bought
+     * @param boughtMagazineSubscriptions Number of magazines that the user has bought
+     */
     public void setBoughtMagazineSubscriptions(int boughtMagazineSubscriptions) {
         this.boughtMagazineSubscriptions = boughtMagazineSubscriptions;
     }
 
+    /**
+     * Method that returns the user's name
+     * @return name User's name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Method that returns the user's id
+     * @return id User's id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Method that returns the user's registration date
+     * @return registrationDate User's registration date
+     */
     public GregorianCalendar getRegistrationDate() {
         return registrationDate;
     }
 
 
+    /**
+     * Method that sets the user's name
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Method that sets the user's id
+     * @param id
+     */
     public void setId(String id) {
         this.id= id;
     }
 
+    /**
+     * Method that sets the user's registration date
+     * @param registrationDate
+     */
     public void setRegistrationDate(GregorianCalendar registrationDate) {
         this.registrationDate = registrationDate;
     }

@@ -15,7 +15,7 @@ public abstract class BibliographicPtoducts {
     private boolean status;
     private int highestPageNumber;
 
-    /*
+    /**
      * Constructor method for the BibliographicPtoducts class (Books)
      * @param name Bibliographic product's name
      * @param pageNumber Bibliographic product's number of pages
@@ -33,7 +33,7 @@ public abstract class BibliographicPtoducts {
         this.status=false ;
     }
 
-    /*
+    /**
      * Constructor method for the BibliographicPtoducts class (Magazines)
      * @param name Bibliographic product's name
      * @param pageNumber Bibliographic product's number of pages
@@ -49,20 +49,20 @@ public abstract class BibliographicPtoducts {
         this.price = price;
     }
 
-    /*
+    /**
      * Abstract method to be implemented in the Book and Magazine classes
      */
     public abstract String generateID();
 
 
-    /*
+    /**
      * Method that sets the highest page number a user has read
      */
     public void setHighestPageNumber (int highestPageNumber){
         this.highestPageNumber=highestPageNumber;
     }
 
-    /*
+    /**
      * Method that returns the highest page number a user has read
      * @return highestPageNumber Highest page number a user has read
      */
@@ -70,7 +70,7 @@ public abstract class BibliographicPtoducts {
         return highestPageNumber;
     }
 
-    /*
+    /**
      * Method that returns the date of purchase of a bibliographic product
      * @param dateOfPurchase Date of purchase of a bibliographic product
      */
@@ -78,7 +78,7 @@ public abstract class BibliographicPtoducts {
         return dateOfPurchase;
     }
 
-    /*
+    /**
      * Method that sets the date of purchase of a bibliographic product
      * @param dateOfPurchase Date of purchase of a bibliographic product
      */
@@ -86,7 +86,7 @@ public abstract class BibliographicPtoducts {
         this.dateOfPurchase = dateOfPurchase;
     }
 
-    /*
+    /**
      * Method that returns the name of a bibliographic product
      * @return name Name of a bibliographic product
      */
@@ -94,7 +94,7 @@ public abstract class BibliographicPtoducts {
         return name;
     }
 
-    /*
+    /**
      * Method that returns the number of pages of a bibliographic product
      * @return pageNumber Number of pages of a bibliographic product
      */
@@ -102,7 +102,7 @@ public abstract class BibliographicPtoducts {
         return pageNumber;
     }
 
-    /*
+    /**
      * Method that returns the publication date of a bibliographic product
      * @return publicationDate Publication date of a bibliographic product
      */
@@ -110,7 +110,7 @@ public abstract class BibliographicPtoducts {
         return publicationDate;
     }
 
-    /*
+    /**
      * Method that returns the price of a bibliographic product
      * @return price Price of a bibliographic product
      */
@@ -118,7 +118,7 @@ public abstract class BibliographicPtoducts {
         return price;
     }
 
-    /*
+    /**
      * Method that sets the name of a bibliographic product
      * @param name Name of a bibliographic product
      */
@@ -126,7 +126,7 @@ public abstract class BibliographicPtoducts {
         this.name = name;
     }
 
-    /*
+    /**
      * Method that sets the number of pages of a bibliographic product
      * @param pageNumber Number of pages of a bibliographic product
      */
@@ -134,7 +134,7 @@ public abstract class BibliographicPtoducts {
         this.pageNumber = pageNumber;
     }
 
-    /*
+    /**
      * Method that sets the publication date of a bibliographic product
      * @param publicationDate Publication date of a bibliographic product
      */
@@ -142,7 +142,7 @@ public abstract class BibliographicPtoducts {
         this.publicationDate = publicationDate;
     }
 
-    /*
+    /**
      * Method that sets the price of a bibliographic product
      * @param price Price of a bibliographic product
      */
@@ -150,7 +150,7 @@ public abstract class BibliographicPtoducts {
         this.price = price;
     }
 
-    /*
+    /**
      * Method that sets the url of a bibliographic product
      * @param url Url of a bibliographic product
      */
@@ -158,7 +158,7 @@ public abstract class BibliographicPtoducts {
         this.url=url;
     }
     
-    /*
+    /**
      * Method that returns the url of a bibliographic product
      * @return url Url of a bibliographic product
      */
@@ -166,7 +166,7 @@ public abstract class BibliographicPtoducts {
         return url;
     }
 
-    /*
+    /**
      * Method that returns the status of a bibliographic product
      * @return status Status of a bibliographic product
      */
@@ -174,7 +174,7 @@ public abstract class BibliographicPtoducts {
         return status;
     }
 
-    /*
+    /**
      * Method that sets the status of a bibliographic product
      * @param status Status of a bibliographic product
      */

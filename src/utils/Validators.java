@@ -9,7 +9,7 @@ public class Validators {
     
     public static Scanner reader = new Scanner(System.in);
 
-    /*
+    /**
      * Method to print a message
      * @param o Object to be printed
      */
@@ -17,8 +17,9 @@ public class Validators {
         System.out.println(o);
     }
 
-    /*
+    /**
      * Method to validate the input is an integer
+     * @return reader.nextInt() Integer input
      */
     public static int validateIntInput(){
         while(!reader.hasNextInt()){
@@ -28,8 +29,9 @@ public class Validators {
         return reader.nextInt();
     }
 
-    /*
+    /**
      * Method to validate the input is a double
+     * @return reader.nextDouble() Double input
      */
     public static double validateDoubleInput(){
         while(!reader.hasNextDouble()){
@@ -39,8 +41,9 @@ public class Validators {
         return reader.nextDouble();
     }
 
-    /*
+    /**
      * Method to validate the input is a Url
+     * @return url String input
      */
     public static String validateUrlInput(){
         String url = reader.next();
@@ -51,8 +54,9 @@ public class Validators {
         return url;
     }
 
-    /*
+    /**
      * Method to validate the input is a valid movement in the reading session
+     * @return movement String input
      */
     public static String validateMovementInput(){
         String movement = reader.next();
@@ -65,8 +69,9 @@ public class Validators {
         return movement;
     }
 
-    /*
+    /**
      * Method to validate the input is a valid option between 1 and 3
+     * @return option Integer input
      */
     public static int validateOptionInput(){
         int option = validateIntInput();
@@ -77,8 +82,9 @@ public class Validators {
         return option;
     }
 
-    /*
+    /**
      * Method to validate the input is a valid option between 1 and 6
+     * @return option Integer input
      */
     public static int validateUpdateInput(){
         int option = validateIntInput();
@@ -89,8 +95,9 @@ public class Validators {
         return option;
     }
 
-    /*
+    /**
      * Method to validate the input is a valid option between 1 and 2
+     * @return option Integer input
      */
     public static int validateOneOrTwo(){
         int option = validateIntInput();
@@ -101,8 +108,9 @@ public class Validators {
         return option;
     }
 
-    /*
+    /**
      * Method to validate the input is a valid product option between 1 and 2
+     * @return selectedProduct Integer input
      */
     public static int validateBibliographicProducts(){
         int selectedProduct = validateIntInput();
@@ -113,8 +121,9 @@ public class Validators {
         return selectedProduct;
     }
 
-    /*
+    /**
      * Method to validate the input is a valid plan option between 1 and 2
+     * @return plan Integer input
      */
     public static int validatePlan(){
         int plan = validateIntInput();
@@ -125,8 +134,9 @@ public class Validators {
         return plan;
     }
     
-    /*
+    /**
      * Method to validate the input is a valid genre option between 1 and 3
+     * @return genre Integer input
      */
     public static int validateGenre(){
         int genre= validateIntInput();
@@ -137,8 +147,9 @@ public class Validators {
         return genre;
     }
 
-    /*
+    /**
      * Method to validate the input is a valid category option between 1 and 3
+     * @return category Integer input
      */
     public static int validateCategory(){
         int category= validateIntInput();

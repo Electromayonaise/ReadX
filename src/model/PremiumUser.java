@@ -9,7 +9,7 @@ public class PremiumUser extends Users {
     private String cardNumber;
     private String securityCode;
 
-    /*
+    /**
      * Constructor method for the PremiumUser class
      * @param name User's name
      * @param id User's id
@@ -23,7 +23,7 @@ public class PremiumUser extends Users {
         this.securityCode = securityCode;
     }
 
-    /*
+    /**
      * Method that returns the user's credit card number
      * @return cardNumber User's credit card number
      */
@@ -31,7 +31,7 @@ public class PremiumUser extends Users {
         return cardNumber;
     }
 
-    /*
+    /**
      * Method that returns the user's credit card security code
      * @return securityCode User's credit card security code
      */
@@ -39,7 +39,7 @@ public class PremiumUser extends Users {
         return securityCode;
     }
 
-    /*
+    /**
      * Method that sets the user's credit card number
      * @param cardNumber User's credit card number
      */
@@ -47,7 +47,7 @@ public class PremiumUser extends Users {
         this.cardNumber = cardNumber;
     }
 
-    /*
+    /**
      * Method that sets the user's credit card security code
      * @param securityCode User's credit card security code
      */

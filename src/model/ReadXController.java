@@ -12,12 +12,12 @@ public class ReadXController {
     ArrayList <Magazine> magazinesList = new ArrayList<Magazine>();
     ArrayList<Users> usersList = new ArrayList<Users>();
 
-    /*
+    /**
      * Constructor method for the ReadXController class, empty because it is not needed
      */
     public ReadXController(){}
 
-    /*
+    /**
      * Method that creates a book object and stores it in the books array
      * @param name Book's name
      * @param pageNumber Book's number of pages
@@ -37,7 +37,7 @@ public class ReadXController {
         return booksCreated;
     }
 
-    /*
+    /**
      * Method that creates a magazine object and stores it in the magazines array
      * @param name Magazine's name
      * @param pageNumber Magazine's number of pages
@@ -57,7 +57,7 @@ public class ReadXController {
         return magazinesCreated;
     }
 
-    /*
+    /**
      * Method that deletes a book object from the books array
      * @param id Book's id
      * @return msj Message that shows if the book was deleted successfully or an error message if the book doesn't exist
@@ -73,7 +73,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that deletes a magazine object from the magazines array
      * @param id Magazine's id
      * @return msj Message that shows if the magazine was deleted successfully or an error message if the magazine doesn't exist
@@ -89,7 +89,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a book object's name
      * @param id Book's id
      * @param newName Book's new name
@@ -106,7 +106,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a book object's number of pages
      * @param id Book's id
      * @param newPageNumber Book's new number of pages
@@ -123,7 +123,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a book object's publication date
      * @param id Book's id
      * @param newPublicationDate Book's new publication date
@@ -140,7 +140,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a book object's price
      * @param id Book's id
      * @param newPrice Book's new price
@@ -157,7 +157,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a book object's brief review
      * @param id Book's id
      * @param newBriefReview Book's new brief review
@@ -174,7 +174,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a book object's genre
      * @param id Book's id
      * @param newGenre Book's new genre (flag value)
@@ -191,7 +191,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a magazine object's name
      * @param id Magazine's id
      * @param newName Magazine's new name
@@ -208,7 +208,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a magazine object's number of pages
      * @param id Magazine's id
      * @param newPageNumber Magazine's new number of pages
@@ -225,7 +225,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a magazine object's publication date
      * @param id Magazine's id
      * @param newPublicationDate Magazine's new publication date\
@@ -242,7 +242,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a magazine object's price
      * @param id Magazine's id
      * @param newPrice Magazine's new price
@@ -259,7 +259,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a magazine object's frequency of issuance
      * @param id Magazine's id
      * @param newFrequencyOfIssuance Magazine's new frequency of issuance
@@ -276,7 +276,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates a magazine object's category
      * @param id Magazine's id
      * @param newCategory Magazine's new category (flag value)
@@ -293,7 +293,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that creates a premium user object and stores it in the users array
      * @param name User's name
      * @param id User's id
@@ -308,7 +308,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that creates a basic user object and stores it in the users array
      * @param name User's name
      * @param id User's id
@@ -321,7 +321,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that searches for a product inputed by the user in the books and magazines arrays and sends 
      * it to the method buyBook/buyMagazine
      * @param id User's id
@@ -414,14 +414,13 @@ public class ReadXController {
         
     }
 
-    /*
+    /**
      * Method that presents a reading session of a book or magazine 
      * @param id User's id
      * @param productID Product's id
      * @param pageNum Page number the user wants to read
      * @return msj Message that shows the reading session or an error message if the user doesn't exist, if the product doesn't exist or if the user doesn't have the product
      */
-
     public String readProduct(String id, String productID, int pageNum){
         String msj = "User not found";
         Users user = searchUserById(id);
@@ -467,7 +466,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that updates the highest page number read by the user in a book or magazine
      * @param id User's id
      * @param productID Product's id
@@ -487,7 +486,7 @@ public class ReadXController {
         }
     }
 
-    /*
+    /**
      * Method that calculates the sum of the pages read of a book by all the users
      * @param bookId Book's id
      * @return msj Message that shows the sum of the pages read of the book or an error message if the book doesn't exist
@@ -507,7 +506,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that calculates the sum of the pages read of a magazine by all the users
      * @param magazineId Magazine's id
      * @return msj Message that shows the sum of the pages read of the magazine or an error message if the magazine doesn't exist
@@ -527,7 +526,7 @@ public class ReadXController {
         return msj;
     }
 
-    /*
+    /**
      * Method that organizes the books array by publication date from oldest to newest
      */
     public void orderBooksByDate(){
@@ -542,7 +541,7 @@ public class ReadXController {
         }
     }
 
-    /*
+    /**
      * Method that organizes the magazines array by publication date from oldest to newest
      */
     public void orderMagazinesByDate(){
@@ -557,7 +556,7 @@ public class ReadXController {
         }
     }
 
-    /*
+    /**
      * Method that searches for a user by its id
      * @param id User's id
      * @return foundUser User that was found
@@ -573,7 +572,7 @@ public class ReadXController {
     }
 
 
-    /*
+    /**
      * Method that searches for a book by its id
      * @param id Book's id
      * @return foundBook Book that was found
@@ -588,7 +587,7 @@ public class ReadXController {
         return foundBook;
     }
 
-    /*
+    /**
      * Method that searches for a magazine by its id
      * @param id Magazine's id
      * @return foundMagazine Magazine that was found
@@ -603,7 +602,7 @@ public class ReadXController {
         return foundMagazine;
     }
 
-    /*  
+    /**
      *  Method to check if the user id allready exists in the system
      * @return id User's id
      */
@@ -618,37 +617,7 @@ public class ReadXController {
         return id;
     }
 
-    /*
-     * Method that searchhes for a Book by its name 
-     * @param name Product's name
-     * @return id Product's id
-     */
-    public String getBookIdByName (String name){
-        String id = "Book not found";
-        for (int i = 0; i < booksList.size(); i++) {
-            if (booksList.get(i).getName().equals(name)) {
-                id = booksList.get(i).getId();
-            }
-        }
-        return id;
-    }
-
-    /*
-     * Method that searchhes for a Magazine by its name 
-     * @param name Product's name
-     * @return id Product's id
-     */
-    public String getMagazineIdByName (String name){
-        String id = "Magazine not found";
-        for (int i = 0; i < magazinesList.size(); i++) {
-            if (magazinesList.get(i).getName().equals(name)) {
-                id = magazinesList.get(i).getId();
-            }
-        }
-        return id;
-    }
-
-    /*
+    /***
      * Method that searches for books with similar names, gives them in a list and shows their respective id 
      * @param name Product's name
      * @return coincidences List of books with similar names
@@ -667,7 +636,7 @@ public class ReadXController {
 
    
 
-    /*
+    /***
      * Method that searches for magazines with similar names, gives them in a list and shows their respective id 
      * @param name Product's name
      * @return coincidences List of magazines with similar names
@@ -682,5 +651,45 @@ public class ReadXController {
             }
         }
         return coincidences;
+    }
+
+    /**
+     * Method that initializes the system with 10 books and 10 magazines, 10 basic users and 10 premium users
+     * @param pageNum
+     * @param price
+     * @param url
+     * @param briefReview
+     * @param genre
+     * @param category
+     * @param frequencyOfIssuance
+     * @param date
+     * @return msj Message that shows the creation of the books, magazines, users and premium users
+     */
+    public String initTest(int pageNum, double price, String url, String briefReview, int genre, int category, int frequencyOfIssuance, GregorianCalendar date){
+        String msj = "";
+        for(int i=0 ; i<10 ; i++){
+            String name1 = "BOOKTEST" + i;
+            String bookCreation = createBook(name1, pageNum, date, price, url, briefReview, genre);
+            msj+= "Book list : "+ bookCreation + "\n";
+          
+        }
+        for (int i=0; i<10;i++){
+            String name2 = "MAGAZINETEST" + i;
+            String magazineCreation = createMagazine(name2, pageNum, date, price, url, frequencyOfIssuance, category);
+            msj+= "Magazine list: " + magazineCreation + "\n";     
+        }
+        for (int i=0; i<10;i++){
+            String premiumUserName = "PREMIUMTEST" + i;
+            String premiumUserId = "PREMIUMUSERID" + i;
+            String premiumUserCreation = createPremiumUser(premiumUserName, premiumUserId, date, "123456789", "123");
+            msj += "Premium user " +i +": "+ premiumUserCreation + "\n";
+        }
+        for (int i=0; i<10; i++){
+            String basicUserName = "BASICTEST" + i;
+            String basicUserId = "BASICUSERID" + i;
+            String basicUserCreation = createBasicUser(basicUserName, basicUserId, date);
+            msj+= "Basic user " +i +": "+ basicUserCreation + "\n";
+        }
+        return msj;
     }
 }

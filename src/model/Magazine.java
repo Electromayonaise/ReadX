@@ -11,7 +11,7 @@ public class Magazine extends BibliographicPtoducts{
     private Category category;
     private String id;
 
-    /*
+    /**
      * Constructor method for the Magazine class
      * @param name Bibliographic product's name
      * @param pageNumber Bibliographic product's number of pages
@@ -28,7 +28,7 @@ public class Magazine extends BibliographicPtoducts{
     }
 
     @Override
-    /*
+    /**
      * Method that generates a random ID for the magazine that is  a unique 3 alphanumeric digit identifier (A-Z, 0-9)
      */
     public String generateID() {
@@ -40,7 +40,7 @@ public class Magazine extends BibliographicPtoducts{
         return id;
     }
 
-    /*
+    /**
      * Method that converts the category flag value to a Category enum value
      * @param category Category flag value
      */
@@ -58,7 +58,7 @@ public class Magazine extends BibliographicPtoducts{
         this.category = finalCategory;
     }
 
-    /*
+    /**
      * Method that returns the magazine's frequency of issuance
      * @return frequencyOfIssuance Magazine's frequency of issuance
      */
@@ -66,7 +66,7 @@ public class Magazine extends BibliographicPtoducts{
         return frequencyOfIssuance;
     }
 
-    /*
+    /**
      * Method that returns the magazine's category
      * @return category Magazine's category
      */
@@ -74,7 +74,7 @@ public class Magazine extends BibliographicPtoducts{
         return category;
     }
 
-    /*
+    /**
      * Method that returns the magazine's ID
      * @return id Magazine's ID
      */
@@ -82,7 +82,7 @@ public class Magazine extends BibliographicPtoducts{
         return id;
     }
 
-    /*
+    /**
      * Method that sets the magazine's frequency of issuance
      * @param frequencyOfIssuance Magazine's frequency of issuance
      */
@@ -90,7 +90,7 @@ public class Magazine extends BibliographicPtoducts{
         this.frequencyOfIssuance = frequencyOfIssuance;
     }
 
-    /*
+    /**
      * Method that sets the magazine's category
      * @param category Magazine's category
      */
@@ -98,7 +98,7 @@ public class Magazine extends BibliographicPtoducts{
         this.category = category;
     }
 
-    /*
+    /**
      * Method that sets the magazine's ID
      * @param id Magazine's ID
      */

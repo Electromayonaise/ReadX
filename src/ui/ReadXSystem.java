@@ -4,7 +4,7 @@ import model.ReadXController;
 import java.util.GregorianCalendar;
 import utils.Validators;
 
-/*
+/**
  * Context: ReadX is an egyptian conglomerate that is in need of a software that allows them to manage their publication business globally. 
  * Functional Requirements:
  * Bibliographic products management 
@@ -21,7 +21,7 @@ public class ReadXSystem {
     GregorianCalendar date = new GregorianCalendar();
 
     public static ReadXController readXController= new ReadXController();
-    /*
+    /**
      * Method that prints an object, to avoid writing System.out.println() every time
      * @param a Object to be printed
      */
@@ -33,7 +33,7 @@ public class ReadXSystem {
         
     }
 
-    /*
+    /**
      * Main method that runs the program by calling the menu method and the other methods according to the user's input
      */
     public static void main(String[] args) {
@@ -78,7 +78,7 @@ public class ReadXSystem {
         }
     }
 
-    /*
+    /**
      * Method that prints the menu
      */
     public static void menu() {
@@ -98,7 +98,7 @@ public class ReadXSystem {
     }
 
 
-    /*
+    /**
      * Bibliographic products management: 
      * Gives the user the option to add, delete or update a bibliographic product
      */
@@ -121,7 +121,7 @@ public class ReadXSystem {
 
     }
 
-    /*
+    /**
      * Method that adds a bibliographic product
      * For now, the two bibliographic products are books and journals. 
      * On one hand, each book has a unique 3 hexadecimal digit identifier, a name, number of pages,  a brief review, a publication date, 
@@ -174,7 +174,7 @@ public class ReadXSystem {
     }
 
 
-    /*
+    /**
      * Method that deletes a bibliographic product by it´s id
      */
     public static void deleteBibliographicProduct(){
@@ -188,13 +188,13 @@ public class ReadXSystem {
             print("Please enter the product's name");
             String name = reader.next();
             name=name.toUpperCase();
-            String bookSearch = readXController.getBookIdByName(name);
-            String magazineSearch= readXController.getMagazineIdByName(name);
-            if (bookSearch.equals("Book not found") && magazineSearch.equals("Magazine not found")){
+            String bookSearch = readXController.checkForBookNameCoincidences(name);
+            String magazineSearch= readXController.checkForMagazineNameCoincidences(name);
+            if (bookSearch.equals("No books with similar names were found") && magazineSearch.equals("No magazines with similar names were found")){
                 print("Product not found");
                 productExistance = false;
             } 
-            else if (bookSearch.equals("Book not found")){
+            else if (bookSearch.equals("No books with similar names were found") && !magazineSearch.equals("No magazines with similar names were found")){
                 print(magazineSearch);
             } else {
                 print(bookSearch);
@@ -213,7 +213,7 @@ public class ReadXSystem {
         }
     }
 
-    /*
+    /**
      * Method that updates a bibliographic product, acording to the user's choice
      */
     public static void updateBibliographicProduct(){
@@ -228,12 +228,12 @@ public class ReadXSystem {
             print("Please enter the product's name");
             String name = reader.next();
             name=name.toUpperCase();
-            String searchBookId= readXController.getBookIdByName(name);
-            String searchMagazineId= readXController.getMagazineIdByName(name);
-            if (searchBookId.equals("Book not found")&& searchMagazineId.equals("Magazine not found")){
+            String searchBookId= readXController.checkForBookNameCoincidences(name);
+            String searchMagazineId= readXController.checkForMagazineNameCoincidences(name);
+            if (searchBookId.equals("No books with similar names were found")&& searchMagazineId.equals("No magazines with similar names were found")){
                 print("The product was not found");
                 productExistance = false;
-            } else if (searchBookId.equals("Book not found") && !searchMagazineId.equals("Magazine not found")){
+            } else if (searchBookId.equals("No books with similar names were found") && !searchMagazineId.equals("No magazines with similar names were found")){
                 print(searchMagazineId);
             } else {
                 print(searchBookId);
@@ -343,7 +343,7 @@ public class ReadXSystem {
         }
     }
 
-    /*
+    /**
      * User management:
      * There are two types of users: basic and premium.
      * On one hand, basic users have a name, an id, and a registration date. 
@@ -372,7 +372,7 @@ public class ReadXSystem {
         }
     }
 
-    /*
+    /**
      * Buy books and journal subscriptions:
      * The user must enter his id, and then he can either enter the name of the product he wants to buy, or the id of the product he wants to buy.
      * If the user enters the name of the product, the system will show the id of the product, and then the user must enter the id of the product he wants to buy.
@@ -388,12 +388,12 @@ public class ReadXSystem {
             print("Please enter the product's name");
             String name = reader.next();
             name=name.toUpperCase();
-            String searchBookId= readXController.getBookIdByName(name);
-            String searchMagazineId= readXController.getMagazineIdByName(name);
-            if (searchBookId.equals("Book not found")&& searchMagazineId.equals("Magazine not found")){
+            String searchBookId= readXController.checkForBookNameCoincidences(name);
+            String searchMagazineId= readXController.checkForMagazineNameCoincidences(name);
+            if (searchBookId.equals("No books with similar names were found")&& searchMagazineId.equals("No magazines with similar names were found")){
                 print("The product was not found");
                 productExistance = false;
-            } else if (searchBookId.equals("Book not found") && !searchMagazineId.equals("Magazine not found")){
+            } else if (searchBookId.equals("No books with similar names were found") && !searchMagazineId.equals("No magazines with similar names were found")){
                 print(searchMagazineId);
             } else {
                 print(searchBookId);
@@ -407,7 +407,7 @@ public class ReadXSystem {
         }
     }
     
-    /*
+    /**
      * Library presentation:
      * The user must enter his id, and then the system will show the user's library.
      */
@@ -417,7 +417,7 @@ public class ReadXSystem {
         readXController.showLibrary(id);
     }
 
-    /*
+    /**
      * Reading session simulation:
      * The user must enter his id, and then the system will show the user's library.
      * Then, the user must enter the id or position in the shown matrix of the product he wants to read.
@@ -462,7 +462,7 @@ public class ReadXSystem {
 
     }
 
-    /*
+    /**
      * Testing management:
      * This method generates random data to test the system
      */
@@ -475,23 +475,8 @@ public class ReadXSystem {
         int category = 1;
         int frequencyOfIssuance = 10;
         GregorianCalendar date = new GregorianCalendar();
-        
-        for(int i=0 ; i<10 ; i++){
-            String name1 = "BOOKTEST" + i;
-            String name2 = "MAGAZINETEST" + i;
-            String basicUserName = "BASICUSER" + i;
-            String premiumUserName = "PREMIUMUSER" + i;
-            String basicUserId= "BASICUSERID"+i; 
-            String premiumUserId= "PREMIUMUSERID"+i;
-            String bookCreation = readXController.createBook(name1, pageNum, date, price, url, briefReview, genre);
-            print (bookCreation);
-            String magazineCreation = readXController.createMagazine(name2, pageNum, date, price, url, frequencyOfIssuance, category);
-            print (magazineCreation);
-            String basicUserCreation = readXController.createBasicUser(basicUserName, basicUserId, date);
-            print (basicUserCreation);
-            String premiumUserCreation = readXController.createPremiumUser(premiumUserName, premiumUserId, date, "123456789", "123");
-            print (premiumUserCreation);
-        }
+        String testData = readXController.initTest( pageNum, price, url, briefReview, genre, category, frequencyOfIssuance, date);
+        print(testData);
     }
 
     
