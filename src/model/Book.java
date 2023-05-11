@@ -54,26 +54,50 @@ public class Book extends BibliographicPtoducts{
         this.genre = finalGenre;
     }
     
+    /*
+     * Method that returns the book's brief review
+     * @return briefReview Book's brief review
+     */
     public String getBriefReview() {
         return briefReview;
     }
 
+    /*
+     * Method that returns the book's genre
+     * @return genre Book's genre
+     */
     public Genre getGenre() {
         return genre;
     }
 
+    /*
+     * Method that returns the book's ID
+     * @return id Book's ID
+     */
     public String getId() {
         return id;
     }
 
+    /*
+     * Method that sets the book's brief review
+     * @param briefReview Book's brief review
+     */
     public void setBriefReview(String briefReview) {
         this.briefReview = briefReview;
     }
 
+    /*
+     * Method that sets the book's genre
+     * @param genre Book's genre
+     */
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
+    /*
+     * Method that sets the book's ID
+     * @param id Book's ID
+     */
     public void setId(String id) {
         this.id = id;
     }

@@ -55,26 +55,50 @@ public class Magazine extends BibliographicPtoducts{
         this.category = finalCategory;
     }
 
+    /*
+     * Method that returns the magazine's frequency of issuance
+     * @return frequencyOfIssuance Magazine's frequency of issuance
+     */
     public int getFrequencyOfIssuance() {
         return frequencyOfIssuance;
     }
 
+    /*
+     * Method that returns the magazine's category
+     * @return category Magazine's category
+     */
     public Category getCategory() {
         return category;
     }
 
+    /*
+     * Method that returns the magazine's ID
+     * @return id Magazine's ID
+     */
     public String getId() {
         return id;
     }
 
+    /*
+     * Method that sets the magazine's frequency of issuance
+     * @param frequencyOfIssuance Magazine's frequency of issuance
+     */
     public void setFrequencyOfIssuance(int frequencyOfIssuance) {
         this.frequencyOfIssuance = frequencyOfIssuance;
     }
 
+    /*
+     * Method that sets the magazine's category
+     * @param category Magazine's category
+     */
     public void setCategory(Category category) {
         this.category = category;
     }
 
+    /*
+     * Method that sets the magazine's ID
+     * @param id Magazine's ID
+     */
     public void setId(String id) {
         this.id = id;
     }

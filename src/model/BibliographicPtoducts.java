@@ -53,66 +53,129 @@ public abstract class BibliographicPtoducts {
     public abstract String generateID();
 
 
+    /*
+     * Method that sets the highest page number a user has read
+     */
     public void setHighestPageNumber (int highestPageNumber){
         this.highestPageNumber=highestPageNumber;
     }
 
+    /*
+     * Method that returns the highest page number a user has read
+     * @return highestPageNumber Highest page number a user has read
+     */
     public int getHighestPageNumber (){
         return highestPageNumber;
     }
-    
+
+    /*
+     * Method that returns the date of purchase of a bibliographic product
+     * @param dateOfPurchase Date of purchase of a bibliographic product
+     */
     public GregorianCalendar getDateOfPurchase() {
         return dateOfPurchase;
     }
 
+    /*
+     * Method that sets the date of purchase of a bibliographic product
+     * @param dateOfPurchase Date of purchase of a bibliographic product
+     */
     public void setDateOfPurchase(GregorianCalendar dateOfPurchase) {
         this.dateOfPurchase = dateOfPurchase;
     }
 
+    /*
+     * Method that returns the name of a bibliographic product
+     * @return name Name of a bibliographic product
+     */
     public String getName() {
         return name;
     }
 
+    /*
+     * Method that returns the number of pages of a bibliographic product
+     * @return pageNumber Number of pages of a bibliographic product
+     */
     public int getPageNumber() {
         return pageNumber;
     }
 
+    /*
+     * Method that returns the publication date of a bibliographic product
+     * @return publicationDate Publication date of a bibliographic product
+     */
     public GregorianCalendar getPublicationDate() {
         return publicationDate;
     }
 
+    /*
+     * Method that returns the price of a bibliographic product
+     * @return price Price of a bibliographic product
+     */
     public double getPrice() {
         return price;
     }
 
+    /*
+     * Method that sets the name of a bibliographic product
+     * @param name Name of a bibliographic product
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /*
+     * Method that sets the number of pages of a bibliographic product
+     * @param pageNumber Number of pages of a bibliographic product
+     */
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
     }
 
+    /*
+     * Method that sets the publication date of a bibliographic product
+     * @param publicationDate Publication date of a bibliographic product
+     */
     public void setPublicationDate(GregorianCalendar publicationDate) {
         this.publicationDate = publicationDate;
     }
 
+    /*
+     * Method that sets the price of a bibliographic product
+     * @param price Price of a bibliographic product
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
+    /*
+     * Method that sets the url of a bibliographic product
+     * @param url Url of a bibliographic product
+     */
     public void setUrl(String url){
         this.url=url;
     }
     
+    /*
+     * Method that returns the url of a bibliographic product
+     * @return url Url of a bibliographic product
+     */
     public String getUrl(){
         return url;
     }
 
+    /*
+     * Method that returns the status of a bibliographic product
+     * @return status Status of a bibliographic product
+     */
     public boolean getStatus() {
         return status;
     }
 
+    /*
+     * Method that sets the status of a bibliographic product
+     * @param status Status of a bibliographic product
+     */
     public void setStatus(boolean status) {
         this.status = status;
     }   
