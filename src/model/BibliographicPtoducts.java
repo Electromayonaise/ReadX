@@ -1,7 +1,9 @@
 package model;
 import java.util.GregorianCalendar;
 
-
+/**
+ * Abstract class that represents the bibliographic products
+ */
 public abstract class BibliographicPtoducts {
     
     private String name;

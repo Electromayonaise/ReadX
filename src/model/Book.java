@@ -1,6 +1,9 @@
 package model;
 import java.util.GregorianCalendar;
 
+/**
+ * Class that represents the books
+ */
 public class Book extends BibliographicPtoducts{
     
     private String briefReview;

@@ -1,6 +1,9 @@
 package model;
 import java.util.GregorianCalendar;
 
+/**
+ * Class that represents the premium users
+ */
 public class PremiumUser extends Users {
     
     private String cardNumber;

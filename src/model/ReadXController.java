@@ -3,6 +3,9 @@ import java.util.GregorianCalendar;
 import java.util.ArrayList;
 import utils.Validators;
 
+/**
+ * Class that represents the controller of the ReadX system
+ */
 public class ReadXController {
     
     ArrayList <Book> booksList = new ArrayList<Book>();

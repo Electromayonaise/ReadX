@@ -1,6 +1,9 @@
 package utils;
 import java.util.Scanner;
 
+/**
+ * Class that contains the methods to validate the inputs
+ */
 public class Validators {
 
     

@@ -2,6 +2,9 @@ package model;
 
 import java.util.GregorianCalendar;
 
+/**
+ * Class that represents the magazines
+ */
 public class Magazine extends BibliographicPtoducts{
     
     private int frequencyOfIssuance;

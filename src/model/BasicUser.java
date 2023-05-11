@@ -1,6 +1,9 @@
 package model;
 import java.util.GregorianCalendar;
 
+/**
+ * Class that represents the basic users
+ */
 public class BasicUser extends Users {
 
     /*

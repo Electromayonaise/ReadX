@@ -2,6 +2,9 @@ package model;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+/**
+ * Abstract class that represents the users
+ */
 public abstract class Users {
  
     private String name;
@@ -146,7 +149,7 @@ public abstract class Users {
         return result;
     }
 
-    
+
     public int getBoughtBooks() {
         return boughtBooks;
     }
