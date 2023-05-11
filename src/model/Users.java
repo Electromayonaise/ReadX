@@ -60,6 +60,93 @@ public abstract class Users {
         boughtMagazineSubscriptions++;
     }
     
+    /*
+     * Method that searches if the user has a book in his book list
+     * @param bookId Book's id
+     * @return result Boolean value that indicates if the user has the book or not
+     */
+    public boolean searchIfUserHasBook(String bookId){
+        boolean result = false;
+        for (int i = 0; i < userBooksList.size(); i++) {
+            if (userBooksList.get(i).getId().equals(bookId)){
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    /*
+     * Method that searches if the user has a magazine in his magazine list
+     * @param magazineId Magazine's id
+     * @return result Boolean value that indicates if the user has the magazine or not
+     */
+    public boolean searchIfUserHasMagazine(String magazineId){
+        boolean result = false;
+        for (int i = 0; i < userMagazinesList.size(); i++) {
+            if (userMagazinesList.get(i).getId().equals(magazineId)){
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    /*
+     * Method that sets the highest page number that the user has read of a book
+     * @param book Book that the user is reading
+     * @param highestPageNumber Highest page number that the user has read
+     */
+    public void setUserHighestBookPageNumber(Book book, int highestPageNumber){
+        for (int i = 0; i < userBooksList.size(); i++) {
+            if (userBooksList.get(i).getId().equals(book.getId())){
+                userBooksList.get(i).setHighestPageNumber(highestPageNumber);
+            }
+        }
+    }
+
+    /*
+     * Method that returns the highest page number that the user has read of a book
+     * @param book Book that the user is reading
+     * @return result Highest page number that the user has read
+     */
+    public int getUserHighestBookPageNumber(Book book){
+        int result = 0;
+        for (int i = 0; i < userBooksList.size(); i++) {
+            if (userBooksList.get(i).getId().equals(book.getId())){
+                result = userBooksList.get(i).getHighestPageNumber();
+            }
+        }
+        return result;
+    }
+
+    /*
+     * Method that sets the highest page number that the user has read of a magazine
+     * @param magazine Magazine that the user is reading
+     * @param highestPageNumber Highest page number that the user has read
+     */
+    public void setUserHighestMagazinePageNumber(Magazine magazine, int highestPageNumber){
+        for (int i = 0; i < userMagazinesList.size(); i++) {
+            if (userMagazinesList.get(i).getId().equals(magazine.getId())){
+                userMagazinesList.get(i).setHighestPageNumber(highestPageNumber);
+            }
+        }
+    }
+
+    /*
+     * Method that returns the highest page number that the user has read of a magazine
+     * @param magazine Magazine that the user is reading
+     * @return result Highest page number that the user has read
+     */
+    public int getUserHighestMagazinePageNumber(Magazine magazine){
+        int result = 0;
+        for (int i = 0; i < userMagazinesList.size(); i++) {
+            if (userMagazinesList.get(i).getId().equals(magazine.getId())){
+                result = userMagazinesList.get(i).getHighestPageNumber();
+            }
+        }
+        return result;
+    }
+
+    
     public int getBoughtBooks() {
         return boughtBooks;
     }

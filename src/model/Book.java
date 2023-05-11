@@ -36,6 +36,10 @@ public class Book extends BibliographicPtoducts{
         return id;
     }
 
+    /*
+     * Method that converts the genre flag value to a Genre enum value
+     * @param genre Genre flag value
+     */
     public void setGenreByFlag(int genre) {
         Genre finalGenre = null;
         if (genre==1){

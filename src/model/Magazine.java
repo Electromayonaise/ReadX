@@ -24,8 +24,10 @@ public class Magazine extends BibliographicPtoducts{
         generateID();
     }
 
-    // must generate a unique alphanumeric identifier of 3 characters (A-Z, 0-9)
     @Override
+    /*
+     * Method that generates a random ID for the magazine that is  a unique 3 alphanumeric digit identifier (A-Z, 0-9)
+     */
     public String generateID() {
         String id = "";
         for (int i = 0; i < 3; i++) {
@@ -35,6 +37,10 @@ public class Magazine extends BibliographicPtoducts{
         return id;
     }
 
+    /*
+     * Method that converts the category flag value to a Category enum value
+     * @param category Category flag value
+     */
     public void setCategoryByFlag(int category) {
         Category finalCategory = null;
         if (category==1){

@@ -10,6 +10,8 @@ public abstract class BibliographicPtoducts {
     private double price;
     private String url;
     private GregorianCalendar dateOfPurchase;
+    private boolean status;
+    private int highestPageNumber;
 
     /*
      * Constructor method for the BibliographicPtoducts class (Books)
@@ -26,6 +28,7 @@ public abstract class BibliographicPtoducts {
         this.publicationDate = publicationDate;
         this.price = price;
         this.url=url;
+        this.status=false ;
     }
 
     /*
@@ -50,6 +53,14 @@ public abstract class BibliographicPtoducts {
     public abstract String generateID();
 
 
+    public void setHighestPageNumber (int highestPageNumber){
+        this.highestPageNumber=highestPageNumber;
+    }
+
+    public int getHighestPageNumber (){
+        return highestPageNumber;
+    }
+    
     public GregorianCalendar getDateOfPurchase() {
         return dateOfPurchase;
     }
@@ -98,4 +109,11 @@ public abstract class BibliographicPtoducts {
         return url;
     }
 
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }   
 }

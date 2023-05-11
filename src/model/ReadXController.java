@@ -23,6 +23,7 @@ public class ReadXController {
      * @param briefReview Book's brief review
      * @param genre Book's genre (flag value)
      * @param bookPos Book's position in the books array
+     * @return booksCreated String that shows the books created
      */
     public String createBook( String name, int pageNumber, GregorianCalendar publicationDate, double price, String url, String briefReview, int genre) {
         booksList.add(new Book(name, pageNumber, publicationDate, price, url, briefReview, genre));
@@ -42,6 +43,7 @@ public class ReadXController {
      * @param frequencyOfIssuance Magazine's frequency of issuance
      * @param category Magazine's category (flag value)
      * @param magazinePos Magazine's position in the magazines array
+     * @return magazinesCreated String that shows the magazines created
      */
     public String createMagazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, String url,  int frequencyOfIssuance, int category){
         magazinesList.add(new Magazine(name, pageNumber, publicationDate, price, url, frequencyOfIssuance, category));
@@ -55,6 +57,7 @@ public class ReadXController {
     /*
      * Method that deletes a book object from the books array
      * @param id Book's id
+     * @return msj Message that shows if the book was deleted successfully or an error message if the book doesn't exist
      */
     public String deleteBook(String id){
         String msj = "Book not found";
@@ -70,6 +73,7 @@ public class ReadXController {
     /*
      * Method that deletes a magazine object from the magazines array
      * @param id Magazine's id
+     * @return msj Message that shows if the magazine was deleted successfully or an error message if the magazine doesn't exist
      */
     public String deleteMagazine(String id){
         String msj = "Magazine not found";
@@ -86,6 +90,7 @@ public class ReadXController {
      * Method that updates a book object's name
      * @param id Book's id
      * @param newName Book's new name
+     * @return msj Message that shows if the book name was updated successfully or an error message if the book doesn't exist
      */
     public String updateBookName(String id, String newName){
         String msj = "Book not found";
@@ -102,6 +107,7 @@ public class ReadXController {
      * Method that updates a book object's number of pages
      * @param id Book's id
      * @param newPageNumber Book's new number of pages
+     * @return msj Message that shows if the book number of pages was updated successfully or an error message if the book doesn't exist
      */
     public String updateBookPageNumber(String id, int newPageNumber){
         String msj = "Book not found";
@@ -118,6 +124,7 @@ public class ReadXController {
      * Method that updates a book object's publication date
      * @param id Book's id
      * @param newPublicationDate Book's new publication date
+     * @return msj Message that shows if the book publication date was updated successfully or an error message if the book doesn't exist
      */
     public String updateBookPublicationDate(String id, GregorianCalendar newPublicationDate){
         String msj = "Book not found";
@@ -134,6 +141,7 @@ public class ReadXController {
      * Method that updates a book object's price
      * @param id Book's id
      * @param newPrice Book's new price
+     * @return msj Message that shows if the book price was updated successfully or an error message if the book doesn't exist
      */
     public String updateBookPrice(String id, double newPrice){
         String msj = "Book not found";
@@ -150,6 +158,7 @@ public class ReadXController {
      * Method that updates a book object's brief review
      * @param id Book's id
      * @param newBriefReview Book's new brief review
+     * @return msj Message that shows if the book brief review was updated successfully or an error message if the book doesn't exist
      */
     public String updateBookBriefReview(String id, String newBriefReview){
         String msj = "Book not found";
@@ -166,6 +175,7 @@ public class ReadXController {
      * Method that updates a book object's genre
      * @param id Book's id
      * @param newGenre Book's new genre (flag value)
+     * @return msj Message that shows if the book genre was updated successfully or an error message if the book doesn't exist
      */
     public String updateBookGenre(String id, int newGenre){
         String msj = "Book not found";
@@ -182,6 +192,7 @@ public class ReadXController {
      * Method that updates a magazine object's name
      * @param id Magazine's id
      * @param newName Magazine's new name
+     * @return msj Message that shows if the magazine name was updated successfully or an error message if the magazine doesn't exist
      */
     public String updateMagazineName(String id, String newName){
         String msj = "Magazine not found";
@@ -198,6 +209,7 @@ public class ReadXController {
      * Method that updates a magazine object's number of pages
      * @param id Magazine's id
      * @param newPageNumber Magazine's new number of pages
+     * @return msj Message that shows if the magazine number of pages was updated successfully or an error message if the magazine doesn't exist
      */
     public String updateMagazinePageNumber(String id, int newPageNumber){
         String msj = "Magazine not found";
@@ -213,7 +225,8 @@ public class ReadXController {
     /*
      * Method that updates a magazine object's publication date
      * @param id Magazine's id
-     * @param newPublicationDate Magazine's new publication date
+     * @param newPublicationDate Magazine's new publication date\
+     * @return msj Message that shows if the magazine publication date was updated successfully or an error message if the magazine doesn't exist
      */
     public String updateMagazinePublicationDate(String id, GregorianCalendar newPublicationDate){
         String msj = "Magazine not found";
@@ -230,6 +243,7 @@ public class ReadXController {
      * Method that updates a magazine object's price
      * @param id Magazine's id
      * @param newPrice Magazine's new price
+     * @return msj Message that shows if the magazine price was updated successfully or an error message if the magazine doesn't exist
      */
     public String updateMagazinePrice(String id, double newPrice){
         String msj = "Magazine not found";
@@ -246,6 +260,7 @@ public class ReadXController {
      * Method that updates a magazine object's frequency of issuance
      * @param id Magazine's id
      * @param newFrequencyOfIssuance Magazine's new frequency of issuance
+     * @return msj Message that shows if the magazine frequency of issuance was updated successfully or an error message if the magazine doesn't exist
      */
     public String updateMagazineFrequencyOfIssuance(String id, int newFrequencyOfIssuance){
         String msj = "Magazine not found";
@@ -262,6 +277,7 @@ public class ReadXController {
      * Method that updates a magazine object's category
      * @param id Magazine's id
      * @param newCategory Magazine's new category (flag value)
+     * @return msj Message that shows if the magazine category was updated successfully or an error message if the magazine doesn't exist
      */
     public String updateMagazineCategory(String id, int newCategory){
         String msj = "Magazine not found";
@@ -281,7 +297,7 @@ public class ReadXController {
      * @param registrationDate User's registration date
      * @param cardNumber User's credit card number
      * @param securityCode User's credit card security code
-     * @param premiumPos User's position in the users array
+     * @return msj Message that shows if the user was created successfully
      */
     public String createPremiumUser(String name, String id, GregorianCalendar registrationDate, String cardNumber, String securityCode){
         String msj = ("Premium user created succesfully, with the name of:"+ name + " and the ID of: " + id +"(payment information private)" );
@@ -294,7 +310,7 @@ public class ReadXController {
      * @param name User's name
      * @param id User's id
      * @param registrationDate User's registration date
-     * @param basicPos User's position in the users array
+     * @return msj Message that shows if the user was created successfully
      */
     public String createBasicUser(String name, String id, GregorianCalendar registrationDate){
         String msj=("Basic user created successfully, with the name of: " + name + " and the ID of: " + id);
@@ -307,6 +323,7 @@ public class ReadXController {
      * it to the method buyBook/buyMagazine
      * @param id User's id
      * @param productID Product's id
+     * @return msj Message that shows if the product was bought successfully or an error message if the user doesn't exist, if the product doesn't exist or if the has reached the maximum number of books/magazines he can buy
      */
     public String buyProducts(String id, String productID){
         String msj = "Product not found";
@@ -355,76 +372,193 @@ public class ReadXController {
         return msj;   
     }
 
+    // INCOMPLETE METHOD !!!!
     // The user's library must be represented trough 5x5 matrix that present the id's of the products from oldest to newest (publication date),when the martix is full, the user may go to the next page of the library and so on.=
-    public void showLibrary(String id){
-        for (int i=0; i<usersList.size(); i++){
-            if (usersList.get(i).getId().equals(id)){
-                String [][]matrix = new String[5][5];
-                for(int j=0, k=0; j<matrix.length ;j++){
-                    for(int m=0; m<matrix.length ;m++){
-                        if(usersList.get(i).userBooksList.get(k) != null){
-                            matrix[j][m] = usersList.get(i).userBooksList.get(k).getId();
-                            k++;
+    public String showLibrary(String id){
+        String msj="User not found";
+        Users user = searchUserById(id);
+        orderBooksByDate();
+        orderMagazinesByDate();
+        int shownBooks = 0;
+        int shownMagazines = 0;
+        if (user != null){
+            String [][] library = new String [5][5];
+            for (int i=0; i<5; i++){
+                for (int j=0; j<5; j++){
+                    for (int k=0; k<user.getBoughtBooks(); k++){
+                        if (booksList.get(i).getStatus() == false){
+                            library[i][j] = booksList.get(i).getId();
+                            booksList.get(i).setStatus(true);
+                            shownBooks++;
                         }
-                        else if(usersList.get(i).userMagazinesList.get(k) != null){
-                            matrix[j][m] = usersList.get(i).userMagazinesList.get(k).getId();
-                            k++;
+                    }
+                    for (int k=0; k<user.getBoughtMagazineSubscriptions(); k++){
+                        if (magazinesList.get(i).getStatus() == false){
+                            library[i][j] = magazinesList.get(i).getId();
+                            magazinesList.get(i).setStatus(true);
+                            shownMagazines++;
                         }
-                    }     
+                    }
                 }
-                for(int j = 0; j < matrix.length; j++)
-                {
-                    for(int m = 0; m < matrix.length; m++)
-                        System.out.print("\t" + matrix[j][m]);
-                    System.out.println();
-                }
-            }  
-            /*
-             * 	public static final int ROW = 3; 
-	public static final int COLUMN = 5; 
+            }
 
-	private int[][] matrix;
+            if (shownBooks <user.getBoughtBooks() || shownMagazines<user.getBoughtMagazineSubscriptions()){
+                msj = "You have reached the end of your library, please go to the next page";
+            }
 
-	public MatrixCalculator(){
-		matrix = new int[ROW][COLUMN]; 
-		initMatrix();
-	}
-
-	public void  createMatrix(int row, int column){
-		for(int i = 0; i < row; i++){
-			for(int j = 0; j < column; j++){
-				matrix[i][j] = i+j; 
-			}
-		}
-
-	}
-	public String printMatrix(){
-		String msj = ""; 
-		for(int i = 0; i < ROW; i++){
-			for(int j = 0; j < COLUMN; j++){
-				msj += " "+matrix[i][j]; 
-			}
-			msj += "\n";
-		}
-		return msj; 
-	}
-
-	private void initMatrix(){
-		for(int i = 0; i < ROW; i++){
-			for(int j = 0; j < COLUMN; j++){
-				matrix[i][j] = i+j; 
-			}
-		}
-	}
-             */
-            
         }
-    }
-
-    public void readProduct(String productID){
+        return msj;
         
     }
 
+    /*
+     * Method that presents a reading session of a book or magazine 
+     * @param id User's id
+     * @param productID Product's id
+     * @param pageNum Page number the user wants to read
+     * @return msj Message that shows the reading session or an error message if the user doesn't exist, if the product doesn't exist or if the user doesn't have the product
+     */
+
+    public String readProduct(String id, String productID, int pageNum){
+        String msj = "User not found";
+        Users user = searchUserById(id);
+        Book book = searchBookById(productID);
+        Magazine magazine = searchMagazineById(productID);
+        int highestPageNumber = 0;
+        if (pageNum<1){
+            pageNum = 1;
+        }
+        if (user != null){
+            if (book != null || magazine != null){
+                if (pageNum>highestPageNumber){
+                    highestPageNumber = pageNum;
+                    updateHighestPageNumber(id, productID, highestPageNumber);
+                }
+                boolean userHasBook= user.searchIfUserHasBook(productID);
+                if (userHasBook == true){
+                    if (pageNum>book.getPageNumber()){
+                        pageNum=book.getPageNumber();
+                        highestPageNumber = pageNum;
+                        updateHighestPageNumber(id, productID, highestPageNumber);
+                    }
+                    msj= "******Reading session in progress******\n" + "Reading: " + book.getName() + "\n" + "Reading page number: " + pageNum + " of " + book.getPageNumber() + "\n";
+                }
+                else {
+                    boolean userHasMagazine = user.searchIfUserHasMagazine(productID);
+                    if (userHasMagazine == true){
+                        if (pageNum>magazine.getPageNumber()){
+                            pageNum=magazine.getPageNumber();
+                            highestPageNumber = pageNum;
+                            updateHighestPageNumber(id, productID, highestPageNumber);
+                        }
+                        msj = "******Reading session in progress******\n" + "Reading: " + magazine.getName() + "\n" + "Reading page number: " + pageNum + " of " + magazine.getPageNumber() + "\n";
+                    }
+                    else {
+                        msj = "you don't have this product in your library";
+                    }
+                }
+            } else {
+                msj = "Product not found";
+            }
+        }
+        return msj;
+    }
+
+    /*
+     * Method that updates the highest page number read by the user in a book or magazine
+     * @param id User's id
+     * @param productID Product's id
+     * @param highestPageNumber Highest page number read by the user
+     */
+    public void updateHighestPageNumber (String id, String productID, int highestPageNumber){
+        Users user = searchUserById(id);
+        Book book = searchBookById(productID);
+        Magazine magazine = searchMagazineById(productID);
+        if (user != null){
+            if (book != null) {
+                user.setUserHighestBookPageNumber(book, highestPageNumber);
+            }
+            else if (magazine != null){
+                user.setUserHighestMagazinePageNumber(magazine, highestPageNumber);
+            }
+        }
+    }
+
+    /*
+     * Method that calculates the sum of the pages read of a book by all the users
+     * @param bookId Book's id
+     * @return msj Message that shows the sum of the pages read of the book or an error message if the book doesn't exist
+     */
+    public String sumatoryOfBookReadPages(String bookId){
+        String msj= "Book not found";
+        Book book = searchBookById(bookId);
+        int sum = 0;
+        if (book != null){
+            for (int i=0; i<usersList.size(); i++){
+                if (usersList.get(i).searchIfUserHasBook(bookId) == true){
+                    sum += usersList.get(i).getUserHighestBookPageNumber(book);
+                    msj = "The sumatory of the pages read of this book is: " + sum;
+                }
+            }
+        }
+        return msj;
+    }
+
+    /*
+     * Method that calculates the sum of the pages read of a magazine by all the users
+     * @param magazineId Magazine's id
+     * @return msj Message that shows the sum of the pages read of the magazine or an error message if the magazine doesn't exist
+     */
+    public String sumatoryOfMagazineReadPages(String magazineId){
+        String msj= "Magazine not found";
+        Magazine magazine = searchMagazineById(magazineId);
+        int sum = 0;
+        if (magazine != null){
+            for (int i=0; i<usersList.size(); i++){
+                if (usersList.get(i).searchIfUserHasMagazine(magazineId) == true){
+                    sum += usersList.get(i).getUserHighestMagazinePageNumber(magazine);
+                    msj = "The sumatory of the pages read of this magazine is: " + sum;
+                }
+            }
+        }
+        return msj;
+    }
+
+    /*
+     * Method that organizes the books array by publication date from oldest to newest
+     */
+    public void orderBooksByDate(){
+        for(int i =0; i<booksList.size(); i++){
+            for(int j =0; j<booksList.size()-1; j++){
+                if(booksList.get(j).getPublicationDate().compareTo(booksList.get(j+1).getPublicationDate())>0){
+                    Book temp = booksList.get(j);
+                    booksList.set(j, booksList.get(j+1));
+                    booksList.set(j+1, temp);
+                }
+            }
+        }
+    }
+
+    /*
+     * Method that organizes the magazines array by publication date from oldest to newest
+     */
+    public void orderMagazinesByDate(){
+        for(int i =0; i<magazinesList.size(); i++){
+            for(int j =0; j<magazinesList.size()-1; j++){
+                if(magazinesList.get(j).getPublicationDate().compareTo(magazinesList.get(j+1).getPublicationDate())>0){
+                    Magazine temp = magazinesList.get(j);
+                    magazinesList.set(j, magazinesList.get(j+1));
+                    magazinesList.set(j+1, temp);
+                }
+            }
+        }
+    }
+
+    /*
+     * Method that searches for a user by its id
+     * @param id User's id
+     * @return foundUser User that was found
+     */
     public Users searchUserById(String id){
         Users foundUser = null;
         for (int i = 0; i < usersList.size(); i++) {
@@ -436,6 +570,11 @@ public class ReadXController {
     }
 
 
+    /*
+     * Method that searches for a book by its id
+     * @param id Book's id
+     * @return foundBook Book that was found
+     */
     public Book searchBookById(String id){
         Book foundBook = null;
         for (int i = 0; i < booksList.size(); i++) {
@@ -446,6 +585,11 @@ public class ReadXController {
         return foundBook;
     }
 
+    /*
+     * Method that searches for a magazine by its id
+     * @param id Magazine's id
+     * @return foundMagazine Magazine that was found
+     */
     public Magazine searchMagazineById(String id){
         Magazine foundMagazine = null;
         for (int i = 0; i < magazinesList.size(); i++) {
@@ -478,7 +622,6 @@ public class ReadXController {
      */
     public String getBookIdByName (String name){
         String id = "Book not found";
-        System.out.println(booksList.size());
         for (int i = 0; i < booksList.size(); i++) {
             if (booksList.get(i).getName().equals(name)) {
                 id = booksList.get(i).getId();
@@ -494,7 +637,6 @@ public class ReadXController {
      */
     public String getMagazineIdByName (String name){
         String id = "Magazine not found";
-        System.out.println(magazinesList.size());
         for (int i = 0; i < magazinesList.size(); i++) {
             if (magazinesList.get(i).getName().equals(name)) {
                 id = magazinesList.get(i).getId();

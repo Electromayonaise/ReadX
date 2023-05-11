@@ -67,6 +67,7 @@ public class ReadXSystem {
                     break;
                 case 7:
                     print("Testing management selected");
+                    testingManagement();
                     break;
                 default:
                     print("Invalid option");
@@ -91,7 +92,7 @@ public class ReadXSystem {
         print("4. Library presentation");
         print("5. Reading session simulation"); 
         print("6. Report generation"); 
-        print("7. Testing management");
+        print("7. Testing management (generate random data)");
         print("8. Exit");
         print("***********************************");
     }
@@ -416,13 +417,81 @@ public class ReadXSystem {
         readXController.showLibrary(id);
     }
 
+    /*
+     * Reading session simulation:
+     * The user must enter his id, and then the system will show the user's library.
+     * Then, the user must enter the id or position in the shown matrix of the product he wants to read.
+     * The system will show the first page of the product, and then the user can advance or return a page, or exit the reading session.
+     * If the user advances a page, the system will show the next page of the product, and if the user returns a page, the system will show the previous page of the product.
+     * The system will save the highest page number the user has read.
+     */
     public static void readingSimulation(){
         print("Please enter your id");
         String id = reader.next();
         readXController.showLibrary(id);
-        print("Please enter the id of or position in the shown matrix of the product you want to read");
+        print("Please enter the id or position in the shown matrix of the product you want to read");
         String productId = reader.next();
-        readXController.readProduct(productId);
+        int pageNumber = 1;
+        String readingSession= readXController.readProduct(id,productId, pageNumber);
+        print(readingSession);
+        if (!readingSession.equals("User not found") && !readingSession.equals("you don't have this product in your library") && !readingSession.equals("Product not found")){
+            print("Press A to advance a page");
+            print("Press S to return a page");
+            print("Press B to exit");
+            String option = Validators.validateMovementInput();
+            while (!option.equals("B")){
+                if (option.equals("A")){
+                    pageNumber++;
+                    readingSession= readXController.readProduct(id,productId, pageNumber);
+                    print(readingSession);
+                } else {
+                    if (pageNumber==1){
+                        pageNumber=1;
+                    } else { 
+                        pageNumber--;
+                    }
+                    readingSession= readXController.readProduct(id,productId, pageNumber);
+                    print(readingSession);
+                }
+                print("Press A to advance a page");
+                print("Press S to return a page");
+                print("Press B to exit");
+                option = Validators.validateMovementInput();
+            }
+        }
+
+    }
+
+    /*
+     * Testing management:
+     * This method generates random data to test the system
+     */
+    public static void testingManagement(){
+        int pageNum = 10;
+        double price = 10000;
+        String url = "https://www.google.com";
+        String briefReview = "This is a brief review";
+        int genre = 1;
+        int category = 1;
+        int frequencyOfIssuance = 10;
+        GregorianCalendar date = new GregorianCalendar();
+        
+        for(int i=0 ; i<10 ; i++){
+            String name1 = "BOOKTEST" + i;
+            String name2 = "MAGAZINETEST" + i;
+            String basicUserName = "BASICUSER" + i;
+            String premiumUserName = "PREMIUMUSER" + i;
+            String basicUserId= "BASICUSERID"+i; 
+            String premiumUserId= "PREMIUMUSERID"+i;
+            String bookCreation = readXController.createBook(name1, pageNum, date, price, url, briefReview, genre);
+            print (bookCreation);
+            String magazineCreation = readXController.createMagazine(name2, pageNum, date, price, url, frequencyOfIssuance, category);
+            print (magazineCreation);
+            String basicUserCreation = readXController.createBasicUser(basicUserName, basicUserId, date);
+            print (basicUserCreation);
+            String premiumUserCreation = readXController.createPremiumUser(premiumUserName, premiumUserId, date, "123456789", "123");
+            print (premiumUserCreation);
+        }
     }
 
     

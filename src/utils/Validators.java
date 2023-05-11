@@ -36,6 +36,9 @@ public class Validators {
         return reader.nextDouble();
     }
 
+    /*
+     * Method to validate the input is a Url
+     */
     public static String validateUrlInput(){
         String url = reader.next();
         while (!url.contains("https") || !url.contains("www")){
@@ -43,6 +46,20 @@ public class Validators {
             url = reader.next();
         }
         return url;
+    }
+
+    /*
+     * Method to validate the input is a valid movement in the reading session
+     */
+    public static String validateMovementInput(){
+        String movement = reader.next();
+        movement = movement.toUpperCase();
+        while (!movement.equals("A") && !movement.equals("S") && !movement.equals("B") && !movement.equals("d")){
+            print("Invalid movement, please try again");
+            movement = reader.next();
+            movement = movement.toUpperCase();
+        }
+        return movement;
     }
 
     /*
