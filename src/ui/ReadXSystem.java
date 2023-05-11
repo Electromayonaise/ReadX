@@ -188,13 +188,13 @@ public class ReadXSystem {
             print("Please enter the product's name");
             String name = reader.next();
             name=name.toUpperCase();
-            String bookSearch = readXController.checkForBookNameCoincidences(name);
-            String magazineSearch= readXController.checkForMagazineNameCoincidences(name);
-            if (bookSearch.equals("No books with similar names were found") && magazineSearch.equals("No magazines with similar names were found")){
+            String bookSearch = readXController.searchBookByName(name);
+            String magazineSearch= readXController.searchMagazineByName(name);
+            if (bookSearch.equals("Book not found") && magazineSearch.equals("Magazine not found")){
                 print("Product not found");
                 productExistance = false;
             } 
-            else if (bookSearch.equals("No books with similar names were found") && !magazineSearch.equals("No magazines with similar names were found")){
+            else if (bookSearch.equals("Book not found") && !magazineSearch.equals("Magazine not found")){
                 print(magazineSearch);
             } else {
                 print(bookSearch);
@@ -228,12 +228,12 @@ public class ReadXSystem {
             print("Please enter the product's name");
             String name = reader.next();
             name=name.toUpperCase();
-            String searchBookId= readXController.checkForBookNameCoincidences(name);
-            String searchMagazineId= readXController.checkForMagazineNameCoincidences(name);
-            if (searchBookId.equals("No books with similar names were found")&& searchMagazineId.equals("No magazines with similar names were found")){
+            String searchBookId= readXController.searchBookByName(name);
+            String searchMagazineId= readXController.searchMagazineByName(name);
+            if (searchBookId.equals("Book not found")&& searchMagazineId.equals("Magazine not found")){
                 print("The product was not found");
                 productExistance = false;
-            } else if (searchBookId.equals("No books with similar names were found") && !searchMagazineId.equals("No magazines with similar names were found")){
+            } else if (searchBookId.equals("Book not found") && !searchMagazineId.equals("Magazine not found")){
                 print(searchMagazineId);
             } else {
                 print(searchBookId);
@@ -380,6 +380,7 @@ public class ReadXSystem {
     public static void buyBooksAndJournalSubscriptions(){
         print("Please enter your id");
         String id = reader.next();
+        id = id.toUpperCase();
         print("If you wish to, you may enter a product's name to get its id by pressing '1', if you already know the id of the product you want to buy, press any other number");
         int option = Validators.validateIntInput();
         String boughtProduct;
@@ -388,12 +389,12 @@ public class ReadXSystem {
             print("Please enter the product's name");
             String name = reader.next();
             name=name.toUpperCase();
-            String searchBookId= readXController.checkForBookNameCoincidences(name);
-            String searchMagazineId= readXController.checkForMagazineNameCoincidences(name);
-            if (searchBookId.equals("No books with similar names were found")&& searchMagazineId.equals("No magazines with similar names were found")){
+            String searchBookId= readXController.searchBookByName(name);
+            String searchMagazineId= readXController.searchMagazineByName(name);
+            if (searchBookId.equals("Book not found")&& searchMagazineId.equals("Magazine not found")){
                 print("The product was not found");
                 productExistance = false;
-            } else if (searchBookId.equals("No books with similar names were found") && !searchMagazineId.equals("No magazines with similar names were found")){
+            } else if (searchBookId.equals("Book not found") && !searchMagazineId.equals("Magazine not found")){
                 print(searchMagazineId);
             } else {
                 print(searchBookId);
@@ -414,6 +415,7 @@ public class ReadXSystem {
     public static void libraryPresentation(){
         print("Please enter your id");
         String id = reader.next();
+        id = id.toUpperCase();
         readXController.showLibrary(id);
     }
 
@@ -428,6 +430,7 @@ public class ReadXSystem {
     public static void readingSimulation(){
         print("Please enter your id");
         String id = reader.next();
+        id = id.toUpperCase();
         readXController.showLibrary(id);
         print("Please enter the id or position in the shown matrix of the product you want to read");
         String productId = reader.next();

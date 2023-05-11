@@ -608,49 +608,45 @@ public class ReadXController {
      */
     public String validateUserID(){
         String id = Validators.reader.next();
+        id = id.toUpperCase();
         for (int i = 0; i < usersList.size(); i++) {
             while (usersList.get(i).getId().equals(id)) {
                 System.out.println("This ID is already registered, please enter a new one");
                 id = Validators.reader.next();
+                id = id.toUpperCase();
             }
         }
         return id;
     }
 
-    /***
-     * Method that searches for books with similar names, gives them in a list and shows their respective id 
-     * @param name Product's name
-     * @return coincidences List of books with similar names
+    /**
+     * Method to seach a book by its name
+     * @param name
+     * @return msj Message that shows the book id or an error message if the book doesn't exist
      */
-    public String checkForBookNameCoincidences(String name){
-        String coincidences = "No books with similar names were found";
-        for (int i = 0; i < booksList.size(); i++) {
-            if (booksList.get(i).getName().contains(name)) {
-                // empty the string
-                coincidences = "";
-                coincidences += booksList.get(i).getName() + " ID: " + booksList.get(i).getId() + "\n";
-            }
+   public String searchBookByName(String name){
+    String msj = "Book not found";
+    for(int i=0; i<booksList.size(); i++){
+        if(booksList.get(i).getName().equals(name)){
+            msj = "Book id : " + booksList.get(i).getId();
         }
-        return coincidences;
     }
+    return msj;
+   }
 
-   
-
-    /***
-     * Method that searches for magazines with similar names, gives them in a list and shows their respective id 
-     * @param name Product's name
-     * @return coincidences List of magazines with similar names
+    /**
+     * Method to seach a magazine by its name
+     * @param name
+     * @return msj Message that shows the magazine id or an error message if the magazine doesn't exist
      */
-    public String checkForMagazineNameCoincidences(String name){
-        String coincidences = "No magazines with similar names were found";
-        for (int i = 0; i < magazinesList.size(); i++) {
-            if (magazinesList.get(i).getName().contains(name)) {
-                // empty the string
-                coincidences = "";
-                coincidences += magazinesList.get(i).getName() + " ID: " + magazinesList.get(i).getId() + "\n";
+    public String searchMagazineByName(String name){
+        String msj = "Magazine not found";
+        for(int i=0; i<magazinesList.size(); i++){
+            if(magazinesList.get(i).getName().equals(name)){
+                msj = "Magazine id : " + magazinesList.get(i).getId();
             }
         }
-        return coincidences;
+        return msj;
     }
 
     /**
