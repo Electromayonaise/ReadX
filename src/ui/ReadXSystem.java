@@ -56,7 +56,7 @@ public class ReadXSystem {
                     break;
                 case 4:
                     print("Library presentation selected");
-                    libraryPresentation();
+                    print("Functionality not implemented yet");
                     break;
                 case 5:
                     print("Reading session simulation selected");
@@ -64,6 +64,7 @@ public class ReadXSystem {
                     break;
                 case 6:
                     print("Report generation selected");
+                    print("Functionality not implemented yet");
                     break;
                 case 7:
                     print("Testing management selected");
@@ -89,9 +90,9 @@ public class ReadXSystem {
         print("1. Bibliographic products management");
         print("2. User management");
         print("3. Buy books and journal subscriptions");
-        print("4. Library presentation");
+        print("4. Library presentation **FUNCTIONALITY NOT IMPLEMENTED YET**");
         print("5. Reading session simulation"); 
-        print("6. Report generation"); 
+        print("6. Report generation **FUNCTIONALITY NOT IMPLEMENTED YET**"); 
         print("7. Testing management (generate random data)");
         print("8. Exit");
         print("***********************************");
