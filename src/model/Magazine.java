@@ -22,7 +22,7 @@ public class Magazine extends BibliographicPtoducts{
      */
     public Magazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, String url, int frequencyOfIssuance, int category) {
         super(name, pageNumber, publicationDate, price, url, frequencyOfIssuance, category);
-        setCategoryByFlag(category);
+        setGenreOrCategoryByFlag(category);
         this.frequencyOfIssuance = frequencyOfIssuance;
         generateID();
     }
@@ -44,7 +44,8 @@ public class Magazine extends BibliographicPtoducts{
      * Method that converts the category flag value to a Category enum value
      * @param category Category flag value
      */
-    public void setCategoryByFlag(int category) {
+    @Override
+    public void setGenreOrCategoryByFlag(int category) {
         Category finalCategory = null;
         if (category==1){
             finalCategory = Category.VARIETY;
@@ -78,6 +79,7 @@ public class Magazine extends BibliographicPtoducts{
      * Method that returns the magazine's ID
      * @return id Magazine's ID
      */
+    @Override
     public String getId() {
         return id;
     }
@@ -102,6 +104,7 @@ public class Magazine extends BibliographicPtoducts{
      * Method that sets the magazine's ID
      * @param id Magazine's ID
      */
+    @Override
     public void setId(String id) {
         this.id = id;
     }

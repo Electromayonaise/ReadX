@@ -181,4 +181,35 @@ public abstract class BibliographicPtoducts {
     public void setStatus(boolean status) {
         this.status = status;
     }   
+
+    /**
+     * Abstract method to be implemented in the Book and Magazine classes
+     */
+    public abstract String getId ();
+
+    /**
+     * Abstract method to be implemented in the Book and Magazine classes
+     */
+    public abstract void setId (String id);
+
+    /**
+     * Abstract method to be implemented in the Book and Magazine classes
+     */
+    public abstract void setGenreOrCategoryByFlag (int flag);
+
+    /**
+     * Method that casts a magazine to set its frequency of issuance
+     * @param frequencyOfIssuance
+     */
+    public void setFrequencyOfIssuance(int frequencyOfIssuance) {
+        ((Magazine)this).setFrequencyOfIssuance(frequencyOfIssuance);
+    }
+
+    /**
+     * Method that casts a book to set its brief review
+     * @param category
+     */
+    public void setBriefReview(String briefReview) {
+        ((Book)this).setBriefReview(briefReview);
+    }
 }

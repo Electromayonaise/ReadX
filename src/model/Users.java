@@ -12,8 +12,8 @@ public abstract class Users {
     private int boughtBooks=0;
     private int boughtMagazineSubscriptions=0;
     private GregorianCalendar registrationDate;
-    public ArrayList <Book> userBooksList = new ArrayList<Book>();
-    public ArrayList <Magazine> userMagazinesList = new ArrayList<Magazine>();
+    public ArrayList <BibliographicPtoducts> userBooksList = new ArrayList<BibliographicPtoducts>();
+    public ArrayList <BibliographicPtoducts> userMagazinesList = new ArrayList<BibliographicPtoducts>();
 
     /**
      * Constructor method for the Users class (Basic users)
@@ -48,7 +48,7 @@ public abstract class Users {
      * @param foundUser User that is buying the book
      * @param desiredProduct Book that the user wants to buy
      */
-    public void buyBook(Book desiredProduct){
+    public void buyBook(BibliographicPtoducts desiredProduct){
         userBooksList.add(desiredProduct);
         boughtBooks++;
     }
@@ -58,7 +58,7 @@ public abstract class Users {
      * @param foundUser User that is buying the magazine
      * @param desiredProduct Magazine that the user wants to buy
      */
-    public void buyMagazine(Magazine desiredProduct){
+    public void buyMagazine(BibliographicPtoducts desiredProduct){
         userMagazinesList.add(desiredProduct);
         boughtMagazineSubscriptions++;
     }
@@ -98,7 +98,7 @@ public abstract class Users {
      * @param book Book that the user is reading
      * @param highestPageNumber Highest page number that the user has read
      */
-    public void setUserHighestBookPageNumber(Book book, int highestPageNumber){
+    public void setUserHighestBookPageNumber(BibliographicPtoducts book, int highestPageNumber){
         for (int i = 0; i < userBooksList.size(); i++) {
             if (userBooksList.get(i).getId().equals(book.getId())){
                 userBooksList.get(i).setHighestPageNumber(highestPageNumber);
@@ -111,7 +111,7 @@ public abstract class Users {
      * @param book Book that the user is reading
      * @return result Highest page number that the user has read
      */
-    public int getUserHighestBookPageNumber(Book book){
+    public int getUserHighestBookPageNumber(BibliographicPtoducts book){
         int result = 0;
         for (int i = 0; i < userBooksList.size(); i++) {
             if (userBooksList.get(i).getId().equals(book.getId())){
@@ -126,7 +126,7 @@ public abstract class Users {
      * @param magazine Magazine that the user is reading
      * @param highestPageNumber Highest page number that the user has read
      */
-    public void setUserHighestMagazinePageNumber(Magazine magazine, int highestPageNumber){
+    public void setUserHighestMagazinePageNumber(BibliographicPtoducts magazine, int highestPageNumber){
         for (int i = 0; i < userMagazinesList.size(); i++) {
             if (userMagazinesList.get(i).getId().equals(magazine.getId())){
                 userMagazinesList.get(i).setHighestPageNumber(highestPageNumber);
@@ -139,7 +139,7 @@ public abstract class Users {
      * @param magazine Magazine that the user is reading
      * @return result Highest page number that the user has read
      */
-    public int getUserHighestMagazinePageNumber(Magazine magazine){
+    public int getUserHighestMagazinePageNumber(BibliographicPtoducts magazine){
         int result = 0;
         for (int i = 0; i < userMagazinesList.size(); i++) {
             if (userMagazinesList.get(i).getId().equals(magazine.getId())){

@@ -8,8 +8,8 @@ import utils.Validators;
  */
 public class ReadXController {
     
-    ArrayList <Book> booksList = new ArrayList<Book>();
-    ArrayList <Magazine> magazinesList = new ArrayList<Magazine>();
+    ArrayList <BibliographicPtoducts> booksList = new ArrayList<BibliographicPtoducts>();
+    ArrayList <BibliographicPtoducts> magazinesList = new ArrayList<BibliographicPtoducts>();
     ArrayList<Users> usersList = new ArrayList<Users>();
 
     /**
@@ -184,7 +184,7 @@ public class ReadXController {
         String msj = "Book not found";
         for (int i = 0; i < booksList.size(); i++) {
             if (booksList.get(i).getId().equals(id)) {
-                booksList.get(i).setGenreByFlag(newGenre);
+                booksList.get(i).setGenreOrCategoryByFlag(newGenre);
                 msj="Book genre updated successfully";
             }
         }
@@ -286,7 +286,7 @@ public class ReadXController {
         String msj = "Magazine not found";
         for (int i = 0; i < magazinesList.size(); i++) {
             if (magazinesList.get(i).getId().equals(id)) {
-                magazinesList.get(i).setCategoryByFlag(newCategory);
+                magazinesList.get(i).setGenreOrCategoryByFlag(newCategory);
                 msj="Magazine category updated successfully";
             }
         }
@@ -324,15 +324,15 @@ public class ReadXController {
     /**
      * Method that searches for a product inputed by the user in the books and magazines arrays and sends 
      * it to the method buyBook/buyMagazine
-     * @param id User's id
+     * @param id User's id|
      * @param productID Product's id
      * @return msj Message that shows if the product was bought successfully or an error message if the user doesn't exist, if the product doesn't exist or if the has reached the maximum number of books/magazines he can buy
      */
     public String buyProducts(String id, String productID){
         String msj = "Product not found";
         Users user = searchUserById(id);
-        Book book = searchBookById(productID);
-        Magazine magazine = searchMagazineById(productID);
+        BibliographicPtoducts book = searchBookById(productID);
+        BibliographicPtoducts magazine = searchMagazineById(productID);
 
         if (book != null){
             if (user instanceof PremiumUser){
@@ -424,8 +424,8 @@ public class ReadXController {
     public String readProduct(String id, String productID, int pageNum){
         String msj = "User not found";
         Users user = searchUserById(id);
-        Book book = searchBookById(productID);
-        Magazine magazine = searchMagazineById(productID);
+        BibliographicPtoducts book = searchBookById(productID);
+        BibliographicPtoducts magazine = searchMagazineById(productID);
         int highestPageNumber = 0;
         if (pageNum<1){
             pageNum = 1;
@@ -474,8 +474,8 @@ public class ReadXController {
      */
     public void updateHighestPageNumber (String id, String productID, int highestPageNumber){
         Users user = searchUserById(id);
-        Book book = searchBookById(productID);
-        Magazine magazine = searchMagazineById(productID);
+        BibliographicPtoducts book = searchBookById(productID);
+        BibliographicPtoducts magazine = searchMagazineById(productID);
         if (user != null){
             if (book != null) {
                 user.setUserHighestBookPageNumber(book, highestPageNumber);
@@ -493,7 +493,7 @@ public class ReadXController {
      */
     public String sumatoryOfBookReadPages(String bookId){
         String msj= "Book not found";
-        Book book = searchBookById(bookId);
+        BibliographicPtoducts book = searchBookById(bookId);
         int sum = 0;
         if (book != null){
             for (int i=0; i<usersList.size(); i++){
@@ -513,7 +513,7 @@ public class ReadXController {
      */
     public String sumatoryOfMagazineReadPages(String magazineId){
         String msj= "Magazine not found";
-        Magazine magazine = searchMagazineById(magazineId);
+        BibliographicPtoducts magazine = searchMagazineById(magazineId);
         int sum = 0;
         if (magazine != null){
             for (int i=0; i<usersList.size(); i++){
@@ -533,7 +533,7 @@ public class ReadXController {
         for(int i =0; i<booksList.size(); i++){
             for(int j =0; j<booksList.size()-1; j++){
                 if(booksList.get(j).getPublicationDate().compareTo(booksList.get(j+1).getPublicationDate())>0){
-                    Book temp = booksList.get(j);
+                    BibliographicPtoducts temp = booksList.get(j);
                     booksList.set(j, booksList.get(j+1));
                     booksList.set(j+1, temp);
                 }
@@ -548,7 +548,7 @@ public class ReadXController {
         for(int i =0; i<magazinesList.size(); i++){
             for(int j =0; j<magazinesList.size()-1; j++){
                 if(magazinesList.get(j).getPublicationDate().compareTo(magazinesList.get(j+1).getPublicationDate())>0){
-                    Magazine temp = magazinesList.get(j);
+                    BibliographicPtoducts temp = magazinesList.get(j);
                     magazinesList.set(j, magazinesList.get(j+1));
                     magazinesList.set(j+1, temp);
                 }
@@ -577,8 +577,8 @@ public class ReadXController {
      * @param id Book's id
      * @return foundBook Book that was found
      */
-    public Book searchBookById(String id){
-        Book foundBook = null;
+    public BibliographicPtoducts searchBookById(String id){
+        BibliographicPtoducts foundBook = null;
         for (int i = 0; i < booksList.size(); i++) {
             if (booksList.get(i).getId().equals(id)) {
                 foundBook = booksList.get(i);
@@ -592,8 +592,8 @@ public class ReadXController {
      * @param id Magazine's id
      * @return foundMagazine Magazine that was found
      */
-    public Magazine searchMagazineById(String id){
-        Magazine foundMagazine = null;
+    public BibliographicPtoducts searchMagazineById(String id){
+        BibliographicPtoducts foundMagazine = null;
         for (int i = 0; i < magazinesList.size(); i++) {
             if (magazinesList.get(i).getId().equals(id)) {
                 foundMagazine = magazinesList.get(i);

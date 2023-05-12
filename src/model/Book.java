@@ -21,7 +21,7 @@ public class Book extends BibliographicPtoducts{
      */
     public Book (String name, int pageNumber, GregorianCalendar publicationDate, double price, String url, String briefReview, int genre) {
         super(name, pageNumber, publicationDate, price, url, briefReview, genre);
-        setGenreByFlag(genre);
+        setGenreOrCategoryByFlag(genre);
         this.briefReview = briefReview;
         generateID();
     }
@@ -43,7 +43,8 @@ public class Book extends BibliographicPtoducts{
      * Method that converts the genre flag value to a Genre enum value
      * @param genre Genre flag value
      */
-    public void setGenreByFlag(int genre) {
+    @Override
+    public void setGenreOrCategoryByFlag(int genre) {
         Genre finalGenre = null;
         if (genre==1){
             finalGenre = Genre.SCIENCEFICTION;
@@ -77,6 +78,7 @@ public class Book extends BibliographicPtoducts{
      * Method that returns the book's ID
      * @return id Book's ID
      */
+    @Override
     public String getId() {
         return id;
     }
@@ -101,6 +103,7 @@ public class Book extends BibliographicPtoducts{
      * Method that sets the book's ID
      * @param id Book's ID
      */
+    @Override
     public void setId(String id) {
         this.id = id;
     }
