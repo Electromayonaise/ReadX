@@ -1,5 +1,6 @@
 package utils;
 import java.util.Scanner;
+import java.util.Random;
 
 /**
  * Class that contains the methods to validate the inputs
@@ -158,5 +159,17 @@ public class Validators {
             category = validateIntInput();
         }
         return category;
+    }
+
+    /**
+     * Method to generate a random number between a min and a max
+     * @param min
+     * @param max
+     * @return randomNum Random number
+     */
+    public static int randInt(int min, int max) {
+        Random rand= new Random();
+        int randomNum = rand.nextInt((max-min)+1)+min;
+        return randomNum;
     }
 }

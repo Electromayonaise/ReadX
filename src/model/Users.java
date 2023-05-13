@@ -12,8 +12,8 @@ public abstract class Users {
     private int boughtBooks=0;
     private int boughtMagazineSubscriptions=0;
     private GregorianCalendar registrationDate;
-    public ArrayList <BibliographicPtoducts> userBooksList = new ArrayList<BibliographicPtoducts>();
-    public ArrayList <BibliographicPtoducts> userMagazinesList = new ArrayList<BibliographicPtoducts>();
+    ArrayList <BibliographicPtoducts> userBooksList = new ArrayList<BibliographicPtoducts>();
+    ArrayList <BibliographicPtoducts> userMagazinesList = new ArrayList<BibliographicPtoducts>();
 
     /**
      * Constructor method for the Users class (Basic users)
@@ -92,6 +92,31 @@ public abstract class Users {
         }
         return result;
     }
+
+    /**
+     * Method that deletes a book from the user's book list
+     * @param bookId Book's id
+     */
+    public void deleteBookFromUserList(String bookId){
+        for (int i = 0; i < userBooksList.size(); i++) {
+            if (userBooksList.get(i).getId().equals(bookId)){
+                userBooksList.remove(i);
+            }
+        }
+    }
+
+    /**
+     * Method that deletes a magazine from the user's magazine list
+     * @param magazineId Magazine's id
+     */
+    public void deleteMagazineFromUserList(String magazineId){
+        for (int i = 0; i < userMagazinesList.size(); i++) {
+            if (userMagazinesList.get(i).getId().equals(magazineId)){
+                userMagazinesList.remove(i);
+            }
+        }
+    }
+
 
     /**
      * Method that sets the highest page number that the user has read of a book

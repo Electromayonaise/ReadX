@@ -51,8 +51,15 @@ public class ReadXSystem {
                     userManagement();
                     break;
                 case 3:
-                    print("Buy books and journal subscriptions selected");
-                    buyBooksAndJournalSubscriptions();
+                    print("Buy books and journal subscriptions or cancel a subscrition selected");
+                    print("Please enter what do you wish to do");
+                    print("1. Buy books and journal subscriptions 2. Cancel a subscription");
+                    int desiredOption=Validators.validateOneOrTwo();
+                    if (desiredOption==1){
+                        buyBooksAndJournalSubscriptions();
+                    } else if (desiredOption==2){
+                        cancelMagazineSubscription();
+                    }
                     break;
                 case 4:
                     print("Library presentation selected");
@@ -89,7 +96,7 @@ public class ReadXSystem {
         print("***********************************");
         print("1. Bibliographic products management");
         print("2. User management");
-        print("3. Buy books and journal subscriptions");
+        print("3. Buy books and journal subscriptions, or cancel a subscription");
         print("4. Library presentation **FUNCTIONALITY NOT IMPLEMENTED YET**");
         print("5. Reading session simulation"); 
         print("6. Report generation **FUNCTIONALITY NOT IMPLEMENTED YET**"); 
@@ -206,10 +213,11 @@ public class ReadXSystem {
             print("Please enter the id");
             String id = reader.next();
             if (selectedProduct==1){
-                readXController.deleteBook(id);
+                String bookDelete = readXController.deleteBook(id);
+                print(bookDelete);
             } else {
-                readXController.deleteMagazine(id);
-        
+                String magazineDelete= readXController.deleteMagazine(id);
+                print(magazineDelete);
             }
         }
     }
@@ -409,6 +417,15 @@ public class ReadXSystem {
         }
     }
     
+    public static void cancelMagazineSubscription(){
+        print("Please enter your id");
+        String id = reader.next();
+        id = id.toUpperCase();
+        print("Please enter the product's id");
+        String productId = reader.next();
+        String cancelSubscription= readXController.cancelMagazineSubscription(id, productId);
+        print(cancelSubscription);
+    }
     /**
      * Library presentation:
      * The user must enter his id, and then the system will show the user's library.
@@ -471,7 +488,7 @@ public class ReadXSystem {
      * This method generates random data to test the system
      */
     public static void testingManagement(){
-        int pageNum = 10;
+        int pageNum = 100;
         double price = 10000;
         String url = "https://www.google.com";
         String briefReview = "This is a brief review";

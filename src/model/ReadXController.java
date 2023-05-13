@@ -67,7 +67,13 @@ public class ReadXController {
         for (int i = 0; i < booksList.size(); i++) {
             if (booksList.get(i).getId().equals(id)) {
                 booksList.remove(i);
-                msj = "Book deleted successfully";
+                msj = "Book deleted successfully from the system";
+            }
+        }
+        for (int i = 0; i < usersList.size(); i++) {
+            if (usersList.get(i).searchIfUserHasBook(id) == true) {
+                usersList.get(i).deleteBookFromUserList(id);
+                msj = "Book deleted successfully from the system and user's library";
             }
         }
         return msj;
@@ -84,6 +90,12 @@ public class ReadXController {
             if (magazinesList.get(i).getId().equals(id)) {
                 magazinesList.remove(i);
                 msj="Magazine deleted successfully";
+            }
+        }
+        for (int i = 0; i < usersList.size(); i++) {
+            if (usersList.get(i).searchIfUserHasMagazine(id) == true) {
+                usersList.get(i).deleteMagazineFromUserList(id);
+                msj = "Magazine deleted successfully from the system and user's library";
             }
         }
         return msj;
@@ -331,49 +343,89 @@ public class ReadXController {
     public String buyProducts(String id, String productID){
         String msj = "Product not found";
         Users user = searchUserById(id);
-        BibliographicPtoducts book = searchBookById(productID);
-        BibliographicPtoducts magazine = searchMagazineById(productID);
+        Double payment;
+        if (user == null){
+            msj = "User not found";
+        }
+        else {
+            BibliographicPtoducts book = searchBookById(productID);
+            BibliographicPtoducts magazine = searchMagazineById(productID);
 
-        if (book != null){
-            if (user instanceof PremiumUser){
-                user.buyBook(book);
-                msj = "Book bought successfully";
-                GregorianCalendar dateOfPurchase = new GregorianCalendar();
-                book.setDateOfPurchase(dateOfPurchase);
-            }
-            else if (user instanceof BasicUser){
-                if (user.getBoughtBooks() == 5){
-                    msj = "You have reached the maximum number of books you can buy";
-                }
-                else {
+            if (book != null){
+                if (user instanceof PremiumUser){
+                    payment = book.getPrice();
                     user.buyBook(book);
-                    msj = "Book bought successfully";
                     GregorianCalendar dateOfPurchase = new GregorianCalendar();
                     book.setDateOfPurchase(dateOfPurchase);
+                    msj = "Book bought successfully, paid: " + payment + " dollars " + " bought on date:  Year: " + book.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + book.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + book.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                }
+                else if (user instanceof BasicUser){
+                    if (user.getBoughtBooks() == 5){
+                        msj = "You have reached the maximum number of books you can buy";
+                    }
+                    else {
+                        payment = book.getPrice();
+                        user.buyBook(book);
+                        GregorianCalendar dateOfPurchase = new GregorianCalendar();
+                        book.setDateOfPurchase(dateOfPurchase);
+                        msj = "Book bought successfully, paid: " + payment + " dollars " + "\n bought on date:  Year: " + book.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + book.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + book.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                    }
                 }
             }
-        }
-        else if (magazine != null){
-            if (user instanceof PremiumUser){
-                user.buyMagazine(magazine);
-                msj = "Magazine bought successfully";
-                GregorianCalendar dateOfPurchase = new GregorianCalendar();
-                magazine.setDateOfPurchase(dateOfPurchase);
-            }
-            else if (user instanceof BasicUser){
-                if (user.getBoughtMagazineSubscriptions() == 2){
-                    msj = "You have reached the maximum number of magazine subscriptions you can buy";
-                }
-                else {
+            else if (magazine != null){
+                if (user instanceof PremiumUser){
+                    payment = magazine.getPrice();
                     user.buyMagazine(magazine);
-                    msj = "Magazine bought successfully";
                     GregorianCalendar dateOfPurchase = new GregorianCalendar();
                     magazine.setDateOfPurchase(dateOfPurchase);
+                    msj = "Magazine subscription bought successfully, paid: " + payment + " dollars " + "\n bought on date: Year: " + magazine.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + magazine.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + magazine.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                }
+                else if (user instanceof BasicUser){
+                    if (user.getBoughtMagazineSubscriptions() == 2){
+                        msj = "You have reached the maximum number of magazine subscriptions you can buy";
+                    }
+                    else {
+                        payment = magazine.getPrice();
+                        user.buyMagazine(magazine);
+                        GregorianCalendar dateOfPurchase = new GregorianCalendar();
+                        magazine.setDateOfPurchase(dateOfPurchase);
+                        msj = "Magazine subscription bought successfully, paid: " + payment + " dollars " + "\n bought on date: Year: " + magazine.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + magazine.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + magazine.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                    }
                 }
             }
         }
-        return msj;   
+        return msj;
     }
+
+    /**
+     * Method that allows the user to cancel a magazine subscription by deleting it from his magazine list
+     * @param id User's id
+     * @param productID Product's id
+     * @return msj Message that shows if the magazine subscription was cancelled successfully or an error message if the user doesn't exist, if the product doesn't exist or if the user doesn't have the product
+     */
+    public String cancelMagazineSubscription(String id, String productID){
+        String msj = "Product not found";
+        Users user = searchUserById(id);
+        if (user==null){
+            msj = "User not found";
+        }
+        else{
+            BibliographicPtoducts magazine = searchMagazineById(productID);
+            if (magazine != null){
+                boolean userHas=user.searchIfUserHasMagazine(productID);
+                if (userHas == true){
+                    user.deleteMagazineFromUserList(id);;
+                    msj = "Magazine subscription cancelled successfully";
+                }
+                else {
+                    msj = "You don't have this magazine subscription";
+                }
+
+            }
+        }
+        return msj;
+    }
+
 
     // INCOMPLETE METHOD !!!!
     // The user's library must be represented trough 5x5 matrix that present the id's of the products from oldest to newest (publication date),when the martix is full, the user may go to the next page of the library and so on.=
@@ -444,6 +496,18 @@ public class ReadXController {
                         updateHighestPageNumber(id, productID, highestPageNumber);
                     }
                     msj= "******Reading session in progress******\n" + "Reading: " + book.getName() + "\n" + "Reading page number: " + pageNum + " of " + book.getPageNumber() + "\n";
+                    if (user instanceof BasicUser && pageNum%20==0){
+                        int add = Validators.randInt(1, 3);
+                        if (add==1){
+                            msj = ((BasicUser)user).getAdvertisment1();
+                        }
+                        else if (add==2){
+                            msj = ((BasicUser)user).getAdvertisment2();
+                        }
+                        else if (add==3){
+                            msj = ((BasicUser)user).getAdvertisment3();
+                        }
+                    }
                 }
                 else {
                     boolean userHasMagazine = user.searchIfUserHasMagazine(productID);
@@ -454,6 +518,18 @@ public class ReadXController {
                             updateHighestPageNumber(id, productID, highestPageNumber);
                         }
                         msj = "******Reading session in progress******\n" + "Reading: " + magazine.getName() + "\n" + "Reading page number: " + pageNum + " of " + magazine.getPageNumber() + "\n";
+                        if (user instanceof BasicUser && pageNum%5==0){
+                            int add = Validators.randInt(1, 3);
+                            if (add==1){
+                                msj = ((BasicUser)user).getAdvertisment1();
+                            }
+                            else if (add==2){
+                                msj = ((BasicUser)user).getAdvertisment2();
+                            }
+                            else if (add==3){
+                                msj = ((BasicUser)user).getAdvertisment3();
+                            }
+                        }
                     }
                     else {
                         msj = "you don't have this product in your library";
@@ -688,4 +764,6 @@ public class ReadXController {
         }
         return msj;
     }
+
+  
 }
