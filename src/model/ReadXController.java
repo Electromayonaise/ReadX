@@ -30,11 +30,11 @@ public class ReadXController {
      */
     public String createBook( String name, int pageNumber, GregorianCalendar publicationDate, double price, String url, String briefReview, int genre) {
         booksList.add(new Book(name, pageNumber, publicationDate, price, url, briefReview, genre));
-        String booksCreated ="";
+        StringBuilder booksCreated = new StringBuilder();
         for (int i = 0; i < booksList.size(); i++){
-           booksCreated += "\n"+ booksList.get(i).getName() + " " + booksList.get(i).getId();
+           booksCreated.append("\n"+ booksList.get(i).getName() + " " + booksList.get(i).getId());
         }
-        return booksCreated;
+        return booksCreated.toString();
     }
 
     /**
@@ -50,11 +50,11 @@ public class ReadXController {
      */
     public String createMagazine(String name, int pageNumber, GregorianCalendar publicationDate, double price, String url,  int frequencyOfIssuance, int category){
         magazinesList.add(new Magazine(name, pageNumber, publicationDate, price, url, frequencyOfIssuance, category));
-        String magazinesCreated ="";
+        StringBuilder magazinesCreated = new StringBuilder();
         for (int i = 0; i < magazinesList.size(); i++){
-            magazinesCreated+= "\n" + magazinesList.get(i).getName() +" "+ magazinesList.get(i).getId();
+            magazinesCreated.append("\n" + magazinesList.get(i).getName() +" "+ magazinesList.get(i).getId());
         } 
-        return magazinesCreated;
+        return magazinesCreated.toString();
     }
 
     /**
@@ -350,46 +350,71 @@ public class ReadXController {
         else {
             BibliographicPtoducts book = searchBookById(productID);
             BibliographicPtoducts magazine = searchMagazineById(productID);
-
+            boolean doesUserHaveProduct;
             if (book != null){
                 if (user instanceof PremiumUser){
-                    payment = book.getPrice();
-                    user.buyBook(book);
-                    GregorianCalendar dateOfPurchase = new GregorianCalendar();
-                    book.setDateOfPurchase(dateOfPurchase);
-                    msj = "Book bought successfully, paid: " + payment + " dollars " + " bought on date:  Year: " + book.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + book.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + book.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                    doesUserHaveProduct = user.searchIfUserHasBook(book.getId());
+                    if (doesUserHaveProduct== true){
+                        msj = "You already have this book";
+                    }
+                    else {
+                        user.buyBook(book);
+                        payment = book.getPrice();
+                        GregorianCalendar dateOfPurchase = new GregorianCalendar();
+                        book.setDateOfPurchase(dateOfPurchase);
+                        msj = "Book bought successfully, paid: " + payment + " dollars " + " bought on date:  Year: " + book.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + book.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + book.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                    }
                 }
                 else if (user instanceof BasicUser){
                     if (user.getBoughtBooks() == 5){
                         msj = "You have reached the maximum number of books you can buy";
                     }
                     else {
-                        payment = book.getPrice();
-                        user.buyBook(book);
-                        GregorianCalendar dateOfPurchase = new GregorianCalendar();
-                        book.setDateOfPurchase(dateOfPurchase);
-                        msj = "Book bought successfully, paid: " + payment + " dollars " + "\n bought on date:  Year: " + book.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + book.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + book.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                        doesUserHaveProduct = user.searchIfUserHasBook(book.getId());
+                        if (doesUserHaveProduct== true ){
+                            msj = "You already have this book";
+                        }
+                        else {
+                            user.buyBook(book);
+                            payment = book.getPrice();
+                            GregorianCalendar dateOfPurchase = new GregorianCalendar();
+                            book.setDateOfPurchase(dateOfPurchase);
+                            msj = "Book bought successfully, paid: " + payment + " dollars " + "\n bought on date:  Year: " + book.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + book.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + book.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                        }
                     }
                 }
             }
             else if (magazine != null){
                 if (user instanceof PremiumUser){
-                    payment = magazine.getPrice();
-                    user.buyMagazine(magazine);
-                    GregorianCalendar dateOfPurchase = new GregorianCalendar();
-                    magazine.setDateOfPurchase(dateOfPurchase);
-                    msj = "Magazine subscription bought successfully, paid: " + payment + " dollars " + "\n bought on date: Year: " + magazine.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + magazine.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + magazine.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                    doesUserHaveProduct = user.searchIfUserHasMagazine(magazine.getId());
+                    if (doesUserHaveProduct== true){
+                        msj = "You already have this magazine subscription";
+                    }
+                    else {
+                        user.buyMagazine(magazine);
+                        payment = magazine.getPrice();
+                        GregorianCalendar dateOfPurchase = new GregorianCalendar();
+                        magazine.setDateOfPurchase(dateOfPurchase);
+                        msj = "Magazine subscription bought successfully, paid: " + payment + " dollars " + "\n bought on date: Year: " + magazine.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + magazine.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + magazine.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                    }
+                    
                 }
                 else if (user instanceof BasicUser){
                     if (user.getBoughtMagazineSubscriptions() == 2){
                         msj = "You have reached the maximum number of magazine subscriptions you can buy";
                     }
                     else {
-                        payment = magazine.getPrice();
-                        user.buyMagazine(magazine);
-                        GregorianCalendar dateOfPurchase = new GregorianCalendar();
-                        magazine.setDateOfPurchase(dateOfPurchase);
-                        msj = "Magazine subscription bought successfully, paid: " + payment + " dollars " + "\n bought on date: Year: " + magazine.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + magazine.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + magazine.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                        doesUserHaveProduct = user.searchIfUserHasMagazine(magazine.getId());
+                        if (doesUserHaveProduct== true){
+                            msj = "You already have this magazine subscription";
+                        }
+                        else {
+                            user.buyMagazine(magazine);
+                            payment = magazine.getPrice();
+                            GregorianCalendar dateOfPurchase = new GregorianCalendar();
+                            magazine.setDateOfPurchase(dateOfPurchase);
+                            msj = "Magazine subscription bought successfully, paid: " + payment + " dollars " + "\n bought on date: Year: " + magazine.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + magazine.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + magazine.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
+                        }
                     }
                 }
             }
@@ -738,31 +763,31 @@ public class ReadXController {
      * @return msj Message that shows the creation of the books, magazines, users and premium users
      */
     public String initTest(int pageNum, double price, String url, String briefReview, int genre, int category, int frequencyOfIssuance, GregorianCalendar date){
-        String msj = "";
+        StringBuilder msj = new StringBuilder();
         for(int i=0 ; i<10 ; i++){
             String name1 = "BOOKTEST" + i;
             String bookCreation = createBook(name1, pageNum, date, price, url, briefReview, genre);
-            msj+= "Book list : "+ bookCreation + "\n";
+            msj.append("Book list : "+ bookCreation + "\n");
           
         }
         for (int i=0; i<10;i++){
             String name2 = "MAGAZINETEST" + i;
             String magazineCreation = createMagazine(name2, pageNum, date, price, url, frequencyOfIssuance, category);
-            msj+= "Magazine list: " + magazineCreation + "\n";     
+            msj.append("Magazine list: " + magazineCreation + "\n");     
         }
         for (int i=0; i<10;i++){
             String premiumUserName = "PREMIUMTEST" + i;
             String premiumUserId = "PREMIUMUSERID" + i;
             String premiumUserCreation = createPremiumUser(premiumUserName, premiumUserId, date, "123456789", "123");
-            msj += "Premium user " +i +": "+ premiumUserCreation + "\n";
+            msj.append("Premium user " +i +": "+ premiumUserCreation + "\n");
         }
         for (int i=0; i<10; i++){
             String basicUserName = "BASICTEST" + i;
             String basicUserId = "BASICUSERID" + i;
             String basicUserCreation = createBasicUser(basicUserName, basicUserId, date);
-            msj+= "Basic user " +i +": "+ basicUserCreation + "\n";
+            msj.append( "Basic user " +i +": "+ basicUserCreation + "\n");
         }
-        return msj;
+        return msj.toString();
     }
 
   

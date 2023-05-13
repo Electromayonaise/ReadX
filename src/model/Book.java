@@ -31,12 +31,12 @@ public class Book extends BibliographicPtoducts{
      */
     @Override
      public String generateID() {
-        String id = "";
+        StringBuilder id = new StringBuilder();
         for (int i = 0; i < 3; i++) {
-            id += Integer.toHexString((int) (Math.random() * 16));
+            id.append(Integer.toHexString((int) (Math.random() * 16)));
         }
-        setId(id);
-        return id;
+        setId(id.toString());
+        return id.toString();
     }
 
     /**

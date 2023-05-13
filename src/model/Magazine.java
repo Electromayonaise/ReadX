@@ -30,14 +30,25 @@ public class Magazine extends BibliographicPtoducts{
     @Override
     /**
      * Method that generates a random ID for the magazine that is  a unique 3 alphanumeric digit identifier (A-Z, 0-9)
+     * @return id Magazine's ID
      */
-    public String generateID() {
-        String id = "";
-        for (int i = 0; i < 3; i++) {
-            id += (char) (Math.random() * 26 + 'A');
+    public  String generateID() {
+        StringBuilder id = new StringBuilder();
+        // Generate a 3 digit ID
+        for(int i = 0 ; i <3; i++) {
+            int rand =( int ) (Math.random() *36);
+            // If random number is less than 10, add a digit character (0-9)
+            if (rand < 10) {
+                id.append((char) (rand + '0'));
+            } 
+            // Otherwise, add an uppercase letter character (A-Z)
+            else{
+                id.append((char) (rand -10 + 'A'));
+            }
         }
-        setId(id);
-        return id;
+        // Set ID and return it
+        setId(id.toString());
+        return id.toString();
     }
 
     /**

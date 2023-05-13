@@ -383,16 +383,58 @@ public class ReadXSystem {
 
     /**
      * Buy books and journal subscriptions:
-     * The user must enter his id, and then he can either enter the name of the product he wants to buy, or the id of the product he wants to buy.
-     * If the user enters the name of the product, the system will show the id of the product, and then the user must enter the id of the product he wants to buy.
+     * The user must enter his id, and then he will be asked whether he wants to buy a single product or make a cart, 
+     * if he chooses to make a cart (maximum of 50 products) the method buyProducts (that returns the product id if it exists) will be called as many times as the user wants to buy a product.
+     * If the user chooses to buy a single product, the method buyProducts will be called once.
      */
     public static void buyBooksAndJournalSubscriptions(){
         print("Please enter your id");
         String id = reader.next();
         id = id.toUpperCase();
+        print("Do you wish to make a cart or buy a single product? 1. Cart 2. Single product");
+        int desiredOption=Validators.validateOneOrTwo();
+        int buyMore=1;
+        String [] productsToBuy = new String [50];
+        if (desiredOption==1){
+            while(buyMore==1 && productsToBuy[49]==null){
+                // Create an array of products to buy and then send it to the controller
+               
+                String productId = buyProducts();
+                for (int i = 0; i < productsToBuy.length; i++) {
+                    if (productsToBuy[i]==null&& !productId.equals("")){
+                        productsToBuy[i]=productId;
+                        break;
+                    }
+                }
+                print("Product added to cart");
+                print("Do you wish to add more products? 1. Yes 2. No");
+                buyMore=Validators.validateOneOrTwo();
+
+            } 
+            for (int i = 0; i < productsToBuy.length; i++) {
+                if (productsToBuy[i]!=null){
+                    String buyProduct= readXController.buyProducts(id, productsToBuy[i]);
+                    print(buyProduct);
+                }
+            }
+        }
+        else {
+            String productId = buyProducts();
+            String buyProduct= readXController.buyProducts(id, productId);
+            print(buyProduct);
+        }
+    }
+
+    /**
+     * Method that asks the user if he wants to search the id of the product he wants to buy, or if he already knows the id.
+     * If the user wants to search the id, he must enter the product's name, and then the system will show the product's id.
+     * If the user already knows the id, he must enter the product's id.
+     * @return productId Product's id
+     */
+    public static String buyProducts(){
         print("If you wish to, you may enter a product's name to get its id by pressing '1', if you already know the id of the product you want to buy, press any other number");
         int option = Validators.validateIntInput();
-        String boughtProduct;
+        String productId = "";
         boolean productExistance= true;
         if (option==1){
             print("Please enter the product's name");
@@ -411,10 +453,9 @@ public class ReadXSystem {
         }
         if (productExistance == true){
             print("Please enter the product's id");
-            String productId = reader.next();
-            boughtProduct= readXController.buyProducts(id, productId);
-            print(boughtProduct);
+            productId = reader.next();
         }
+        return productId;
     }
     
     public static void cancelMagazineSubscription(){

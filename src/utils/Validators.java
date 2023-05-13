@@ -48,7 +48,7 @@ public class Validators {
      */
     public static String validateUrlInput(){
         String url = reader.next();
-        while (!url.contains("https") || !url.contains("www")){
+        while (!url.contains("https") && !url.contains("www") && !url.contains(".com")){
             print("Invalid url, please make sure it has a direction (or contains https, www)");
             url = reader.next();
         }
