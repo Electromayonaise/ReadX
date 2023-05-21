@@ -12,8 +12,10 @@ public abstract class Users {
     private int boughtBooks=0;
     private int boughtMagazineSubscriptions=0;
     private GregorianCalendar registrationDate;
-    ArrayList <BibliographicPtoducts> userBooksList = new ArrayList<BibliographicPtoducts>();
-    ArrayList <BibliographicPtoducts> userMagazinesList = new ArrayList<BibliographicPtoducts>();
+    protected ArrayList <BibliographicPtoducts> userBooksList = new ArrayList<BibliographicPtoducts>();
+    protected  ArrayList <BibliographicPtoducts> userMagazinesList = new ArrayList<BibliographicPtoducts>();
+    protected ArrayList <LibraryDisplay> userLibraryDisplays = new ArrayList<LibraryDisplay>();
+    private int productLenght = userBooksList.size() + userMagazinesList.size();
 
     /**
      * Constructor method for the Users class (Basic users)
@@ -173,6 +175,73 @@ public abstract class Users {
         }
         return result;
     }
+
+    public void fillLibrary(){
+        boolean isFull = false;
+        orderBooksByDate();
+        orderMagazinesByDate();
+        userLibraryDisplays.add(new LibraryDisplay());
+        int k=0;
+        for(int o=0; o<productLenght; o++){
+            for (int i=0; i<5; i++){
+                for(int j=0; j<5; j++) {
+                    if(isFull==false){
+                        if(userBooksList.size()>o){
+                            isFull= userLibraryDisplays.get(k).fillDisplay(i, j, userBooksList.get(o).getId());
+                        }
+                        else if(userMagazinesList.size()>o){
+                            isFull= userLibraryDisplays.get(k).fillDisplay(i, j, userMagazinesList.get(o).getId());
+                        }
+                    }
+                    else{
+                        k++;
+                        userLibraryDisplays.add(new LibraryDisplay());
+                        isFull=false;
+                    }
+                }
+            }
+        }
+
+    }
+    public String displayLibrary (int pagePos){
+        String msj = "Page not found";
+        if(userLibraryDisplays.get(pagePos) != null){
+            msj = userLibraryDisplays.get(pagePos).libraryDisplay();
+        }
+        return msj; 
+
+    }
+
+     /**
+     * Method that organizes the books array by publication date from oldest to newest
+     */
+    public void orderBooksByDate(){
+        for(int i =0; i<userBooksList.size(); i++){
+            for(int j =0; j<userBooksList.size()-1; j++){
+                if(userBooksList.get(j).getPublicationDate().compareTo(userBooksList.get(j+1).getPublicationDate())>0){
+                    BibliographicPtoducts temp = userBooksList.get(j);
+                    userBooksList.set(j, userBooksList.get(j+1));
+                    userBooksList.set(j+1, temp);
+                }
+            }
+        }
+    }
+
+    /**
+     * Method that organizes the magazines array by publication date from oldest to newest
+     */
+    public void orderMagazinesByDate(){
+        for(int i =0; i<userMagazinesList.size(); i++){
+            for(int j =0; j<userMagazinesList.size()-1; j++){
+                if(userMagazinesList.get(j).getPublicationDate().compareTo(userMagazinesList.get(j+1).getPublicationDate())>0){
+                    BibliographicPtoducts temp = userMagazinesList.get(j);
+                    userMagazinesList.set(j, userMagazinesList.get(j+1));
+                    userMagazinesList.set(j+1, temp);
+                }
+            }
+        }
+    }
+
 
     /**
      * Method that returns the number of books that the user has bought

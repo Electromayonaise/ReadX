@@ -63,7 +63,7 @@ public class ReadXSystem {
                     break;
                 case 4:
                     print("Library presentation selected");
-                    print("Functionality not implemented yet");
+                    libraryPresentation();
                     break;
                 case 5:
                     print("Reading session simulation selected");
@@ -472,10 +472,31 @@ public class ReadXSystem {
      * The user must enter his id, and then the system will show the user's library.
      */
     public static void libraryPresentation(){
+        String msj = "";
+        int page =0;
         print("Please enter your id");
         String id = reader.next();
         id = id.toUpperCase();
-        readXController.showLibrary(id);
+        print(readXController.showLibrary(id, page));
+        print("Do you wish to advance a page, return a page or exit the library? S. Advance A. Return B. Exit");
+        String option = Validators.validateMovementInput();
+        option = option.toUpperCase();
+        while(!option.equals("B") && !msj.equals("User not found")){
+            if (option.equals("S")){
+                page++;
+                msj=readXController.showLibrary(id, page);
+                print(msj);
+            }
+            if (option.equals("A")){
+                page--;
+                msj= readXController.showLibrary(id, page);
+                print(msj);
+            }
+            print("Do you wish to advance a page, return a page or exit the library? S. Advance A. Return B. Exit");
+            option = Validators.validateMovementInput();
+            option = option.toUpperCase();
+        } 
+
     }
 
     /**
@@ -490,7 +511,6 @@ public class ReadXSystem {
         print("Please enter your id");
         String id = reader.next();
         id = id.toUpperCase();
-        readXController.showLibrary(id);
         print("Please enter the id or position in the shown matrix of the product you want to read");
         String productId = reader.next();
         int pageNumber = 1;

@@ -454,41 +454,14 @@ public class ReadXController {
 
     // INCOMPLETE METHOD !!!!
     // The user's library must be represented trough 5x5 matrix that present the id's of the products from oldest to newest (publication date),when the martix is full, the user may go to the next page of the library and so on.=
-    public String showLibrary(String id){
+    public String showLibrary(String id, int page){
         String msj="User not found";
         Users user = searchUserById(id);
-        orderBooksByDate();
-        orderMagazinesByDate();
-        int shownBooks = 0;
-        int shownMagazines = 0;
         if (user != null){
-            String [][] library = new String [5][5];
-            for (int i=0; i<5; i++){
-                for (int j=0; j<5; j++){
-                    for (int k=0; k<user.getBoughtBooks(); k++){
-                        if (booksList.get(i).getStatus() == false){
-                            library[i][j] = booksList.get(i).getId();
-                            booksList.get(i).setStatus(true);
-                            shownBooks++;
-                        }
-                    }
-                    for (int k=0; k<user.getBoughtMagazineSubscriptions(); k++){
-                        if (magazinesList.get(i).getStatus() == false){
-                            library[i][j] = magazinesList.get(i).getId();
-                            magazinesList.get(i).setStatus(true);
-                            shownMagazines++;
-                        }
-                    }
-                }
-            }
-
-            if (shownBooks <user.getBoughtBooks() || shownMagazines<user.getBoughtMagazineSubscriptions()){
-                msj = "You have reached the end of your library, please go to the next page";
-            }
-
+            user.fillLibrary();
+            msj = user.displayLibrary(page);   
         }
         return msj;
-        
     }
 
     /**
@@ -627,36 +600,7 @@ public class ReadXController {
         return msj;
     }
 
-    /**
-     * Method that organizes the books array by publication date from oldest to newest
-     */
-    public void orderBooksByDate(){
-        for(int i =0; i<booksList.size(); i++){
-            for(int j =0; j<booksList.size()-1; j++){
-                if(booksList.get(j).getPublicationDate().compareTo(booksList.get(j+1).getPublicationDate())>0){
-                    BibliographicPtoducts temp = booksList.get(j);
-                    booksList.set(j, booksList.get(j+1));
-                    booksList.set(j+1, temp);
-                }
-            }
-        }
-    }
-
-    /**
-     * Method that organizes the magazines array by publication date from oldest to newest
-     */
-    public void orderMagazinesByDate(){
-        for(int i =0; i<magazinesList.size(); i++){
-            for(int j =0; j<magazinesList.size()-1; j++){
-                if(magazinesList.get(j).getPublicationDate().compareTo(magazinesList.get(j+1).getPublicationDate())>0){
-                    BibliographicPtoducts temp = magazinesList.get(j);
-                    magazinesList.set(j, magazinesList.get(j+1));
-                    magazinesList.set(j+1, temp);
-                }
-            }
-        }
-    }
-
+   
     /**
      * Method that searches for a user by its id
      * @param id User's id
