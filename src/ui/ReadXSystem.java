@@ -477,26 +477,37 @@ public class ReadXSystem {
         print("Please enter your id");
         String id = reader.next();
         id = id.toUpperCase();
-        print(readXController.showLibrary(id, page));
-        print("Do you wish to advance a page, return a page or exit the library? S. Advance A. Return B. Exit");
-        String option = Validators.validateMovementInput();
-        option = option.toUpperCase();
-        while(!option.equals("B") && !msj.equals("User not found")){
-            if (option.equals("S")){
-                page++;
-                msj=readXController.showLibrary(id, page);
+        msj = readXController.fillLibrary(id);
+        if (!msj.equals("User not found")){
+            msj=readXController.showUserLibrary(id, page);
+            if(msj.isBlank()){
+               print("You don't have any products in your library"); 
+            } else {
                 print(msj);
             }
-            if (option.equals("A")){
-                page--;
-                msj= readXController.showLibrary(id, page);
-                print(msj);
-            }
+        } else {
+            print(msj);
+        }
+        if (!msj.equals("User not found") && !msj.isBlank()){
             print("Do you wish to advance a page, return a page or exit the library? S. Advance A. Return B. Exit");
-            option = Validators.validateMovementInput();
+            String option = Validators.validateMovementInput();
             option = option.toUpperCase();
-        } 
-
+            while(!option.equals("B") && !msj.equals("User not found")){
+                if (option.equals("S")){
+                    page++;
+                    msj=readXController.showUserLibrary(id, page);
+                    print(msj);
+                }
+                if (option.equals("A")){
+                    page--;
+                    msj= readXController.showUserLibrary(id, page);
+                    print(msj);
+                }
+                print("Do you wish to advance a page, return a page or exit the library? S. Advance A. Return B. Exit");
+                option = Validators.validateMovementInput();
+                option = option.toUpperCase();
+            } 
+        }
     }
 
     /**

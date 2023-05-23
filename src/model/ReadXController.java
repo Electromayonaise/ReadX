@@ -454,7 +454,17 @@ public class ReadXController {
 
     // INCOMPLETE METHOD !!!!
     // The user's library must be represented trough 5x5 matrix that present the id's of the products from oldest to newest (publication date),when the martix is full, the user may go to the next page of the library and so on.=
-    public String showLibrary(String id, int page){
+    public String fillLibrary(String id){
+        String msj="User not found";
+        Users user = searchUserById(id);
+        if (user != null){
+            msj = "User found";
+            user.fillLibrary();
+        }
+        return msj;
+    }
+
+    public String showUserLibrary(String id, int page){
         String msj="User not found";
         Users user = searchUserById(id);
         if (user != null){

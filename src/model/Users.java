@@ -14,8 +14,8 @@ public abstract class Users {
     private GregorianCalendar registrationDate;
     protected ArrayList <BibliographicPtoducts> userBooksList = new ArrayList<BibliographicPtoducts>();
     protected  ArrayList <BibliographicPtoducts> userMagazinesList = new ArrayList<BibliographicPtoducts>();
+    protected ArrayList <BibliographicPtoducts> userProducts = new ArrayList<BibliographicPtoducts>();
     protected ArrayList <LibraryDisplay> userLibraryDisplays = new ArrayList<LibraryDisplay>();
-    private int productLenght = userBooksList.size() + userMagazinesList.size();
 
     /**
      * Constructor method for the Users class (Basic users)
@@ -177,32 +177,33 @@ public abstract class Users {
     }
 
     public void fillLibrary(){
-        boolean isFull = false;
-        orderBooksByDate();
-        orderMagazinesByDate();
+        userProducts.addAll(userBooksList);
+        userProducts.addAll(userMagazinesList);
+        orderUserProductsByDate();
         userLibraryDisplays.add(new LibraryDisplay());
+        int addedProducts=0;
         int k=0;
-        for(int o=0; o<productLenght; o++){
+        while (addedProducts<userProducts.size()){
             for (int i=0; i<5; i++){
                 for(int j=0; j<5; j++) {
-                    if(isFull==false){
-                        if(userBooksList.size()>o){
-                            isFull= userLibraryDisplays.get(k).fillDisplay(i, j, userBooksList.get(o).getId());
-                        }
-                        else if(userMagazinesList.size()>o){
-                            isFull= userLibraryDisplays.get(k).fillDisplay(i, j, userMagazinesList.get(o).getId());
+                    if(addedProducts==0 || addedProducts%25!=0){
+                        if(userProducts.size()>addedProducts){
+                            userLibraryDisplays.get(k).fillDisplay(i, j, userProducts.get(addedProducts).getId());
+                            System.out.println("Entro");
+                            addedProducts++;
                         }
                     }
-                    else{
-                        k++;
+                    else if (addedProducts%25==0){
                         userLibraryDisplays.add(new LibraryDisplay());
-                        isFull=false;
+                        System.out.println(userLibraryDisplays.size());
+                        k++;
                     }
                 }
             }
         }
 
     }
+
     public String displayLibrary (int pagePos){
         String msj = "Page not found";
         if(userLibraryDisplays.get(pagePos) != null){
@@ -215,28 +216,14 @@ public abstract class Users {
      /**
      * Method that organizes the books array by publication date from oldest to newest
      */
-    public void orderBooksByDate(){
-        for(int i =0; i<userBooksList.size(); i++){
-            for(int j =0; j<userBooksList.size()-1; j++){
-                if(userBooksList.get(j).getPublicationDate().compareTo(userBooksList.get(j+1).getPublicationDate())>0){
-                    BibliographicPtoducts temp = userBooksList.get(j);
-                    userBooksList.set(j, userBooksList.get(j+1));
-                    userBooksList.set(j+1, temp);
-                }
-            }
-        }
-    }
-
-    /**
-     * Method that organizes the magazines array by publication date from oldest to newest
-     */
-    public void orderMagazinesByDate(){
-        for(int i =0; i<userMagazinesList.size(); i++){
-            for(int j =0; j<userMagazinesList.size()-1; j++){
-                if(userMagazinesList.get(j).getPublicationDate().compareTo(userMagazinesList.get(j+1).getPublicationDate())>0){
-                    BibliographicPtoducts temp = userMagazinesList.get(j);
-                    userMagazinesList.set(j, userMagazinesList.get(j+1));
-                    userMagazinesList.set(j+1, temp);
+    public void orderUserProductsByDate(){
+        BibliographicPtoducts temp;
+        for (int i = 0; i < userProducts.size(); i++) {
+            for (int j = 1; j < (userProducts.size() - i); j++) {
+                if (userProducts.get(j - 1).getPublicationDate().compareTo(userProducts.get(j).getPublicationDate()) > 0) {
+                    temp = userProducts.get(j - 1);
+                    userProducts.set(j - 1, userProducts.get(j));
+                    userProducts.set(j, temp);
                 }
             }
         }

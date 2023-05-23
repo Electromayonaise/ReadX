@@ -8,27 +8,24 @@ public class LibraryDisplay {
         page = new String[5][5];
     }
 
-    public boolean fillDisplay(int row, int column, String id){
-        boolean isFull = true;
+    public void fillDisplay(int row, int column, String id){
+        System.out.println("row: " + row + " column: " + column + " id: " + id);
         if (page[row][column] == null){
             page[row][column] = id;
-            isFull = false;
         }
-        return isFull;
     }
 
     public String libraryDisplay(){
-        String result = "";
+        StringBuilder result = new StringBuilder(); 
         for (int i = 0; i < page.length; i++) {
             for (int j = 0; j < page[0].length ; j++) {
                 if (page[i][j] != null){
-                    result += page[i][j] + " ";
-                }else{
-                    result += "null ";
+                    // empty the string
+                    result.append(page[i][j] + " ");
                 }
             }
-            result += "\n";
+            result.append("\n");
         }
-        return result;
+        return result.toString();
     }
 }
