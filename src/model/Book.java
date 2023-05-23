@@ -59,6 +59,24 @@ public class Book extends BibliographicPtoducts{
     }
     
     /**
+     * Method that returns the genre flag value
+     * @return getGenre Genre flag value
+     */
+    @Override
+    public int getGenreOrCategoryByFlag() {
+       int getGenre=0; 
+       if(this.genre==Genre.SCIENCEFICTION){
+           getGenre=1;
+       }
+       else if(this.genre==Genre.FANTASY){
+           getGenre= 2;
+       }
+       else if(this.genre==Genre.HISTORICNOVEL){
+           getGenre= 3;
+       }
+       return getGenre;
+    }
+    /**
      * Method that returns the book's brief review
      * @return briefReview Book's brief review
      */

@@ -172,4 +172,17 @@ public class Validators {
         int randomNum = rand.nextInt((max-min)+1)+min;
         return randomNum;
     }
+
+    /**
+     * Method to validate the input is a valid report option between 1 and 5
+     * @return option Integer input
+     */
+    public static int validateReportOption(){
+        int option = validateIntInput();
+        while(option>5 || option<1){
+            print("Invalid option, please try again");
+            option = validateIntInput();
+        }
+        return option;
+    }
 }

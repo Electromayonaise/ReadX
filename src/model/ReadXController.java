@@ -15,7 +15,8 @@ public class ReadXController {
     /**
      * Constructor method for the ReadXController class, empty because it is not needed
      */
-    public ReadXController(){}
+    public ReadXController(){
+    }
 
     /**
      * Method that creates a book object and stores it in the books array
@@ -361,7 +362,7 @@ public class ReadXController {
                         user.buyBook(book);
                         payment = book.getPrice();
                         GregorianCalendar dateOfPurchase = new GregorianCalendar();
-                        book.setDateOfPurchase(dateOfPurchase);
+                        book.setDateOfPurchase(dateOfPurchase); 
                         msj = "Book bought successfully, paid: " + payment + " dollars " + " bought on date:  Year: " + book.getDateOfPurchase().get(GregorianCalendar.YEAR) + " Month: " + book.getDateOfPurchase().get(GregorianCalendar.MONTH) + " Day: " + book.getDateOfPurchase().get(GregorianCalendar.DAY_OF_MONTH) ;
                     }
                 }
@@ -452,8 +453,11 @@ public class ReadXController {
     }
 
 
-    // INCOMPLETE METHOD !!!!
-    // The user's library must be represented trough 5x5 matrix that present the id's of the products from oldest to newest (publication date),when the martix is full, the user may go to the next page of the library and so on.=
+    /**
+     * Method that searches if the user exists, if it does it calls the method that fills the user's library
+     * @param id User's id
+     * @return msj Message that shows if the user was found or not
+     */
     public String fillLibrary(String id){
         String msj="User not found";
         Users user = searchUserById(id);
@@ -464,11 +468,16 @@ public class ReadXController {
         return msj;
     }
 
+    /**
+     * Method that searches if the user exists, if it does it calls the method that shows the user's library
+     * @param id User's id
+     * @param page Page number the user wants to see
+     * @return msj Message that shows the user's library or an error message if the user doesn't exist
+     */
     public String showUserLibrary(String id, int page){
         String msj="User not found";
         Users user = searchUserById(id);
         if (user != null){
-            user.fillLibrary();
             msj = user.displayLibrary(page);   
         }
         return msj;
@@ -481,9 +490,16 @@ public class ReadXController {
      * @param pageNum Page number the user wants to read
      * @return msj Message that shows the reading session or an error message if the user doesn't exist, if the product doesn't exist or if the user doesn't have the product
      */
-    public String readProduct(String id, String productID, int pageNum){
+    public String readProduct(String id, String productIdOrPos, int option,  int pageNum){
         String msj = "User not found";
         Users user = searchUserById(id);
+        String productID = "";
+        if (option==1){
+            productID = productIdOrPos;
+        }
+        else if (option==2){
+            productID = user.searchProductIdByPosition(productIdOrPos);
+        }
         BibliographicPtoducts book = searchBookById(productID);
         BibliographicPtoducts magazine = searchMagazineById(productID);
         int highestPageNumber = 0;
@@ -503,7 +519,7 @@ public class ReadXController {
                         highestPageNumber = pageNum;
                         updateHighestPageNumber(id, productID, highestPageNumber);
                     }
-                    msj= "******Reading session in progress******\n" + "Reading: " + book.getName() + "\n" + "Reading page number: " + pageNum + " of " + book.getPageNumber() + "\n";
+                    msj= "******Reading session in progress******\n" + "Reading book: " + book.getName() + "\n" + "Reading page number: " + pageNum + " of " + book.getPageNumber() + "\n";
                     if (user instanceof BasicUser && pageNum%20==0){
                         int add = Validators.randInt(1, 3);
                         if (add==1){
@@ -525,7 +541,7 @@ public class ReadXController {
                             highestPageNumber = pageNum;
                             updateHighestPageNumber(id, productID, highestPageNumber);
                         }
-                        msj = "******Reading session in progress******\n" + "Reading: " + magazine.getName() + "\n" + "Reading page number: " + pageNum + " of " + magazine.getPageNumber() + "\n";
+                        msj = "******Reading session in progress******\n" + "Reading magazine: " + magazine.getName() + "\n" + "Reading page number: " + pageNum + " of " + magazine.getPageNumber() + "\n";
                         if (user instanceof BasicUser && pageNum%5==0){
                             int add = Validators.randInt(1, 3);
                             if (add==1){
@@ -575,19 +591,17 @@ public class ReadXController {
      * @param bookId Book's id
      * @return msj Message that shows the sum of the pages read of the book or an error message if the book doesn't exist
      */
-    public String sumatoryOfBookReadPages(String bookId){
-        String msj= "Book not found";
+    public int sumatoryOfBookReadPages(String bookId){
         BibliographicPtoducts book = searchBookById(bookId);
         int sum = 0;
         if (book != null){
             for (int i=0; i<usersList.size(); i++){
                 if (usersList.get(i).searchIfUserHasBook(bookId) == true){
                     sum += usersList.get(i).getUserHighestBookPageNumber(book);
-                    msj = "The sumatory of the pages read of this book is: " + sum;
                 }
             }
         }
-        return msj;
+        return sum;
     }
 
     /**
@@ -595,22 +609,73 @@ public class ReadXController {
      * @param magazineId Magazine's id
      * @return msj Message that shows the sum of the pages read of the magazine or an error message if the magazine doesn't exist
      */
-    public String sumatoryOfMagazineReadPages(String magazineId){
-        String msj= "Magazine not found";
+    public int sumatoryOfMagazineReadPages(String magazineId){
         BibliographicPtoducts magazine = searchMagazineById(magazineId);
         int sum = 0;
         if (magazine != null){
             for (int i=0; i<usersList.size(); i++){
                 if (usersList.get(i).searchIfUserHasMagazine(magazineId) == true){
                     sum += usersList.get(i).getUserHighestMagazinePageNumber(magazine);
-                    msj = "The sumatory of the pages read of this magazine is: " + sum;
                 }
             }
         }
-        return msj;
+        return sum;
     }
 
-   
+    /**
+     * Method that calculates the sum of the pages read of all the books by all the users
+     * @return sum Sum of the pages read of all the books by all the users
+     */
+   public int sumatoryOfAllBookReadPages(){
+    int sum=0;
+    for(int i=0; i<booksList.size(); i++){
+        sum+=sumatoryOfBookReadPages(booksList.get(i).getId());
+    }
+    return sum;
+   }
+
+   /**
+    * Method that calculates the sum of the pages read of all the magazines by all the users
+    * @return sum Sum of the pages read of all the magazines by all the users
+    */
+   public int sumatoryOfAllMagazineReadPages(){
+    int sum=0;
+    for(int i=0; i<magazinesList.size(); i++){
+        sum+=sumatoryOfMagazineReadPages(magazinesList.get(i).getId());
+    }
+    return sum;
+   }
+
+   /**
+    * Method that calculates the sum of the pages read of all the books of a genre by all the users
+    * @param genre Genre of the books
+    * @return sum Sum of the pages read of all the books of a genre by all the users
+    */
+   public int sumatoryOfReadPagesByGenre(int genre){
+    int sum=0;
+    for(int i=0; i<booksList.size(); i++){
+        if (((Book)booksList.get(i)).getGenreOrCategoryByFlag() == genre){
+            sum+=sumatoryOfBookReadPages(booksList.get(i).getId());
+        }
+    }
+    return sum;
+   }
+
+   /**
+    * Method that calculates the sum of the pages read of all the magazines of a category by all the users
+    * @param category Category of the magazines
+    * @return sum Sum of the pages read of all the magazines of a category by all the users
+    */
+   public int sumatoryOfReadPagesByCategory(int category){
+    int sum=0;
+    for (int i=0; i<magazinesList.size(); i++){
+        if (((Magazine)magazinesList.get(i)).getGenreOrCategoryByFlag() == category){
+            sum+=sumatoryOfMagazineReadPages(magazinesList.get(i).getId());
+        }
+    }
+    return sum;
+   }
+
     /**
      * Method that searches for a user by its id
      * @param id User's id
@@ -626,7 +691,81 @@ public class ReadXController {
         return foundUser;
     }
 
+    /**
+     * Method that searches for the number of books bought by genre
+     * @param genre Genre of the books
+     * @return sum Sum of the books bought of said genre
+     */
+    public int boughtBooksByGenre(int genre){
+        int sum=0;
+        for(int i=0; i<usersList.size(); i++){
+            for (int j=0; j<booksList.size() ; j++){
+                if (usersList.get(i).searchIfUserHasBook(booksList.get(j).getId()) == true){
+                    if (((Book)booksList.get(j)).getGenreOrCategoryByFlag() == genre){
+                        sum++;
+                    }
+                }
+            }
+        }
+        return sum;
+    }
 
+    /**
+     * Method that searches for the number of magazines bought by category
+     * @param category Category of the magazines
+     * @return sum Sum of the magazines bought of said category
+     */
+    public int boughtMagazinesByCategory(int category){
+        int sum=0;
+        for(int i=0; i<usersList.size(); i++){
+            for (int j=0; j<magazinesList.size() ; j++){
+                if (usersList.get(i).searchIfUserHasMagazine(magazinesList.get(j).getId()) == true){
+                    if (((Magazine)magazinesList.get(j)).getGenreOrCategoryByFlag() == category){
+                        sum++;
+                    }
+                }
+            }
+        }
+        return sum;
+    }
+
+    /**
+     * Method that calculates the revenue of a book by genre
+     * @param genre Genre of the book
+     * @return sum Sum of the revenue of the book by genre
+     */
+    public double bookRevenueByGenre(int genre){
+        double sum=0;
+        for(int i=0; i<usersList.size(); i++){
+            for (int j=0; j<booksList.size() ; j++){
+                if (usersList.get(i).searchIfUserHasBook(booksList.get(j).getId()) == true){
+                    if (((Book)booksList.get(j)).getGenreOrCategoryByFlag() == genre){
+                        sum+=booksList.get(j).getPrice();
+                    }
+                }
+            }
+        }
+        return sum;
+    }
+
+    /**
+     * Method that calculates the revenue of a magazine by category
+     * @param category Category of the magazine
+     * @return sum Sum of the revenue of the magazine by category
+     */
+    public double magazineRevenueByCategory(int category){
+        double sum=0;
+        for(int i=0; i<usersList.size(); i++){
+            for (int j=0; j<magazinesList.size() ; j++){
+                if (usersList.get(i).searchIfUserHasMagazine(magazinesList.get(j).getId()) == true){
+                    if (((Magazine)magazinesList.get(j)).getGenreOrCategoryByFlag() == category){
+                        sum+=magazinesList.get(j).getPrice();
+                    }
+                }
+            }
+        }
+        return sum;
+    }
     /**
      * Method that searches for a book by its id
      * @param id Book's id
@@ -641,7 +780,6 @@ public class ReadXController {
         }
         return foundBook;
     }
-
     /**
      * Method that searches for a magazine by its id
      * @param id Magazine's id
@@ -656,7 +794,6 @@ public class ReadXController {
         }
         return foundMagazine;
     }
-
     /**
      *  Method to check if the user id allready exists in the system
      * @return id User's id
@@ -673,7 +810,6 @@ public class ReadXController {
         }
         return id;
     }
-
     /**
      * Method to seach a book by its name
      * @param name
@@ -702,6 +838,115 @@ public class ReadXController {
             }
         }
         return msj;
+    }
+
+    /**
+     * Method to generate the first report, it shows the total number of pages read in all books and magazines
+     * @return msj Message that shows the total number of pages read in all books and magazines
+     */
+    public String reportOne(){
+        StringBuilder msj = new StringBuilder();
+        msj.append("Number of total pages read in all books: " + sumatoryOfAllBookReadPages());
+        msj.append("\n");
+        msj.append("Number of total pages read in all magazines: " + sumatoryOfAllMagazineReadPages());  
+        return msj.toString();
+    }
+
+    /**
+     * Method to generate the second report, it shows the total number of pages read by genre and category
+     * @return msj Message that shows the total number of pages read by genre and category
+     */
+    public String reportTwo(){
+        StringBuilder msj = new StringBuilder();
+        msj.append("Number of total pages read of sience fiction books: " + sumatoryOfReadPagesByGenre(1));
+        msj.append("\n");
+        msj.append("Number of total pages read of fantasy books: " + sumatoryOfReadPagesByGenre(2));
+        msj.append("\n");
+        msj.append("Number of total pages read of historic novel books: " + sumatoryOfReadPagesByGenre(3));
+        msj.append("\n");
+        msj.append("Number of total pages read of variety magazines: " + sumatoryOfReadPagesByCategory(1));
+        msj.append("\n");
+        msj.append("Number of total pages read of design magazines: " + sumatoryOfReadPagesByCategory(2));
+        msj.append("\n");
+        msj.append("Number of total pages read of science magazines: " + sumatoryOfReadPagesByCategory(3));
+        return msj.toString();
+    }
+
+    /**
+     * Method to generate the third report, it shows the top 5 of most read books and magazines
+     * @return msj Message that shows the top 5 of most read books and magazines
+     */
+    public String reportThree(){
+        StringBuilder msj = new StringBuilder();
+        // Top 5 of most read books
+        String[] topFiveBooks = new String[5];
+        int max = 0;
+        int index = 0;
+        for(int i=0; i<5; i++){
+            for(int j=0; j<booksList.size(); j++){
+                if(sumatoryOfBookReadPages(booksList.get(j).getId()) > max){
+                    max = sumatoryOfBookReadPages(booksList.get(j).getId());
+                    index = j;
+                }
+            }
+            topFiveBooks[i] = booksList.get(index).getName();
+            max = 0;
+        }
+        msj.append("Top 5 of most read books: ");
+        msj.append("\n");
+        for(int i=0; i<topFiveBooks.length; i++){
+            msj.append(i+ ": " + topFiveBooks[i]);
+            msj.append("\n");
+        }
+        // Top 5 of most read magazines
+        String[] topFiveMagazines = new String[5];
+        max = 0;
+        index = 0;
+        for(int i=0; i<5; i++){
+            for(int j=0; j<magazinesList.size(); j++){
+                if(sumatoryOfMagazineReadPages(magazinesList.get(j).getId()) > max){
+                    max = sumatoryOfMagazineReadPages(magazinesList.get(j).getId());
+                    index = j;
+                }
+            }
+            topFiveMagazines[i] = magazinesList.get(index).getName();
+            max = 0;
+        }
+        msj.append("Top 5 of most read magazines: ");
+        msj.append("\n");
+        for(int i=0; i<topFiveMagazines.length; i++){
+            msj.append(i+ ": " + topFiveMagazines[i]);
+            msj.append("\n");
+        }
+        return msj.toString();
+    }
+
+    /**
+     * Method to generate the fourth report, it shows the number of books bought by genre and the revenue
+     * @return msj Message that shows the number of books bought by genre and the revenue
+     */
+    public String reportFour(){
+        StringBuilder msj = new StringBuilder();
+        msj.append("Number of science fiction books bought: " + boughtBooksByGenre(1) + " and the revenue is: " + bookRevenueByGenre(1));
+        msj.append("\n");
+        msj.append("Number of fantasy books bought: " + boughtBooksByGenre(2) + " and the revenue is: " + bookRevenueByGenre(2));
+        msj.append("\n");
+        msj.append("Number of historic novel books bought: " + boughtBooksByGenre(3) + " and the revenue is: " + bookRevenueByGenre(3));
+        return msj.toString();
+    }
+
+    /**
+     * Method to generate the fifth report, it shows the number of magazines bought by category and the revenue 
+     * @return msj Message that shows the number of magazines bought by category and the revenue
+     */
+    public String reportFive(){
+        StringBuilder msj = new StringBuilder();
+        msj.append("Number of variety magazine subscriptions bought: " + boughtMagazinesByCategory(1) + " and the revenue is: " + magazineRevenueByCategory(1));
+        msj.append("\n");
+        msj.append("Number of design magazine subscriptions bought: " + boughtMagazinesByCategory(2) + " and the revenue is: " + magazineRevenueByCategory(2));
+        msj.append("\n");
+        msj.append("Number of science magazines subscriptions bought: " + boughtMagazinesByCategory(3) + " and the revenue is: " + magazineRevenueByCategory(3));
+        return msj.toString();
     }
 
     /**
@@ -744,5 +989,4 @@ public class ReadXController {
         return msj.toString();
     }
 
-  
 }

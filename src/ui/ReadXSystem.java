@@ -71,7 +71,7 @@ public class ReadXSystem {
                     break;
                 case 6:
                     print("Report generation selected");
-                    print("Functionality not implemented yet");
+                    reportGeneration();
                     break;
                 case 7:
                     print("Testing management selected");
@@ -97,7 +97,7 @@ public class ReadXSystem {
         print("1. Bibliographic products management");
         print("2. User management");
         print("3. Buy books and journal subscriptions, or cancel a subscription");
-        print("4. Library presentation **FUNCTIONALITY NOT IMPLEMENTED YET**");
+        print("4. Library presentation");
         print("5. Reading session simulation"); 
         print("6. Report generation **FUNCTIONALITY NOT IMPLEMENTED YET**"); 
         print("7. Testing management (generate random data)");
@@ -458,6 +458,9 @@ public class ReadXSystem {
         return productId;
     }
     
+    /**
+     * Method to cancel a magazine subscription by entering the user's id and the product's id.
+     */
     public static void cancelMagazineSubscription(){
         print("Please enter your id");
         String id = reader.next();
@@ -492,15 +495,21 @@ public class ReadXSystem {
             print("Do you wish to advance a page, return a page or exit the library? S. Advance A. Return B. Exit");
             String option = Validators.validateMovementInput();
             option = option.toUpperCase();
-            while(!option.equals("B") && !msj.equals("User not found")){
+            while(!option.equals("B")){
                 if (option.equals("S")){
                     page++;
                     msj=readXController.showUserLibrary(id, page);
+                    if (msj.isBlank()){
+                        msj = "Empty page";
+                    }
                     print(msj);
                 }
                 if (option.equals("A")){
                     page--;
                     msj= readXController.showUserLibrary(id, page);
+                    if (msj.isBlank()){
+                        msj = "Empty page";
+                    }
                     print(msj);
                 }
                 print("Do you wish to advance a page, return a page or exit the library? S. Advance A. Return B. Exit");
@@ -522,20 +531,30 @@ public class ReadXSystem {
         print("Please enter your id");
         String id = reader.next();
         id = id.toUpperCase();
-        print("Please enter the id or position in the shown matrix of the product you want to read");
-        String productId = reader.next();
+        print("Do you wish to start the reading session by: 1. Entering the product's id 2. Entering the product's position in the library (make sure you use funtion 4 first to fill your library)");
+        int option = Validators.validateOneOrTwo();
+        String productIdOrPosition = "";
+        if (option==1){
+            print("Please enter the product's id");
+            productIdOrPosition = reader.next();
+        }
+        else {
+            print("Please enter the product's position in the library with the format row,column (for example: 1,1 is the first product))");
+            productIdOrPosition = reader.next();
+        }
+        
         int pageNumber = 1;
-        String readingSession= readXController.readProduct(id,productId, pageNumber);
+        String readingSession= readXController.readProduct(id,productIdOrPosition, option, pageNumber);
         print(readingSession);
         if (!readingSession.equals("User not found") && !readingSession.equals("you don't have this product in your library") && !readingSession.equals("Product not found")){
             print("Press A to advance a page");
             print("Press S to return a page");
             print("Press B to exit");
-            String option = Validators.validateMovementInput();
-            while (!option.equals("B")){
-                if (option.equals("A")){
+            String Movementoption = Validators.validateMovementInput();
+            while (!Movementoption.equals("B")){
+                if (Movementoption.equals("A")){
                     pageNumber++;
-                    readingSession= readXController.readProduct(id,productId, pageNumber);
+                    readingSession= readXController.readProduct(id,productIdOrPosition, option, pageNumber);
                     print(readingSession);
                 } else {
                     if (pageNumber==1){
@@ -543,13 +562,13 @@ public class ReadXSystem {
                     } else { 
                         pageNumber--;
                     }
-                    readingSession= readXController.readProduct(id,productId, pageNumber);
+                    readingSession= readXController.readProduct(id,productIdOrPosition, option, pageNumber);
                     print(readingSession);
                 }
                 print("Press A to advance a page");
                 print("Press S to return a page");
                 print("Press B to exit");
-                option = Validators.validateMovementInput();
+                Movementoption = Validators.validateMovementInput();
             }
         }
 
@@ -570,6 +589,39 @@ public class ReadXSystem {
         GregorianCalendar date = new GregorianCalendar();
         String testData = readXController.initTest( pageNum, price, url, briefReview, genre, category, frequencyOfIssuance, date);
         print(testData);
+    }
+
+    public static void reportGeneration(){
+        print("What report do you want to generate?");
+        print("1. Number of acumulated read pages of books or magazines");
+        print("2. Book genre or magazine category with the most read pages");
+        print("3. Top 5 most read books and top 5 most read magazines");
+        print("4. Number of sold books of each genre and their total revenue");
+        print("5. Number of active magazine subscriptions of each category and their total revenue");
+        int option = Validators.validateReportOption();
+        switch (option){
+            case 1:
+                String report = readXController.reportOne();
+                print(report);
+                break;
+            case 2:
+                String report2 = readXController.reportTwo();
+                print(report2);
+                break;
+            case 3:
+                String report3 = readXController.reportThree();
+                print(report3);
+                break;
+            case 4:
+                String report4 = readXController.reportFour();
+                print(report4);
+                break;
+            case 5:
+                String report5 = readXController.reportFive();
+                print(report5);
+                break;
+        }
+
     }
 
     

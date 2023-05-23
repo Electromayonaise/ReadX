@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Interface that represents the advertisable users
+ */
 public interface Advertisable {
     public String getAdvertisment1();
 

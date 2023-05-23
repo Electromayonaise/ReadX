@@ -176,6 +176,9 @@ public abstract class Users {
         return result;
     }
 
+    /**
+     * Method to fill the user's library with the products that he has bought
+     */
     public void fillLibrary(){
         userProducts.addAll(userBooksList);
         userProducts.addAll(userMagazinesList);
@@ -187,30 +190,50 @@ public abstract class Users {
             for (int i=0; i<5; i++){
                 for(int j=0; j<5; j++) {
                     if(addedProducts==0 || addedProducts%25!=0){
-                        if(userProducts.size()>addedProducts){
+                        if (addedProducts<userProducts.size()){
                             userLibraryDisplays.get(k).fillDisplay(i, j, userProducts.get(addedProducts).getId());
-                            System.out.println("Entro");
                             addedProducts++;
                         }
                     }
                     else if (addedProducts%25==0){
                         userLibraryDisplays.add(new LibraryDisplay());
-                        System.out.println(userLibraryDisplays.size());
                         k++;
                     }
                 }
             }
         }
-
     }
 
+    /**
+     * Method that displays the user's library
+     * @param pagePos Position of the page that the user wants to see
+     * @return msj String with the library display
+     */
     public String displayLibrary (int pagePos){
-        String msj = "Page not found";
-        if(userLibraryDisplays.get(pagePos) != null){
-            msj = userLibraryDisplays.get(pagePos).libraryDisplay();
+        String msj = "";
+        if (pagePos<userLibraryDisplays.size()){
+            if(userLibraryDisplays.get(pagePos) != null){
+                if(!userLibraryDisplays.get(pagePos).libraryDisplay().isBlank()){
+                    msj = userLibraryDisplays.get(pagePos).libraryDisplay();
+                }
+            }
         }
         return msj; 
+    }
 
+    /**
+     * Method that searches for a product in the user's library display
+     * @param pos Position of the product in the library
+     * @return id Product's id
+     */
+    public String searchProductIdByPosition(String pos){
+        String id = "";
+        for (int i = 0; i < userLibraryDisplays.size(); i++) {
+            if(userLibraryDisplays.get(i).searchProductId(pos) != null){
+                id = userLibraryDisplays.get(i).searchProductId(pos);
+            }
+        }
+        return id;
     }
 
      /**
