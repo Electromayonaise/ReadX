@@ -99,7 +99,7 @@ public class ReadXSystem {
         print("3. Buy books and journal subscriptions, or cancel a subscription");
         print("4. Library presentation");
         print("5. Reading session simulation"); 
-        print("6. Report generation **FUNCTIONALITY NOT IMPLEMENTED YET**"); 
+        print("6. Report generation"); 
         print("7. Testing management (generate random data)");
         print("8. Exit");
         print("***********************************");
