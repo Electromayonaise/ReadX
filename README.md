@@ -25,4 +25,5 @@
 
 Video of the working code: 
 
-[<a href="https://ibb.co/5j8CSyK"><img src="https://i.ibb.co/X5s6KgY/2023-05-24.png" alt="2023-05-24" border="0"></a>](https://youtu.be/gdj96Wis0R4)
+
+[<img src="https://i.ibb.co/X5s6KgY/2023-05-24.png" width="70%">](https://youtu.be/gdj96Wis0R4 "Now in Android: 55")
