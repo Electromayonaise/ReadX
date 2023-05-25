@@ -26,4 +26,4 @@
 Video of the working code: 
 
 
-[<img src="https://i.ibb.co/X5s6KgY/2023-05-24.png" width="70%">](https://youtu.be/gdj96Wis0R4 "Now in Android: 55")
+[<img src="https://i.ibb.co/X5s6KgY/2023-05-24.png" width="70%">](https://youtu.be/gdj96Wis0R4)
