@@ -522,14 +522,15 @@ public class ReadXController {
                     msj= "******Reading session in progress******\n" + "Reading book: " + book.getName() + "\n" + "Reading page number: " + pageNum + " of " + book.getPageNumber() + "\n";
                     if (user instanceof BasicUser && pageNum%20==0){
                         int add = Validators.randInt(1, 3);
+                        msj += "\n";
                         if (add==1){
-                            msj = ((BasicUser)user).getAdvertisment1();
+                            msj += ((BasicUser)user).getAdvertisment1();
                         }
                         else if (add==2){
-                            msj = ((BasicUser)user).getAdvertisment2();
+                            msj += ((BasicUser)user).getAdvertisment2();
                         }
                         else if (add==3){
-                            msj = ((BasicUser)user).getAdvertisment3();
+                            msj += ((BasicUser)user).getAdvertisment3();
                         }
                     }
                 }
@@ -544,14 +545,15 @@ public class ReadXController {
                         msj = "******Reading session in progress******\n" + "Reading magazine: " + magazine.getName() + "\n" + "Reading page number: " + pageNum + " of " + magazine.getPageNumber() + "\n";
                         if (user instanceof BasicUser && pageNum%5==0){
                             int add = Validators.randInt(1, 3);
+                            msj += "\n";
                             if (add==1){
-                                msj = ((BasicUser)user).getAdvertisment1();
+                                msj += ((BasicUser)user).getAdvertisment1();
                             }
                             else if (add==2){
-                                msj = ((BasicUser)user).getAdvertisment2();
+                                msj += ((BasicUser)user).getAdvertisment2();
                             }
                             else if (add==3){
-                                msj = ((BasicUser)user).getAdvertisment3();
+                                msj += ((BasicUser)user).getAdvertisment3();
                             }
                         }
                     }
@@ -603,6 +605,8 @@ public class ReadXController {
         }
         return sum;
     }
+
+    // not saving 
 
     /**
      * Method that calculates the sum of the pages read of a magazine by all the users
@@ -895,7 +899,7 @@ public class ReadXController {
         msj.append("Top 5 of most read books: ");
         msj.append("\n");
         for(int i=0; i<topFiveBooks.length; i++){
-            msj.append(i+ ": " + topFiveBooks[i]);
+            msj.append((i+1)+ ": " + topFiveBooks[i]);
             msj.append("\n");
         }
         // Top 5 of most read magazines
@@ -915,7 +919,7 @@ public class ReadXController {
         msj.append("Top 5 of most read magazines: ");
         msj.append("\n");
         for(int i=0; i<topFiveMagazines.length; i++){
-            msj.append(i+ ": " + topFiveMagazines[i]);
+            msj.append((i+1)+ ": " + topFiveMagazines[i]+1);
             msj.append("\n");
         }
         return msj.toString();
