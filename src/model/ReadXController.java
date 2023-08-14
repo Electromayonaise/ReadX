@@ -1002,5 +1002,9 @@ public class ReadXController {
         }
         return sumatory;
     }
+  
+    public String validateControllerCreation(){
+        return "**Controller created succesfully**";
+    }
 
 }
