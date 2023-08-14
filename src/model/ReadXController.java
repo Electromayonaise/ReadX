@@ -993,4 +993,9 @@ public class ReadXController {
         return msj.toString();
     }
 
+
+    public String validateControllerCreation(){
+        return "**Controller created succesfully**";
+    }
+
 }
