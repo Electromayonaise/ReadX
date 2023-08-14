@@ -316,7 +316,7 @@ public class ReadXController {
      * @return msj Message that shows if the user was created successfully
      */
     public String createPremiumUser(String name, String id, GregorianCalendar registrationDate, String cardNumber, String securityCode){
-        String msj = ("Premium user created succesfully, with the name of:"+ name + " and the ID of: " + id +"(payment information private)" );
+        String msj = ("Premium user created succesfully, with the name of:"+ name; // Requested to be only the name by client
         usersList.add(new PremiumUser(name, id, registrationDate, cardNumber, securityCode));
         return msj;
     }
@@ -329,7 +329,7 @@ public class ReadXController {
      * @return msj Message that shows if the user was created successfully
      */
     public String createBasicUser(String name, String id, GregorianCalendar registrationDate){
-        String msj=("Basic user created successfully, with the name of: " + name + " and the ID of: " + id);
+        String msj=("Basic user created successfully, with the name of: " + name ); // Requested to be only the name by client
         usersList.add(new BasicUser(name, id, registrationDate));
         return msj;
     }
