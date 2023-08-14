@@ -993,4 +993,14 @@ public class ReadXController {
         return msj.toString();
     }
 
+    public int sumatoryOfReadPagesByGenre(int genre){
+        int sumatory = 0;
+        for(int i=0; i<booksList.size(); i++){
+            if(booksList.get(i).getGenre() == genre){
+                // ****INCOMPLETE CODE****
+            }
+        }
+        return sumatory;
+    }
+
 }
